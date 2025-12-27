@@ -1,10 +1,12 @@
-baseURL = 'https://github.com/hiennguyen267/NguyenThiThuyHien_Blog'
-publishDir = 'docs'
-languageCode = 'vi'
-title = 'NGUYEN THI THUY HIEN BLOG'
+baseURL = "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/"
+publishDir = "docs"
+languageCode = "vi"
+title = "NGUYEN THI THUY HIEN BLOG"
 theme = "PaperMod"
 
-# --- CẤU HÌNH PHÂN TRANG (CHUẨN MỚI) ---
+relativeURLs = false
+canonifyURLs = true
+
 [pagination]
   pagerSize = 3
 

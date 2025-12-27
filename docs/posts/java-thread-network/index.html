@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="light">
 
-<head><script src="/hiennguyen267/NguyenThiThuyHien_Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=hiennguyen267/NguyenThiThuyHien_Blog/livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack | NGUYEN THI THUY HIEN BLOG</title>
 <meta name="keywords" content="Java, Multithreading, Concurrency, Performance">
 <meta name="description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-thread-network/">
-<link crossorigin="anonymous" href="/hiennguyen267/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/">
+<link crossorigin="anonymous" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-thread-network/">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/">
 <noscript>
     <style>
         #theme-toggle,
@@ -33,13 +33,79 @@
         document.querySelector("html").dataset.theme = 'dark';
     }
 
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack">
+  <meta property="og:description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Multithreading">
+    <meta property="article:tag" content="Concurrency">
+    <meta property="article:tag" content="Performance">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack">
+<meta name="twitter:description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack",
+  "name": "Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack",
+  "description": "Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.",
+  "keywords": [
+    "Java", "Multithreading", "Concurrency", "Performance"
+  ],
+  "articleBody": "Trong lập trình Java, Multithreading (Đa luồng) là một kỹ thuật cho phép CPU thực hiện nhiều tác vụ cùng một lúc. Nó giúp tận dụng tối đa sức mạnh của bộ vi xử lý và làm cho ứng dụng phản hồi nhanh hơn, đặc biệt là trong các game hay ứng dụng xử lý dữ liệu lớn.\nBài viết này sẽ tóm tắt các kiến thức cốt lõi về Đa luồng dựa trên tài liệu từ VietJack.\n1. Đa luồng là gì? Đa luồng trong Java là quá trình thực thi nhiều luồng (thread) đồng thời. Một Thread là một đơn vị xử lý nhỏ nhất trong chương trình.\nĐa nhiệm (Multitasking): Là chạy nhiều tiến trình (process) cùng lúc (ví dụ: vừa nghe nhạc vừa code). Đa luồng (Multithreading): Là chạy nhiều luồng trong cùng một tiến trình (ví dụ: trong trình nghe nhạc, một luồng phát nhạc, một luồng tải bài hát tiếp theo). 2. Vòng đời của một Thread (Thread Life Cycle) Một Thread trong Java sẽ trải qua 5 trạng thái chính trong vòng đời của nó:\nNew (Mới): Luồng vừa được khởi tạo nhưng chưa chạy (chưa gọi hàm start()). Runnable (Có thể chạy): Luồng đã sẵn sàng và đang đợi CPU cấp phát tài nguyên để chạy. Running (Đang chạy): CPU đang thực thi các mã lệnh trong luồng. Blocked/Waiting (Bị chặn/Đợi): Luồng tạm dừng để đợi tài nguyên (I/O) hoặc đợi một luồng khác. Terminated/Dead (Kết thúc): Luồng hoàn thành công việc hoặc bị tắt đột ngột. 3. Cách tạo Thread trong Java Có 2 cách chính để tạo một luồng trong Java.\nCách 1: Kế thừa lớp Thread\nBạn tạo một class kế thừa từ Thread và ghi đè phương thức run().\nclass MyThread extends Thread { public void run() { System.out.println(\"Luồng đang chạy...\"); } public static void main(String args[]) { MyThread t1 = new MyThread(); t1.start(); // Bắt đầu luồng } } Cách 2: Thực thi interface Runnable\nCách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiều interface) nhưng chỉ cho phép đơn kế thừa.Javaclass MyRunnable\nimplements Runnable { public void run() { System.out.println(\"Luồng Runnable đang chạy...\"); } public static void main(String args[]) { MyRunnable myRunnable = new MyRunnable(); Thread t1 = new Thread(myRunnable); t1.start(); } } 4. Các phương thức quan trọng Lớp Thread cung cấp nhiều phương thức để điều khiển luồng:\nPhương thức Mô tả start() Bắt đầu thực thi luồng (gọi hàm run() bên trong). run() Chứa code thực thi chính của luồng. sleep(long millis) Tạm dừng luồng trong một khoảng thời gian (tính bằng mili giây). join() Đợi luồng này kết thúc rồi mới tiếp tục chạy luồng khác. getPriority() Lấy mức độ ưu tiên của luồng. setPriority(int) Thiết lập độ ưu tiên của luồng (MIN_PRIORITY = 1, MAX_PRIORITY = 10). 5. Ví dụ: Sử dụng sleep()Dưới đây là ví dụ cho hai luồng chạy song song và tạm dừng xen kẽ nhau:\nJavaclass TestSleep extends Thread { public void run() { for (int i = 1; i \u003c= 3; i++) { try { Thread.sleep(500); // Ngủ 500ms } catch (InterruptedException e) { System.out.println(e); } System.out.println(i); } } public static void main(String args[]) { TestSleep t1 = new TestSleep(); TestSleep t2 = new TestSleep(); t1.start(); t2.start(); } } 6.Kết quả: Bạn sẽ thấy các số 1, 1, 2, 2, 3, 3 hiện ra lần lượt do hai luồng chạy đua với nhau.6. Kết luậnMultithreading là một vũ khí mạnh mẽ nhưng cũng dễ gây lỗi (như Deadlock, Race Condition) nếu không quản lý tốt. Hiểu rõ vòng đời và cách tạo Thread là bước đầu tiên để bạn chinh phục các ứng dụng Java hiệu năng cao.\nNguồn tham khảo VietJack – Java Multithreading\nhttps://vietjack.com/java/java_multithreading.jsp\nVietJack – Java Thread Class\nhttps://vietjack.com/java/java_thread_class.jsp\nOracle Java Documentation – Concurrency\nhttps://docs.oracle.com/javase/tutorial/essential/concurrency/\nOracle Java API – Thread Class\nhttps://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html\n",
+  "wordCount" : "644",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -65,27 +131,27 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" title="Trang Chủ">
+                <a href="https://hiennguyen267.github.io/" title="Trang Chủ">
                     <span>Trang Chủ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
+                <a href="https://hiennguyen267.github.io/posts/" title="Bài Viết">
                     <span>Bài Viết</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/about/" title="Giới Thiệu">
+                <a href="https://hiennguyen267.github.io/about/" title="Giới Thiệu">
                     <span>Giới Thiệu</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/contact/" title="Liên Hệ">
+                <a href="https://hiennguyen267.github.io/contact/" title="Liên Hệ">
                     <span>Liên Hệ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/cv/" title="CV">
+                <a href="https://hiennguyen267.github.io/cv/" title="CV">
                     <span>CV</span>
                 </a>
             </li>
@@ -244,13 +310,13 @@ Cách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiề
         <div class="tags-section">
           <span class="tags-label">Tags:</span>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/multithreading" class="tag-pill">#Multithreading</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multithreading" class="tag-pill">#Multithreading</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/concurrency" class="tag-pill">#Concurrency</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/concurrency" class="tag-pill">#Concurrency</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/performance" class="tag-pill">#Performance</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance" class="tag-pill">#Performance</a>
           
         </div>
         
@@ -297,10 +363,10 @@ Cách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiề
             <div class="footer-links">
                 <h3>Liên kết nhanh</h3>
                 <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/posts">Blog</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/">Trang chủ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="footer-contact">

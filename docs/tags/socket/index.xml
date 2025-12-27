@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Socket on NGUYEN THI THUY HIEN BLOG</title>
-    <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/socket/</link>
+    <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/socket/</link>
     <description>Recent content in Socket on NGUYEN THI THUY HIEN BLOG</description>
     <generator>Hugo -- 0.153.2</generator>
     <language>vi</language>
     <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/socket/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/socket/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tổng quan về Lập trình mạng trong Java (Java Networking)</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/websocket/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/websocket/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/websocket/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/websocket/</guid>
       <description>Khám phá sức mạnh của gói thư viện java.net. Hướng dẫn cơ bản về Socket, URL và cách xây dựng ứng dụng Client-Server đơn giản.</description>
     </item>
   </channel>

@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="light">
 
-<head><script src="/hiennguyen267/NguyenThiThuyHien_Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=hiennguyen267/NguyenThiThuyHien_Blog/livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet | NGUYEN THI THUY HIEN BLOG</title>
 <meta name="keywords" content="Networking, TCP, UDP, Protocol, Network Layer">
 <meta name="description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
-<link crossorigin="anonymous" href="/hiennguyen267/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
+<link crossorigin="anonymous" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
 <noscript>
     <style>
         #theme-toggle,
@@ -33,13 +33,80 @@
         document.querySelector("html").dataset.theme = 'dark';
     }
 
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet">
+  <meta property="og:description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Networking">
+    <meta property="article:tag" content="TCP">
+    <meta property="article:tag" content="UDP">
+    <meta property="article:tag" content="Protocol">
+    <meta property="article:tag" content="Network Layer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet">
+<meta name="twitter:description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet",
+  "name": "TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet",
+  "description": "Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.",
+  "keywords": [
+    "Networking", "TCP", "UDP", "Protocol", "Network Layer"
+  ],
+  "articleBody": "Trong thế giới mạng máy tính, mọi dữ liệu di chuyển từ máy này sang máy khác đều phải tuân theo các quy tắc gọi là Giao thức (Protocol). Ở tầng Giao vận (Transport Layer), hai “gã khổng lồ” phổ biến nhất chính là TCP và UDP.\nHiểu rõ sự khác biệt giữa chúng là kiến thức bắt buộc để thiết kế ứng dụng mạng hiệu quả. Bài viết này dựa trên thông tin từ Vietnix sẽ giúp bạn phân biệt chúng.\n1. TCP (Transmission Control Protocol) là gì? TCP (Giao thức điều khiển truyền vận) là giao thức hướng kết nối (connection-oriented). Điểm đặc trưng nhất của TCP là sự tin cậy.\nĐặc điểm nổi bật: Bắt tay 3 bước (Three-way Handshake): Trước khi gửi dữ liệu, TCP buộc hai máy phải thiết lập kết nối với nhau (SYN - SYN/ACK - ACK). Đảm bảo toàn vẹn: TCP đảm bảo dữ liệu gửi đi không bị mất, không bị lỗi và đến đúng thứ tự. Nếu gói tin bị mất, TCP sẽ yêu cầu gửi lại (Retransmission). Kiểm soát luồng (Flow Control): Điều chỉnh tốc độ gửi dữ liệu để tránh làm quá tải người nhận. Ứng dụng thực tế: Do tính chất “chậm mà chắc”, TCP được dùng cho:\nDuyệt Web (HTTP/HTTPS). Gửi nhận Email (SMTP, IMAP/POP). Truyền tải file (FTP). 2. UDP (User Datagram Protocol) là gì? UDP (Giao thức gói dữ liệu người dùng) là giao thức phi kết nối (connectionless). Điểm đặc trưng của UDP là tốc độ.\nĐặc điểm nổi bật: Không kết nối: Gửi là gửi thôi, không cần “bắt tay” hay chào hỏi gì cả. Gửi và quên (Fire and Forget): UDP không quan tâm gói tin có đến nơi hay không, cũng không quan tâm thứ tự. Gói tin đến trước có thể được xử lý trước hoặc sau gói tin đến muộn. Nhẹ và nhanh: Do bỏ qua các bước kiểm tra lỗi và thiết lập kết nối, UDP có header nhỏ hơn và tốc độ truyền tải nhanh hơn TCP rất nhiều. Ứng dụng thực tế: Do tính chất “nhanh nhưng ẩu”, UDP phù hợp với các ứng dụng chấp nhận mất một chút dữ liệu nhưng cần thời gian thực (Real-time):\nStreaming Video/Audio (YouTube, Netflix, Spotify). Game Online (FPS, MOBA). Voice over IP (VoIP - Gọi điện qua mạng như Zoom, Skype). Hệ thống phân giải tên miền (DNS). 3. Bảng so sánh TCP và UDP Dưới đây là bảng tổng hợp sự khác biệt chính dựa trên tài liệu từ Vietnix:\nTiêu chí TCP (Transmission Control Protocol) UDP (User Datagram Protocol) Loại kết nối Hướng kết nối (Connection-oriented). Phi kết nối (Connectionless). Độ tin cậy Cao. Đảm bảo dữ liệu đến nơi đầy đủ. Thấp. Không đảm bảo dữ liệu đến nơi. Thứ tự Sắp xếp lại đúng thứ tự gửi. Không quan tâm thứ tự. Tốc độ Chậm hơn (do phải kiểm tra lỗi, bắt tay). Nhanh hơn. Header Size Lớn (20 bytes). Nhỏ (8 bytes). Cơ chế gửi lại Có (nếu mất gói tin). Không. 4. Khi nào nên dùng loại nào? Câu trả lời phụ thuộc vào yêu cầu của ứng dụng bạn đang viết:\nChọn TCP khi: Bạn cần độ chính xác tuyệt đối. Ví dụ: Khi tải một file .exe hay gửi một tin nhắn văn bản, bạn không muốn mất dù chỉ 1 byte dữ liệu. Chọn UDP khi: Bạn cần tốc độ và độ trễ thấp (Low latency). Ví dụ: Khi xem Livestream, nếu mạng lag, bạn thà bị nhòe hình (mất gói tin) trong 1 giây rồi xem tiếp, còn hơn là video dừng hẳn lại để chờ tải lại gói tin bị mất đó. 5. Kết luận TCP và UDP không có cái nào “tốt hơn” cái nào, chúng sinh ra để giải quyết các bài toán khác nhau của Internet.\nTCP là người vận chuyển cẩn thận, tỉ mỉ. UDP là người vận chuyển siêu tốc, phóng khoáng. Là một lập trình viên Backend/Network, việc lựa chọn đúng giao thức sẽ quyết định hiệu năng ứng dụng của bạn.\nNguồn tham khảo Vietnix – TCP vs UDP: Phân biệt các giao thức truyền tải Internet\nhttps://vietnix.vn/tcp-vs-udp\nOracle Java Documentation – TCP/IP Protocols\nhttps://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html\n",
+  "wordCount" : "706",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -65,27 +132,27 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" title="Trang Chủ">
+                <a href="https://hiennguyen267.github.io/" title="Trang Chủ">
                     <span>Trang Chủ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
+                <a href="https://hiennguyen267.github.io/posts/" title="Bài Viết">
                     <span>Bài Viết</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/about/" title="Giới Thiệu">
+                <a href="https://hiennguyen267.github.io/about/" title="Giới Thiệu">
                     <span>Giới Thiệu</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/contact/" title="Liên Hệ">
+                <a href="https://hiennguyen267.github.io/contact/" title="Liên Hệ">
                     <span>Liên Hệ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/cv/" title="CV">
+                <a href="https://hiennguyen267.github.io/cv/" title="CV">
                     <span>CV</span>
                 </a>
             </li>
@@ -221,15 +288,15 @@
         <div class="tags-section">
           <span class="tags-label">Tags:</span>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/tcp" class="tag-pill">#TCP</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/tcp" class="tag-pill">#TCP</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/udp" class="tag-pill">#UDP</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/udp" class="tag-pill">#UDP</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/protocol" class="tag-pill">#Protocol</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/protocol" class="tag-pill">#Protocol</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/network-layer" class="tag-pill">#Network Layer</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/network-layer" class="tag-pill">#Network Layer</a>
           
         </div>
         
@@ -276,10 +343,10 @@
             <div class="footer-links">
                 <h3>Liên kết nhanh</h3>
                 <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/posts">Blog</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/">Trang chủ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="footer-contact">

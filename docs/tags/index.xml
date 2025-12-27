@@ -2,206 +2,206 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on NGUYEN THI THUY HIEN BLOG</title>
-    <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/</link>
+    <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/</link>
     <description>Recent content in Tags on NGUYEN THI THUY HIEN BLOG</description>
     <generator>Hugo -- 0.153.2</generator>
     <language>vi</language>
     <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Backend</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/backend/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/backend/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/backend/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/backend/</guid>
       <description></description>
     </item>
     <item>
       <title>Basic</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/basic/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/basic/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/basic/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/basic/</guid>
       <description></description>
     </item>
     <item>
       <title>Comparison</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/comparison/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/comparison/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/comparison/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/comparison/</guid>
       <description></description>
     </item>
     <item>
       <title>Concurrency</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/concurrency/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/concurrency/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/concurrency/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/concurrency/</guid>
       <description></description>
     </item>
     <item>
       <title>Distributed System</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/distributed-system/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/distributed-system/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/distributed-system/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/distributed-system/</guid>
       <description></description>
     </item>
     <item>
       <title>Frontend</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/frontend/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/frontend/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/frontend/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/frontend/</guid>
       <description></description>
     </item>
     <item>
       <title>Guru99</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/guru99/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/guru99/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/guru99/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/guru99/</guid>
       <description></description>
     </item>
     <item>
       <title>HTTP</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/http/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/http/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/http/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/http/</guid>
       <description></description>
     </item>
     <item>
       <title>HTTPS</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/https/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/https/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/https/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/https/</guid>
       <description></description>
     </item>
     <item>
       <title>Java</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/java/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/java/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java/</guid>
       <description></description>
     </item>
     <item>
       <title>JavaScript</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/javascript/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/javascript/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/javascript/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/javascript/</guid>
       <description></description>
     </item>
     <item>
       <title>Multicast</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/multicast/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multicast/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/multicast/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multicast/</guid>
       <description></description>
     </item>
     <item>
       <title>Multithreading</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/multithreading/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multithreading/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/multithreading/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multithreading/</guid>
       <description></description>
     </item>
     <item>
       <title>Network Layer</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/network-layer/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/network-layer/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/network-layer/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/network-layer/</guid>
       <description></description>
     </item>
     <item>
       <title>Networking</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking/</guid>
       <description></description>
     </item>
     <item>
       <title>Performance</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/performance/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/performance/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance/</guid>
       <description></description>
     </item>
     <item>
       <title>Promise</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/promise/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/promise/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/promise/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/promise/</guid>
       <description></description>
     </item>
     <item>
       <title>Protocol</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/protocol/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/protocol/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/protocol/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/protocol/</guid>
       <description></description>
     </item>
     <item>
       <title>REST API</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/rest-api/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rest-api/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/rest-api/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rest-api/</guid>
       <description></description>
     </item>
     <item>
       <title>RMI</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/rmi/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rmi/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/rmi/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rmi/</guid>
       <description></description>
     </item>
     <item>
       <title>Security</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/security/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/security/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/security/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/security/</guid>
       <description></description>
     </item>
     <item>
       <title>Socket</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/socket/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/socket/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/socket/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/socket/</guid>
       <description></description>
     </item>
     <item>
       <title>Spring Boot</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/spring-boot/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/spring-boot/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/spring-boot/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/spring-boot/</guid>
       <description></description>
     </item>
     <item>
       <title>SSL</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/ssl/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/ssl/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/ssl/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/ssl/</guid>
       <description></description>
     </item>
     <item>
       <title>TCP</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/tcp/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/tcp/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/tcp/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/tcp/</guid>
       <description></description>
     </item>
     <item>
       <title>TCP/IP</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/tcp/ip/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/tcp/ip/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/tcp/ip/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/tcp/ip/</guid>
       <description></description>
     </item>
     <item>
       <title>UDP</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/udp/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/udp/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/udp/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/udp/</guid>
       <description></description>
     </item>
     <item>
       <title>Web</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/web/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/web/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/web/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/web/</guid>
       <description></description>
     </item>
   </channel>

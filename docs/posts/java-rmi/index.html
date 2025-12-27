@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="light">
 
-<head><script src="/hiennguyen267/NguyenThiThuyHien_Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=hiennguyen267/NguyenThiThuyHien_Blog/livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì? | NGUYEN THI THUY HIEN BLOG</title>
 <meta name="keywords" content="Java, RMI, Distributed System, Networking">
 <meta name="description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-rmi/">
-<link crossorigin="anonymous" href="/hiennguyen267/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/">
+<link crossorigin="anonymous" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-rmi/">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/">
 <noscript>
     <style>
         #theme-toggle,
@@ -33,13 +33,79 @@
         document.querySelector("html").dataset.theme = 'dark';
     }
 
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?">
+  <meta property="og:description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="RMI">
+    <meta property="article:tag" content="Distributed System">
+    <meta property="article:tag" content="Networking">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?">
+<meta name="twitter:description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?",
+  "name": "Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?",
+  "description": "Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.",
+  "keywords": [
+    "Java", "RMI", "Distributed System", "Networking"
+  ],
+  "articleBody": "Trong lập trình hệ thống phân tán (Distributed Systems), việc giao tiếp giữa các máy tính là cốt lõi. Chúng ta thường nghe đến REST API hay Socket. Tuy nhiên, trong thế giới thuần Java, có một công nghệ cực kỳ mạnh mẽ giúp việc giao tiếp giữa các server trở nên trong suốt như đang gọi hàm nội bộ: đó là Java RMI.\nHôm nay, mình sẽ giới thiệu về Java RMI và cách triển khai một ứng dụng Calculator đơn giản.\n1. Java RMI là gì? RMI (Remote Method Invocation) là cơ chế cho phép một đối tượng đang chạy trên máy ảo Java này (Client) có thể gọi các phương thức của một đối tượng đang chạy trên máy ảo Java khác (Server).\nHãy tưởng tượng: Bạn đang code ở máy A, bạn gọi hàm tinhTong(1, 2). Nhưng thực tế, phép tính 1 + 2 lại được thực hiện CPU của máy B, sau đó máy B trả kết quả về cho máy A. Đó chính là RMI.\n2. Các thành phần cốt lõi Để RMI hoạt động, nó dựa trên kiến trúc Stub/Skeleton:\nRemote Interface: Một Interface chung quy định các hàm mà Server sẽ cung cấp và Client có thể gọi. Remote Object (Server): Đối tượng thực sự cài đặt các xử lý logic (Implementation). Stub (Client-side): Một “đại diện” giả mạo của đối tượng Server nằm ở phía Client. Khi Client gọi hàm, nó gọi vào Stub. Stub sẽ đóng gói dữ liệu và gửi qua mạng. RMI Registry: Cuốn “danh bạ” điện thoại. Server đăng ký tên của object vào đây, Client tra cứu tên để tìm địa chỉ object. 3. Ví dụ thực tế: Ứng dụng Calculator Chúng ta sẽ xây dựng một ứng dụng tính toán đơn giản gồm 2 máy: Client gửi số, Server tính toán và trả về kết quả.\nBước 1: Tạo Remote Interface Interface này phải kế thừa từ java.rmi.Remote và các phương thức phải ném ra ngoại lệ RemoteException.\nimport java.rmi.Remote; import java.rmi.RemoteException; // Interface chung cho cả Client và Server public interface CalculatorService extends Remote { int add(int a, int b) throws RemoteException; int subtract(int a, int b) throws RemoteException; } Bước 2: Cài đặt logic trên Server (Implementation) Class này sẽ thực thi logic thực tế. Nó thường kế thừa UnicastRemoteObject để RMI có thể export object này ra mạng.\nJava import java.rmi.server.UnicastRemoteObject; import java.rmi.RemoteException; public class CalculatorServiceImpl extends UnicastRemoteObject implements CalculatorService { // Constructor bắt buộc phải throw RemoteException protected CalculatorServiceImpl() throws RemoteException { super(); } @Override public int add(int a, int b) throws RemoteException { System.out.println(\"Server đang tính tổng: \" + a + \" + \" + b); return a + b; } @Override public int subtract(int a, int b) throws RemoteException { return a - b; } } Bước 3: Tạo Server và Đăng ký lên Registry Server sẽ khởi tạo object và gắn nó vào một cái tên (ví dụ: “Calculator”) trên cổng mặc định 1099.\nJava import java.rmi.Naming; import java.rmi.registry.LocateRegistry; public class RmiServer { public static void main(String[] args) { try { // 1. Tạo thanh ghi RMI ở cổng 1099 LocateRegistry.createRegistry(1099); // 2. Khởi tạo đối tượng CalculatorService service = new CalculatorServiceImpl(); // 3. Đăng ký tên định danh cho đối tượng Naming.rebind(\"rmi://localhost:1099/Calculator\", service); System.out.println(\"Server đã sẵn sàng!\"); } catch (Exception e) { e.printStackTrace(); } } } Bước 4: Tạo Client để gọi hàm Client sẽ tìm kiếm object tên là “Calculator” và gọi hàm như thể object đó đang nằm ngay trên máy mình.\nJava import java.rmi.Naming; public class RmiClient { public static void main(String[] args) { try { // 1. Tìm kiếm đối tượng trên Server qua tên \"Calculator\" CalculatorService service = (CalculatorService) Naming.lookup(\"rmi://localhost:1099/Calculator\"); // 2. Gọi phương thức từ xa int result = service.add(10, 20); System.out.println(\"Kết quả trả về từ Server: \" + result); } catch (Exception e) { e.printStackTrace(); } } } 4. Ưu và nhược điểm Ưu điểm\nDễ sử dụng: Cú pháp giống hệt gọi hàm Java thông thường.\nType-safe: Đảm bảo an toàn kiểu dữ liệu vì dùng chung Interface Java.\nTích hợp sâu: Hỗ trợ truyền Object phức tạp (thông qua Serialization).\nNhược điểm\nChỉ dành cho Java: Cả Client và Server đều phải viết bằng Java. Nếu muốn đa ngôn ngữ, bạn nên dùng REST API hoặc gRPC.\nChậm hơn Socket: Do mất chi phí đóng gói (Marshalling) và giải nén (Unmarshalling) đối tượng.\nCấu hình mạng: Đôi khi gặp rắc rối với Firewall khi triển khai thực tế.\n5. Kết luận Java RMI là một công nghệ nền tảng tuyệt vời để hiểu về cách các hệ thống phân tán hoạt động. Mặc dù ngày nay Microservices và REST API phổ biến hơn, nhưng RMI vẫn được sử dụng trong nhiều hệ thống nội bộ doanh nghiệp nhờ sự chặt chẽ và an toàn của nó.\nNguồn tham khảo Oracle Java Documentation – Java RMI\nhttps://docs.oracle.com/javase/8/docs/technotes/guides/rmi/\nOracle Java SE – Remote Method Invocation (RMI)\nhttps://docs.oracle.com/javase/tutorial/rmi/\nGeeksforGeeks – Java RMI\nhttps://www.geeksforgeeks.org/java-rmi/\nTutorialsPoint – Java RMI\nhttps://www.tutorialspoint.com/java_rmi/index.htm\nIBM Documentation – Java RMI Concepts\nhttps://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi\n",
+  "wordCount" : "844",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -65,27 +131,27 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" title="Trang Chủ">
+                <a href="https://hiennguyen267.github.io/" title="Trang Chủ">
                     <span>Trang Chủ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
+                <a href="https://hiennguyen267.github.io/posts/" title="Bài Viết">
                     <span>Bài Viết</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/about/" title="Giới Thiệu">
+                <a href="https://hiennguyen267.github.io/about/" title="Giới Thiệu">
                     <span>Giới Thiệu</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/contact/" title="Liên Hệ">
+                <a href="https://hiennguyen267.github.io/contact/" title="Liên Hệ">
                     <span>Liên Hệ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/cv/" title="CV">
+                <a href="https://hiennguyen267.github.io/cv/" title="CV">
                     <span>CV</span>
                 </a>
             </li>
@@ -268,13 +334,13 @@
         <div class="tags-section">
           <span class="tags-label">Tags:</span>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/rmi" class="tag-pill">#RMI</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rmi" class="tag-pill">#RMI</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/distributed-system" class="tag-pill">#Distributed System</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/distributed-system" class="tag-pill">#Distributed System</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
           
         </div>
         
@@ -321,10 +387,10 @@
             <div class="footer-links">
                 <h3>Liên kết nhanh</h3>
                 <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/posts">Blog</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/">Trang chủ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="footer-contact">

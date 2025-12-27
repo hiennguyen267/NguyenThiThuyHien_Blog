@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Protocol on NGUYEN THI THUY HIEN BLOG</title>
-    <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/protocol/</link>
+    <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/protocol/</link>
     <description>Recent content in Protocol on NGUYEN THI THUY HIEN BLOG</description>
     <generator>Hugo -- 0.153.2</generator>
     <language>vi</language>
     <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/protocol/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/protocol/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet</title>
-      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</link>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</link>
       <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</guid>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</guid>
       <description>Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.</description>
     </item>
   </channel>

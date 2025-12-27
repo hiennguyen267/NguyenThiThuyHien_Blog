@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="light">
 
-<head><script src="/hiennguyen267/NguyenThiThuyHien_Blog/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=hiennguyen267/NguyenThiThuyHien_Blog/livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm) | NGUYEN THI THUY HIEN BLOG</title>
 <meta name="keywords" content="Java, Networking, Multicast, UDP">
 <meta name="description" content="Tìm hiểu về kỹ thuật Multicast - gửi dữ liệu từ một nguồn đến một nhóm người nhận cụ thể. Hướng dẫn sử dụng MulticastSocket trong Java.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/multicast-java/">
-<link crossorigin="anonymous" href="/hiennguyen267/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/">
+<link crossorigin="anonymous" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/multicast-java/">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/">
 <noscript>
     <style>
         #theme-toggle,
@@ -33,13 +33,79 @@
         document.querySelector("html").dataset.theme = 'dark';
     }
 
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)">
+  <meta property="og:description" content="Tìm hiểu về kỹ thuật Multicast - gửi dữ liệu từ một nguồn đến một nhóm người nhận cụ thể. Hướng dẫn sử dụng MulticastSocket trong Java.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Networking">
+    <meta property="article:tag" content="Multicast">
+    <meta property="article:tag" content="UDP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)">
+<meta name="twitter:description" content="Tìm hiểu về kỹ thuật Multicast - gửi dữ liệu từ một nguồn đến một nhóm người nhận cụ thể. Hướng dẫn sử dụng MulticastSocket trong Java.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)",
+  "name": "Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)",
+  "description": "Tìm hiểu về kỹ thuật Multicast - gửi dữ liệu từ một nguồn đến một nhóm người nhận cụ thể. Hướng dẫn sử dụng MulticastSocket trong Java.",
+  "keywords": [
+    "Java", "Networking", "Multicast", "UDP"
+  ],
+  "articleBody": "Trong lập trình mạng, chúng ta thường nghe đến Unicast (1 gửi 1) và Broadcast (1 gửi tất cả). Tuy nhiên, có một kỹ thuật thứ ba rất quan trọng là Multicast (1 gửi một nhóm).\nBài viết này sẽ hướng dẫn bạn cách xây dựng chương trình Client/Server kết nối theo dạng Multicast dựa trên tài liệu từ VnCoder.\n1. Multicast là gì? Multicast là phương thức truyền tin mà tại đó, một gói tin được gửi từ một máy nguồn có thể được nhận bởi một nhóm các máy đích (đăng ký tham gia nhóm đó), thay vì gửi cho tất cả mọi người như Broadcast.\nĐặc điểm kỹ thuật: Giao thức: Sử dụng UDP (User Datagram Protocol) vì tính chất nhanh và không cần thiết lập kết nối (connectionless). Địa chỉ IP: Sử dụng dải địa chỉ lớp D (Class D) từ 224.0.0.0 đến 239.255.255.255. Cơ chế: Các máy muốn nhận tin phải “tham gia” (joinGroup) vào một địa chỉ Multicast cụ thể. 2. Lớp MulticastSocket trong Java Để thực hiện Multicast, Java cung cấp lớp java.net.MulticastSocket.\nCác phương thức quan trọng:\njoinGroup(InetAddress mcastaddr): Tham gia vào một nhóm để bắt đầu nhận tin. leaveGroup(InetAddress mcastaddr): Rời khỏi nhóm, không nhận tin nữa. send(DatagramPacket p): Gửi gói tin đi (giống như DatagramSocket thông thường). receive(DatagramPacket p): Nhận gói tin về. 3. Ví dụ thực tế: Chat nhóm đơn giản Chúng ta sẽ viết 2 chương trình:\nSender (Server): Gửi lời chào đến nhóm. Receiver (Client): Tham gia nhóm và nhận lời chào. Cấu hình chung:\nĐịa chỉ nhóm: 224.0.0.1 Cổng (Port): 8888 3.1. Code Sender (Người gửi) Sender không cần phải joinGroup, chỉ cần đóng gói dữ liệu và gửi đến địa chỉ IP của nhóm.\nimport java.net.DatagramPacket; import java.net.DatagramSocket; import java.net.InetAddress; public class MulticastSender { public static void main(String[] args) { try { // 1. Địa chỉ Group và Port String groupIP = \"224.0.0.1\"; int port = 8888; String message = \"Xin chào các bạn trong nhóm Multicast!\"; // 2. Tạo Socket (Dùng DatagramSocket hoặc MulticastSocket đều được để gửi) DatagramSocket socket = new DatagramSocket(); InetAddress group = InetAddress.getByName(groupIP); // 3. Đóng gói dữ liệu byte[] buf = message.getBytes(); DatagramPacket packet = new DatagramPacket(buf, buf.length, group, port); // 4. Gửi dữ liệu socket.send(packet); System.out.println(\"Đã gửi tin nhắn: \" + message); // 5. Đóng socket socket.close(); } catch (Exception e) { e.printStackTrace(); } } } 3.2. Code Receiver (Người nhận) Receiver bắt buộc phải tạo MulticastSocket và gọi lệnh joinGroup thì mới nhận được tin nhắn.\nJava import java.net.DatagramPacket; import java.net.InetAddress; import java.net.MulticastSocket; public class MulticastReceiver { public static void main(String[] args) { try { // 1. Cấu hình địa chỉ và cổng phải khớp với Sender String groupIP = \"224.0.0.1\"; int port = 8888; // 2. Tạo MulticastSocket lắng nghe tại cổng 8888 MulticastSocket socket = new MulticastSocket(port); InetAddress group = InetAddress.getByName(groupIP); // 3. THAM GIA NHÓM (Bước quan trọng nhất) socket.joinGroup(group); System.out.println(\"Đã tham gia nhóm \" + groupIP + \". Đang chờ tin nhắn...\"); // 4. Nhận dữ liệu byte[] buf = new byte[1024]; DatagramPacket packet = new DatagramPacket(buf, buf.length); // Hàm receive sẽ treo (block) cho đến khi có tin nhắn đến socket.receive(packet); // 5. Hiển thị tin nhắn String received = new String(packet.getData(), 0, packet.getLength()); System.out.println(\"Nhận được: \" + received); // 6. Rời nhóm và đóng socket.leaveGroup(group); socket.close(); } catch (Exception e) { e.printStackTrace(); } } } 4. Cách chạy chương trình Chạy Receiver trước. Bạn sẽ thấy dòng thông báo “Đang chờ tin nhắn…”.\nChạy Sender.\nQuay lại màn hình Receiver, bạn sẽ thấy dòng chữ “Xin chào các bạn trong nhóm Multicast!” xuất hiện.\nLưu ý: Bạn có thể chạy nhiều bản Receiver cùng lúc (trên các máy khác nhau trong cùng mạng LAN hoặc nhiều terminal). Khi Sender gửi 1 tin, tất cả Receiver đều sẽ nhận được.\n5. Kết luận Multicast là giải pháp tuyệt vời cho các ứng dụng như: họp trực tuyến, dạy học online, update phần mềm đồng loạt, hoặc các ứng dụng stream media. Nó giúp tiết kiệm băng thông mạng đáng kể so với việc gửi riêng lẻ cho từng người.\nNguồn tham khảo VnCoder – Lập trình Multicast trong Java\nhttps://vncoder.com/java-multicast\nOracle Java Documentation – MulticastSocket\nhttps://docs.oracle.com/javase/8/docs/api/java/net/MulticastSocket.html\n",
+  "wordCount" : "704",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -65,27 +131,27 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/" title="Trang Chủ">
+                <a href="https://hiennguyen267.github.io/" title="Trang Chủ">
                     <span>Trang Chủ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
+                <a href="https://hiennguyen267.github.io/posts/" title="Bài Viết">
                     <span>Bài Viết</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/about/" title="Giới Thiệu">
+                <a href="https://hiennguyen267.github.io/about/" title="Giới Thiệu">
                     <span>Giới Thiệu</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/contact/" title="Liên Hệ">
+                <a href="https://hiennguyen267.github.io/contact/" title="Liên Hệ">
                     <span>Liên Hệ</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/cv/" title="CV">
+                <a href="https://hiennguyen267.github.io/cv/" title="CV">
                     <span>CV</span>
                 </a>
             </li>
@@ -254,13 +320,13 @@
         <div class="tags-section">
           <span class="tags-label">Tags:</span>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/multicast" class="tag-pill">#Multicast</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multicast" class="tag-pill">#Multicast</a>
           
-          <a href="/hiennguyen267/NguyenThiThuyHien_Blog/tags/udp" class="tag-pill">#UDP</a>
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/udp" class="tag-pill">#UDP</a>
           
         </div>
         
@@ -307,10 +373,10 @@
             <div class="footer-links">
                 <h3>Liên kết nhanh</h3>
                 <ul>
-                    <li><a href="/">Trang chủ</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/posts">Blog</a></li>
-                    <li><a href="/hiennguyen267/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/">Trang chủ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
