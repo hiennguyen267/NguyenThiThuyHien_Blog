@@ -164,28 +164,34 @@ hãy liên hệ với mình qua các kênh bên dưới 👇
     </nav>
 </header>
 <style>
+     
     .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;  
-    background: var(--theme);  
-    backdrop-filter: blur(8px);  
-    border-bottom: 1px solid var(--border);
-}
-
- 
-body {
-    padding-top: 60px;  
-}
-
- 
-@media screen and (max-width: 768px) {
-    body {
-        padding-top: 50px;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999 !important;  
+        background: var(--theme);  
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-}
+
+     
+    body {
+        padding-top: 60px !important; 
+    }
+
+     
+    .profile-wrapper {
+        margin-top: 0 !important;  
+        z-index: 1;
+    }
+
+     
+    @media screen and (max-width: 768px) {
+        body { padding-top: 50px !important; }
+    }
 </style>
 <main class="main">
 
