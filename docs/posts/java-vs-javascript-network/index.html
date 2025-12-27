@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Phân biệt Java và JavaScript | NGUYEN THI THUY HIEN BLOG</title>
+<meta name="keywords" content="Java, JavaScript, Comparison, Guru99">
+<meta name="description" content="Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/">
+<link crossorigin="anonymous" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    }
+
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="Phân biệt Java và JavaScript">
+  <meta property="og:description" content="Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="JavaScript">
+    <meta property="article:tag" content="Comparison">
+    <meta property="article:tag" content="Guru99">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Phân biệt Java và JavaScript">
+<meta name="twitter:description" content="Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Phân biệt Java và JavaScript",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Phân biệt Java và JavaScript",
+  "name": "Phân biệt Java và JavaScript",
+  "description": "Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.",
+  "keywords": [
+    "Java", "JavaScript", "Comparison", "Guru99"
+  ],
+  "articleBody": "Trong cộng đồng lập trình, có một câu nói vui rằng: “Java và JavaScript giống nhau như Car (Ô tô) và Carpet (Cái thảm)”. Tuy tên gọi có phần tương đồng, nhưng bản chất kỹ thuật, mục đích sử dụng và cách thức hoạt động của chúng lại hoàn toàn khác biệt.\n1. Định nghĩa cơ bản Java là gì? Java là một ngôn ngữ lập trình hướng đối tượng (OOP), dựa trên lớp (class-based) và được thiết kế để hoạt động độc lập trên nhiều nền tảng khác nhau (Write Once, Run Anywhere).\nĐặc điểm: Mã nguồn Java được biên dịch (compiled) thành Bytecode và chạy trên máy ảo Java (JVM). Mục đích: Xây dựng các ứng dụng doanh nghiệp, ứng dụng di động (Android), và hệ thống xử lý phía server. JavaScript là gì? JavaScript (thường viết tắt là JS) là một ngôn ngữ kịch bản (scripting language) nhẹ, được thông dịch (interpreted).\nĐặc điểm: Được tích hợp trực tiếp vào HTML và chạy chủ yếu trên trình duyệt web. Mục đích: Tạo tính tương tác cho trang web, xác thực dữ liệu người dùng (validation), và xử lý giao diện động. 2. Bảng so sánh chi tiết (Key Differences) Dưới đây là bảng so sánh các tiêu chí kỹ thuật quan trọng:\nTiêu chí Java JavaScript Loại ngôn ngữ Ngôn ngữ lập trình hướng đối tượng (OOP). Ngôn ngữ kịch bản (Scripting) dựa trên đối tượng. Kiểu dữ liệu (Typing) Statically Typed (Kiểu tĩnh): Bạn phải khai báo kiểu dữ liệu biến trước khi sử dụng (ví dụ: int a = 10;). Dynamically Typed (Kiểu động): Không cần khai báo kiểu, biến có thể chứa bất kỳ loại dữ liệu nào (ví dụ: let a = 10;). Môi trường chạy Chạy trên máy ảo Java (JVM). Cần cài đặt JDK/JRE. Chạy trực tiếp trên trình duyệt web (Browser) hoặc Node.js. Cơ chế thực thi Mã nguồn được Biên dịch (Compiled) thành Bytecode trước khi chạy. Mã nguồn dạng văn bản được Thông dịch (Interpreted) từng dòng khi chạy. Mô hình đối tượng Dựa trên Lớp (Class-based). Kế thừa thông qua class. Dựa trên Nguyên mẫu (Prototype-based). Bộ nhớ Tốn nhiều bộ nhớ hơn do chạy trên máy ảo. Nhẹ hơn, tốn ít bộ nhớ hơn (khi chạy trên client). Đuôi file .java .js 3. Các điểm khác biệt chuyên sâu Về tính năng hướng đối tượng (OOP) Java: Sử dụng mô hình OOP truyền thống và chặt chẽ với các khái niệm: Class, Object, Inheritance (Kế thừa), Polymorphism (Đa hình). Mọi thứ trong Java bắt buộc phải nằm trong một Class. JavaScript: Tuy cũng hỗ trợ đối tượng nhưng linh hoạt hơn. Bạn không bắt buộc phải tạo Class để viết mã (mặc dù ES6 đã bổ sung từ khóa class). Về khả năng ứng dụng Java: Thường được dùng cho: Ứng dụng Android. Phần mềm doanh nghiệp (Enterprise Software). Hệ thống nhúng (Embedded Systems). Xử lý Big Data. JavaScript: Thường được dùng cho: Phát triển Frontend Website (React, Vue, Angular). Phát triển Backend (với Node.js). Ứng dụng di động lai (Hybrid Apps). Về sự phụ thuộc Java: Là ngôn ngữ độc lập. Bạn viết code, biên dịch và nó chạy ở bất cứ đâu có JVM. JavaScript: Trước đây phụ thuộc hoàn toàn vào mã HTML/CSS để hiển thị trên trình duyệt. Ngày nay với Node.js, nó đã có thể chạy độc lập phía Server. Java – OOP chặt chẽ Java tuân thủ nghiêm ngặt mô hình hướng đối tượng:\nMọi đoạn code đều nằm trong class Hỗ trợ đầy đủ: kế thừa, đa hình, đóng gói Cấu trúc rõ ràng, phù hợp dự án lớn Ví dụ:\nclass HelloJava { public static void main(String[] args) { System.out.println(\"Hello Java\"); } } JavaScript – OOP linh hoạt JavaScript sử dụng mô hình Prototype-based, linh hoạt hơn:\nKhông bắt buộc phải tạo class ES6 đã bổ sung cú pháp class nhưng bản chất vẫn là prototype Phù hợp cho phát triển nhanh Ví dụ:\nconsole.log(\"Hello JavaScript\"); 4. Khả năng ứng dụng trong thực tế Java thường dùng cho:\nỨng dụng Android\nHệ thống ngân hàng, tài chính\nỨng dụng doanh nghiệp lớn\nServer Backend hiệu năng cao\nJavaScript thường dùng cho:\nWebsite động\nỨng dụng Web (SPA)\nBackend với Node.js\nFull-stack Web Development\n5. Nên học Java hay JavaScript? Việc lựa chọn phụ thuộc vào định hướng nghề nghiệp:\nChọn Java nếu bạn:\nMuốn làm Backend\nPhát triển Android\nXây dựng hệ thống lớn, ổn định\nChọn JavaScript nếu bạn:\nMuốn làm Web Developer\nPhát triển Frontend / Full-stack\nXây dựng ứng dụng web hiện đại\nNguồn tham khảo Guru99 – Difference between Java and JavaScript\nhttps://www.guru99.com/vi/difference-between-java-and-javascript.html\nOracle Java Documentation\nhttps://docs.oracle.com/en/java/\nMDN Web Docs – JavaScript\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript\n",
+  "wordCount" : "789",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hiennguyen267.github.io/" title="Trang Chủ">
+                    <span>Trang Chủ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/posts/" title="Bài Viết">
+                    <span>Bài Viết</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/about/" title="Giới Thiệu">
+                    <span>Giới Thiệu</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/contact/" title="Liên Hệ">
+                    <span>Liên Hệ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/cv/" title="CV">
+                    <span>CV</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <article class="post-article">
+      <header class="post-header">
+        <div class="post-meta">
+          
+          <span class="tag-badge">Java</span>
+          
+          <span class="date">26/12/2025</span>
+        </div>
+        <h1 class="post-title">Phân biệt Java và JavaScript</h1>
+        <p class="post-lead">Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.</p>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="markdown-body">
+        <p>Trong cộng đồng lập trình, có một câu nói vui rằng: <em>&ldquo;Java và JavaScript giống nhau như Car (Ô tô) và Carpet (Cái thảm)&rdquo;</em>. Tuy tên gọi có phần tương đồng, nhưng bản chất kỹ thuật, mục đích sử dụng và cách thức hoạt động của chúng lại hoàn toàn khác biệt.</p>
+<h2 id="1-định-nghĩa-cơ-bản">1. Định nghĩa cơ bản</h2>
+<h3 id="java-là-gì">Java là gì?</h3>
+<p>Java là một ngôn ngữ lập trình hướng đối tượng (OOP), dựa trên lớp (class-based) và được thiết kế để hoạt động độc lập trên nhiều nền tảng khác nhau (Write Once, Run Anywhere).</p>
+<ul>
+<li><strong>Đặc điểm:</strong> Mã nguồn Java được biên dịch (compiled) thành Bytecode và chạy trên máy ảo Java (JVM).</li>
+<li><strong>Mục đích:</strong> Xây dựng các ứng dụng doanh nghiệp, ứng dụng di động (Android), và hệ thống xử lý phía server.</li>
+</ul>
+<h3 id="javascript-là-gì">JavaScript là gì?</h3>
+<p>JavaScript (thường viết tắt là JS) là một ngôn ngữ kịch bản (scripting language) nhẹ, được thông dịch (interpreted).</p>
+<ul>
+<li><strong>Đặc điểm:</strong> Được tích hợp trực tiếp vào HTML và chạy chủ yếu trên trình duyệt web.</li>
+<li><strong>Mục đích:</strong> Tạo tính tương tác cho trang web, xác thực dữ liệu người dùng (validation), và xử lý giao diện động.</li>
+</ul>
+<hr>
+<h2 id="2-bảng-so-sánh-chi-tiết-key-differences">2. Bảng so sánh chi tiết (Key Differences)</h2>
+<p>Dưới đây là bảng so sánh các tiêu chí kỹ thuật quan trọng:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Tiêu chí</th>
+          <th style="text-align: left">Java</th>
+          <th style="text-align: left">JavaScript</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Loại ngôn ngữ</strong></td>
+          <td style="text-align: left">Ngôn ngữ lập trình hướng đối tượng (OOP).</td>
+          <td style="text-align: left">Ngôn ngữ kịch bản (Scripting) dựa trên đối tượng.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Kiểu dữ liệu (Typing)</strong></td>
+          <td style="text-align: left"><strong>Statically Typed (Kiểu tĩnh):</strong> Bạn phải khai báo kiểu dữ liệu biến trước khi sử dụng (ví dụ: <code>int a = 10;</code>).</td>
+          <td style="text-align: left"><strong>Dynamically Typed (Kiểu động):</strong> Không cần khai báo kiểu, biến có thể chứa bất kỳ loại dữ liệu nào (ví dụ: <code>let a = 10;</code>).</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Môi trường chạy</strong></td>
+          <td style="text-align: left">Chạy trên máy ảo Java (JVM). Cần cài đặt JDK/JRE.</td>
+          <td style="text-align: left">Chạy trực tiếp trên trình duyệt web (Browser) hoặc Node.js.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Cơ chế thực thi</strong></td>
+          <td style="text-align: left">Mã nguồn được <strong>Biên dịch (Compiled)</strong> thành Bytecode trước khi chạy.</td>
+          <td style="text-align: left">Mã nguồn dạng văn bản được <strong>Thông dịch (Interpreted)</strong> từng dòng khi chạy.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Mô hình đối tượng</strong></td>
+          <td style="text-align: left">Dựa trên <strong>Lớp (Class-based)</strong>. Kế thừa thông qua class.</td>
+          <td style="text-align: left">Dựa trên <strong>Nguyên mẫu (Prototype-based)</strong>.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Bộ nhớ</strong></td>
+          <td style="text-align: left">Tốn nhiều bộ nhớ hơn do chạy trên máy ảo.</td>
+          <td style="text-align: left">Nhẹ hơn, tốn ít bộ nhớ hơn (khi chạy trên client).</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Đuôi file</strong></td>
+          <td style="text-align: left"><code>.java</code></td>
+          <td style="text-align: left"><code>.js</code></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="3-các-điểm-khác-biệt-chuyên-sâu">3. Các điểm khác biệt chuyên sâu</h2>
+<h3 id="về-tính-năng-hướng-đối-tượng-oop">Về tính năng hướng đối tượng (OOP)</h3>
+<ul>
+<li><strong>Java:</strong> Sử dụng mô hình OOP truyền thống và chặt chẽ với các khái niệm: Class, Object, Inheritance (Kế thừa), Polymorphism (Đa hình). Mọi thứ trong Java bắt buộc phải nằm trong một Class.</li>
+<li><strong>JavaScript:</strong> Tuy cũng hỗ trợ đối tượng nhưng linh hoạt hơn. Bạn không bắt buộc phải tạo Class để viết mã (mặc dù ES6 đã bổ sung từ khóa <code>class</code>).</li>
+</ul>
+<h3 id="về-khả-năng-ứng-dụng">Về khả năng ứng dụng</h3>
+<ul>
+<li><strong>Java:</strong> Thường được dùng cho:
+<ul>
+<li>Ứng dụng Android.</li>
+<li>Phần mềm doanh nghiệp (Enterprise Software).</li>
+<li>Hệ thống nhúng (Embedded Systems).</li>
+<li>Xử lý Big Data.</li>
+</ul>
+</li>
+<li><strong>JavaScript:</strong> Thường được dùng cho:
+<ul>
+<li>Phát triển Frontend Website (React, Vue, Angular).</li>
+<li>Phát triển Backend (với Node.js).</li>
+<li>Ứng dụng di động lai (Hybrid Apps).</li>
+</ul>
+</li>
+</ul>
+<h3 id="về-sự-phụ-thuộc">Về sự phụ thuộc</h3>
+<ul>
+<li><strong>Java:</strong> Là ngôn ngữ độc lập. Bạn viết code, biên dịch và nó chạy ở bất cứ đâu có JVM.</li>
+<li><strong>JavaScript:</strong> Trước đây phụ thuộc hoàn toàn vào mã HTML/CSS để hiển thị trên trình duyệt. Ngày nay với Node.js, nó đã có thể chạy độc lập phía Server.</li>
+</ul>
+<h3 id="java--oop-chặt-chẽ">Java – OOP chặt chẽ</h3>
+<p><strong>Java tuân thủ nghiêm ngặt mô hình hướng đối tượng:</strong></p>
+<ul>
+<li>Mọi đoạn code đều nằm trong <strong>class</strong></li>
+<li>Hỗ trợ đầy đủ: kế thừa, đa hình, đóng gói</li>
+<li>Cấu trúc rõ ràng, phù hợp dự án lớn</li>
+</ul>
+<p><strong>Ví dụ:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HelloJava</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
+</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Hello Java&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="javascript--oop-linh-hoạt">JavaScript – OOP linh hoạt</h3>
+<p><strong>JavaScript sử dụng mô hình Prototype-based, linh hoạt hơn:</strong></p>
+<ul>
+<li>Không bắt buộc phải tạo class</li>
+<li>ES6 đã bổ sung cú pháp class nhưng bản chất vẫn là prototype</li>
+<li>Phù hợp cho phát triển nhanh</li>
+</ul>
+<p><strong>Ví dụ:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>console.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Hello JavaScript&#34;</span>);
+</span></span></code></pre></div><h2 id="4-khả-năng-ứng-dụng-trong-thực-tế">4. Khả năng ứng dụng trong thực tế</h2>
+<p><strong>Java thường dùng cho:</strong></p>
+<ul>
+<li>
+<p>Ứng dụng Android</p>
+</li>
+<li>
+<p>Hệ thống ngân hàng, tài chính</p>
+</li>
+<li>
+<p>Ứng dụng doanh nghiệp lớn</p>
+</li>
+<li>
+<p>Server Backend hiệu năng cao</p>
+</li>
+</ul>
+<p><strong>JavaScript thường dùng cho:</strong></p>
+<ul>
+<li>
+<p>Website động</p>
+</li>
+<li>
+<p>Ứng dụng Web (SPA)</p>
+</li>
+<li>
+<p>Backend với Node.js</p>
+</li>
+<li>
+<p>Full-stack Web Development</p>
+</li>
+</ul>
+<h2 id="5-nên-học-java-hay-javascript">5. Nên học Java hay JavaScript?</h2>
+<p><strong>Việc lựa chọn phụ thuộc vào định hướng nghề nghiệp:</strong></p>
+<p><strong>Chọn Java nếu bạn:</strong></p>
+<ul>
+<li>
+<p>Muốn làm Backend</p>
+</li>
+<li>
+<p>Phát triển Android</p>
+</li>
+<li>
+<p>Xây dựng hệ thống lớn, ổn định</p>
+</li>
+</ul>
+<p><strong>Chọn JavaScript nếu bạn:</strong></p>
+<ul>
+<li>
+<p>Muốn làm Web Developer</p>
+</li>
+<li>
+<p>Phát triển Frontend / Full-stack</p>
+</li>
+<li>
+<p>Xây dựng ứng dụng web hiện đại</p>
+</li>
+</ul>
+<h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2>
+<ul>
+<li>
+<p><strong>Guru99 – Difference between Java and JavaScript</strong><br>
+<a href="https://www.guru99.com/vi/difference-between-java-and-javascript.html">https://www.guru99.com/vi/difference-between-java-and-javascript.html</a></p>
+</li>
+<li>
+<p><strong>Oracle Java Documentation</strong><br>
+<a href="https://docs.oracle.com/en/java/">https://docs.oracle.com/en/java/</a></p>
+</li>
+<li>
+<p><strong>MDN Web Docs – JavaScript</strong><br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a></p>
+</li>
+</ul>
+
+      </div>
+
+      <footer class="post-footer">
+        
+        <div class="tags-section">
+          <span class="tags-label">Tags:</span>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/javascript" class="tag-pill">#JavaScript</a>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/comparison" class="tag-pill">#Comparison</a>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/guru99" class="tag-pill">#Guru99</a>
+          
+        </div>
+        
+      </footer>
+    </article>
+  </div>
+</div>
+
+<style>
+  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
+  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
+  .blog-reading-wrapper { padding: 60px 0 100px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
+  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
+  .post-header { text-align: center; margin-bottom: 50px; }
+  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
+  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
+  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
+  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+  .markdown-body { font-size: 1.15rem; text-align: justify; }
+  .markdown-body p { margin-bottom: 1.8em; }
+  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
+  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
+  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
+  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
+  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
+</style>
+
+    </main>
+    
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-logo">
+                    <div class="badge-tech">IT Student</div>
+                    <h3>Nguyễn Thị Thúy Hiền</h3>
+                </div>
+                <p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/">Trang chủ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Thông tin liên hệ</h3>
+                <ul>
+                    <li><a href="mailto:nguyenthithuyhienbl@gmail.com">nguyenthithuyhienbl@gmail.com</a></li>
+                    <li><a href="https://www.facebook.com/hien.nguyen.564852">Facebook</a></li>
+                    <li><a href="https://github.com/hiennguyen267">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Nguyễn Thị Thúy Hiền</p>
+        </div>
+    </div>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    
+    document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+    
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+</script>
+
+<style>
+   
+  .main-footer {
+    background-color: #0f172a;
+    color: #cbd5e1;
+    padding: 80px 0 30px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+  }
+  .footer-grid { 
+    display: grid; 
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 50px; 
+    margin-bottom: 50px; 
+  }
+  .footer-brand h3, .footer-links h3, .footer-contact h3 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+  .footer-brand p { font-size: 1rem; line-height: 1.6; }
+  .footer-links ul li { margin-bottom: 10px; }
+  .footer-links a, .footer-contact a { color: #94a3b8; font-size: 0.9rem; }
+  .footer-links a:hover { color: #7a7b7e; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; font-size: 0.85rem; }
+
+   
+  body { overflow-x: hidden; margin: 0; }  
+  
+  .skills-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px; 
+  }
+  .skill-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 20px; 
+    text-align: center; 
+    transition: 0.3s; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    border: 1px solid #f1f5f9; 
+  }
+  .skill-icon-img { 
+    width: 60px; 
+    height: 60px; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+  }
+</style></body>
+
+</html>
