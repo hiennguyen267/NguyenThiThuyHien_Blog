@@ -3,8 +3,8 @@ publishDir = 'docs'
 languageCode = 'vi'
 title = 'NGUYEN THI THUY HIEN BLOG'
 theme = "PaperMod"
-canonifyURLs = false
-relativeURLs = true
+canonifyURLs = true
+relativeURLs = false
 # --- CẤU HÌNH PHÂN TRANG (CHUẨN MỚI) ---
 [pagination]
   pagerSize = 3
