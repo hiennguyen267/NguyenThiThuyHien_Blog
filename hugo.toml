@@ -4,8 +4,7 @@ languageCode = "vi"
 title = "NGUYEN THI THUY HIEN BLOG"
 theme = "PaperMod"
 
-# SỬA LẠI ĐOẠN NÀY
-canonifyURLs = false
+canonifyURLs = true
 relativeURLs = false
 
 [pagination]
@@ -15,18 +14,37 @@ relativeURLs = false
   defaultTheme = "light"
   ShowReadingTime = true
   ShowShareButtons = true
-  # Thêm dòng này để fix lỗi asset
-  env = "production" 
+
+  [params.assets]
+    disableFingerprinting = false
 
 [menu]
   [[menu.main]]
     identifier = "home"
     name = "Trang Chủ"
-    url = "/" # Link tuyệt đối sẽ dựa vào baseURL
+    url = "/"
     weight = 10
 
   [[menu.main]]
     identifier = "posts"
     name = "Bài Viết"
-    url = "posts/" # Hugo tự nối thành baseURL/posts/
+    url = "posts/"
     weight = 20
+
+  [[menu.main]]
+    identifier = "about"
+    name = "Giới Thiệu"
+    url = "about/"
+    weight = 30
+
+  [[menu.main]]
+    identifier = "contact"
+    name = "Liên Hệ"
+    url = "contact/"
+    weight = 40
+
+  [[menu.main]]
+    identifier = "cv"
+    name = "CV"
+    url = "cv/"
+    weight = 50

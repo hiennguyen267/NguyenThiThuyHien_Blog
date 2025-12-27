@@ -1,439 +1,50 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="light">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack | NGUYEN THI THUY HIEN BLOG</title>
-<meta name="keywords" content="Java, Multithreading, Concurrency, Performance">
-<meta name="description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.">
-<meta name="author" content="">
-<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/">
-<link crossorigin="anonymous" href="/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
-<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    }
-
-</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/">
-  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
-  <meta property="og:title" content="Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack">
-  <meta property="og:description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.">
-  <meta property="og:locale" content="vi">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
-    <meta property="article:tag" content="Java">
-    <meta property="article:tag" content="Multithreading">
-    <meta property="article:tag" content="Concurrency">
-    <meta property="article:tag" content="Performance">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack">
-<meta name="twitter:description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack",
-      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack",
-  "name": "Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack",
-  "description": "Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.",
-  "keywords": [
-    "Java", "Multithreading", "Concurrency", "Performance"
-  ],
-  "articleBody": "Trong lập trình Java, Multithreading (Đa luồng) là một kỹ thuật cho phép CPU thực hiện nhiều tác vụ cùng một lúc. Nó giúp tận dụng tối đa sức mạnh của bộ vi xử lý và làm cho ứng dụng phản hồi nhanh hơn, đặc biệt là trong các game hay ứng dụng xử lý dữ liệu lớn.\nBài viết này sẽ tóm tắt các kiến thức cốt lõi về Đa luồng dựa trên tài liệu từ VietJack.\n1. Đa luồng là gì? Đa luồng trong Java là quá trình thực thi nhiều luồng (thread) đồng thời. Một Thread là một đơn vị xử lý nhỏ nhất trong chương trình.\nĐa nhiệm (Multitasking): Là chạy nhiều tiến trình (process) cùng lúc (ví dụ: vừa nghe nhạc vừa code). Đa luồng (Multithreading): Là chạy nhiều luồng trong cùng một tiến trình (ví dụ: trong trình nghe nhạc, một luồng phát nhạc, một luồng tải bài hát tiếp theo). 2. Vòng đời của một Thread (Thread Life Cycle) Một Thread trong Java sẽ trải qua 5 trạng thái chính trong vòng đời của nó:\nNew (Mới): Luồng vừa được khởi tạo nhưng chưa chạy (chưa gọi hàm start()). Runnable (Có thể chạy): Luồng đã sẵn sàng và đang đợi CPU cấp phát tài nguyên để chạy. Running (Đang chạy): CPU đang thực thi các mã lệnh trong luồng. Blocked/Waiting (Bị chặn/Đợi): Luồng tạm dừng để đợi tài nguyên (I/O) hoặc đợi một luồng khác. Terminated/Dead (Kết thúc): Luồng hoàn thành công việc hoặc bị tắt đột ngột. 3. Cách tạo Thread trong Java Có 2 cách chính để tạo một luồng trong Java.\nCách 1: Kế thừa lớp Thread\nBạn tạo một class kế thừa từ Thread và ghi đè phương thức run().\nclass MyThread extends Thread { public void run() { System.out.println(\"Luồng đang chạy...\"); } public static void main(String args[]) { MyThread t1 = new MyThread(); t1.start(); // Bắt đầu luồng } } Cách 2: Thực thi interface Runnable\nCách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiều interface) nhưng chỉ cho phép đơn kế thừa.Javaclass MyRunnable\nimplements Runnable { public void run() { System.out.println(\"Luồng Runnable đang chạy...\"); } public static void main(String args[]) { MyRunnable myRunnable = new MyRunnable(); Thread t1 = new Thread(myRunnable); t1.start(); } } 4. Các phương thức quan trọng Lớp Thread cung cấp nhiều phương thức để điều khiển luồng:\nPhương thức Mô tả start() Bắt đầu thực thi luồng (gọi hàm run() bên trong). run() Chứa code thực thi chính của luồng. sleep(long millis) Tạm dừng luồng trong một khoảng thời gian (tính bằng mili giây). join() Đợi luồng này kết thúc rồi mới tiếp tục chạy luồng khác. getPriority() Lấy mức độ ưu tiên của luồng. setPriority(int) Thiết lập độ ưu tiên của luồng (MIN_PRIORITY = 1, MAX_PRIORITY = 10). 5. Ví dụ: Sử dụng sleep()Dưới đây là ví dụ cho hai luồng chạy song song và tạm dừng xen kẽ nhau:\nJavaclass TestSleep extends Thread { public void run() { for (int i = 1; i \u003c= 3; i++) { try { Thread.sleep(500); // Ngủ 500ms } catch (InterruptedException e) { System.out.println(e); } System.out.println(i); } } public static void main(String args[]) { TestSleep t1 = new TestSleep(); TestSleep t2 = new TestSleep(); t1.start(); t2.start(); } } 6.Kết quả: Bạn sẽ thấy các số 1, 1, 2, 2, 3, 3 hiện ra lần lượt do hai luồng chạy đua với nhau.6. Kết luậnMultithreading là một vũ khí mạnh mẽ nhưng cũng dễ gây lỗi (như Deadlock, Race Condition) nếu không quản lý tốt. Hiểu rõ vòng đời và cách tạo Thread là bước đầu tiên để bạn chinh phục các ứng dụng Java hiệu năng cao.\nNguồn tham khảo VietJack – Java Multithreading\nhttps://vietjack.com/java/java_multithreading.jsp\nVietJack – Java Thread Class\nhttps://vietjack.com/java/java_thread_class.jsp\nOracle Java Documentation – Concurrency\nhttps://docs.oracle.com/javase/tutorial/essential/concurrency/\nOracle Java API – Thread Class\nhttps://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html\n",
-  "wordCount" : "644",
-  "inLanguage": "en",
-  "datePublished": "2025-12-26T00:00:00Z",
-  "dateModified": "2025-12-26T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "NGUYEN THI THUY HIEN BLOG",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" title="Trang Chủ">
-                    <span>Trang Chủ</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
-                    <span>Bài Viết</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-    <article class="post-article">
-      <header class="post-header">
-        <div class="post-meta">
-          
-          <span class="tag-badge">Java</span>
-          
-          <span class="date">26/12/2025</span>
-        </div>
-        <h1 class="post-title">Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack</h1>
-        <p class="post-lead">Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.</p>
-        <div class="header-divider"></div>
-      </header>
-
-      <div class="markdown-body">
-        <p>Trong lập trình Java, <strong>Multithreading (Đa luồng)</strong> là một kỹ thuật cho phép CPU thực hiện nhiều tác vụ cùng một lúc. Nó giúp tận dụng tối đa sức mạnh của bộ vi xử lý và làm cho ứng dụng phản hồi nhanh hơn, đặc biệt là trong các game hay ứng dụng xử lý dữ liệu lớn.</p>
-<p>Bài viết này sẽ tóm tắt các kiến thức cốt lõi về Đa luồng dựa trên tài liệu từ <strong>VietJack</strong>.</p>
-<h2 id="1-đa-luồng-là-gì">1. Đa luồng là gì?</h2>
-<p>Đa luồng trong Java là quá trình thực thi nhiều luồng (thread) đồng thời. Một <strong>Thread</strong> là một đơn vị xử lý nhỏ nhất trong chương trình.</p>
-<ul>
-<li><strong>Đa nhiệm (Multitasking):</strong> Là chạy nhiều tiến trình (process) cùng lúc (ví dụ: vừa nghe nhạc vừa code).</li>
-<li><strong>Đa luồng (Multithreading):</strong> Là chạy nhiều luồng trong cùng một tiến trình (ví dụ: trong trình nghe nhạc, một luồng phát nhạc, một luồng tải bài hát tiếp theo).</li>
-</ul>
-<h2 id="2-vòng-đời-của-một-thread-thread-life-cycle">2. Vòng đời của một Thread (Thread Life Cycle)</h2>
-<p>Một Thread trong Java sẽ trải qua 5 trạng thái chính trong vòng đời của nó:</p>
-<ol>
-<li><strong>New (Mới):</strong> Luồng vừa được khởi tạo nhưng chưa chạy (chưa gọi hàm <code>start()</code>).</li>
-<li><strong>Runnable (Có thể chạy):</strong> Luồng đã sẵn sàng và đang đợi CPU cấp phát tài nguyên để chạy.</li>
-<li><strong>Running (Đang chạy):</strong> CPU đang thực thi các mã lệnh trong luồng.</li>
-<li><strong>Blocked/Waiting (Bị chặn/Đợi):</strong> Luồng tạm dừng để đợi tài nguyên (I/O) hoặc đợi một luồng khác.</li>
-<li><strong>Terminated/Dead (Kết thúc):</strong> Luồng hoàn thành công việc hoặc bị tắt đột ngột.</li>
-</ol>
-<h2 id="3-cách-tạo-thread-trong-java">3. Cách tạo Thread trong Java</h2>
-<p>Có 2 cách chính để tạo một luồng trong Java.</p>
-<p><strong>Cách 1: Kế thừa lớp <code>Thread</code></strong><br>
-Bạn tạo một class kế thừa từ <code>Thread</code> và ghi đè phương thức <code>run()</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyThread</span> <span style="color:#66d9ef">extends</span> Thread {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Luồng đang chạy...&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) {
-</span></span><span style="display:flex;"><span>        MyThread t1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyThread();
-</span></span><span style="display:flex;"><span>        t1.<span style="color:#a6e22e">start</span>(); <span style="color:#75715e">// Bắt đầu luồng</span>
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><strong>Cách 2: Thực thi interface Runnable</strong><br>
-Cách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiều interface) nhưng chỉ cho phép đơn kế thừa.Javaclass MyRunnable</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#66d9ef">implements</span> Runnable {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Luồng Runnable đang chạy...&#34;</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) {
-</span></span><span style="display:flex;"><span>        MyRunnable myRunnable <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyRunnable();
-</span></span><span style="display:flex;"><span>        Thread t1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Thread(myRunnable);
-</span></span><span style="display:flex;"><span>        t1.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="4-các-phương-thức-quan-trọng">4. Các phương thức quan trọng</h2>
-<p>Lớp Thread cung cấp nhiều phương thức để điều khiển luồng:</p>
-<table>
-  <thead>
-      <tr>
-          <th>Phương thức</th>
-          <th>Mô tả</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>start()</code></td>
-          <td>Bắt đầu thực thi luồng (gọi hàm <code>run()</code> bên trong).</td>
-      </tr>
-      <tr>
-          <td><code>run()</code></td>
-          <td>Chứa code thực thi chính của luồng.</td>
-      </tr>
-      <tr>
-          <td><code>sleep(long millis)</code></td>
-          <td>Tạm dừng luồng trong một khoảng thời gian (tính bằng mili giây).</td>
-      </tr>
-      <tr>
-          <td><code>join()</code></td>
-          <td>Đợi luồng này kết thúc rồi mới tiếp tục chạy luồng khác.</td>
-      </tr>
-      <tr>
-          <td><code>getPriority()</code></td>
-          <td>Lấy mức độ ưu tiên của luồng.</td>
-      </tr>
-      <tr>
-          <td><code>setPriority(int)</code></td>
-          <td>Thiết lập độ ưu tiên của luồng (<code>MIN_PRIORITY = 1</code>, <code>MAX_PRIORITY = 10</code>).</td>
-      </tr>
-  </tbody>
-</table>
-<h2 id="5-ví-dụ">5. Ví dụ:</h2>
-<p>Sử dụng sleep()Dưới đây là ví dụ cho hai luồng chạy song song và tạm dừng xen kẽ nhau:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Javaclass TestSleep <span style="color:#66d9ef">extends</span> Thread {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">run</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1; i <span style="color:#f92672">&lt;=</span> 3; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>                Thread.<span style="color:#a6e22e">sleep</span>(500); <span style="color:#75715e">// Ngủ 500ms</span>
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> (InterruptedException e) {
-</span></span><span style="display:flex;"><span>                System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(e);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(i);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String args<span style="color:#f92672">[]</span>) {
-</span></span><span style="display:flex;"><span>        TestSleep t1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TestSleep();
-</span></span><span style="display:flex;"><span>        TestSleep t2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TestSleep();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        t1.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>        t2.<span style="color:#a6e22e">start</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="6kết-quả">6.Kết quả:</h2>
-<p>Bạn sẽ thấy các số 1, 1, 2, 2, 3, 3 hiện ra lần lượt do hai luồng chạy đua với nhau.6. Kết luậnMultithreading là một vũ khí mạnh mẽ nhưng cũng dễ gây lỗi (như Deadlock, Race Condition) nếu không quản lý tốt. Hiểu rõ vòng đời và cách tạo Thread là bước đầu tiên để bạn chinh phục các ứng dụng Java hiệu năng cao.</p>
-<h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2>
-<ul>
-<li>
-<p><strong>VietJack – Java Multithreading</strong><br>
-<a href="https://vietjack.com/java/java_multithreading.jsp">https://vietjack.com/java/java_multithreading.jsp</a></p>
-</li>
-<li>
-<p><strong>VietJack – Java Thread Class</strong><br>
-<a href="https://vietjack.com/java/java_thread_class.jsp">https://vietjack.com/java/java_thread_class.jsp</a></p>
-</li>
-<li>
-<p><strong>Oracle Java Documentation – Concurrency</strong><br>
-<a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/">https://docs.oracle.com/javase/tutorial/essential/concurrency/</a></p>
-</li>
-<li>
-<p><strong>Oracle Java API – Thread Class</strong><br>
-<a href="https://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html">https://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html</a></p>
-</li>
-</ul>
-
-      </div>
-
-      <footer class="post-footer">
-        
-        <div class="tags-section">
-          <span class="tags-label">Tags:</span>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/multithreading" class="tag-pill">#Multithreading</a>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/concurrency" class="tag-pill">#Concurrency</a>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/performance" class="tag-pill">#Performance</a>
-          
-        </div>
-        
-      </footer>
-    </article>
-  </div>
-</div>
-
-<style>
-  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
-  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
-  .blog-reading-wrapper { padding: 60px 0 100px; }
-  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
-  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
-  .post-header { text-align: center; margin-bottom: 50px; }
-  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
-  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
-  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
-  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
-  .markdown-body { font-size: 1.15rem; text-align: justify; }
-  .markdown-body p { margin-bottom: 1.8em; }
-  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
-  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
-  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
-  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
-  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
-</style>
-
-    </main>
-    
-<footer class="footer">
-    <div class="container"> <div class="footer-grid">
-            <div class="footer-column">
-                <h3>IT Student</h3>
-                <strong>Nguyễn Thị Thúy Hiền</strong>
-                <p>Chia sẻ kiến thức về lập trình...</p>
-            </div>
-            <div class="footer-column">
-                <h3>Liên kết nhanh</h3>
-                </div>
-            <div class="footer-column">
-                <h3>Thông tin liên hệ</h3>
-                </div>
-        </div>
-        <div class="footer-bottom">
-            © 2025 NGUYEN THI THUY HIEN BLOG
-        </div>
-    </div>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    
-    document.getElementById("theme-toggle")?.addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-    
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-</script>
-
-<style>
-   
-  .main-footer {
-    background-color: #0f172a;
-    color: #cbd5e1;
-    padding: 80px 0 30px;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    box-sizing: border-box;
-  }
-  .footer-grid { 
-    display: grid; 
-    grid-template-columns: 1.5fr 1fr 1.2fr;
-    gap: 50px; 
-    margin-bottom: 50px; 
-  }
-  .footer-brand h3, .footer-links h3, .footer-contact h3 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
-  .footer-brand p { font-size: 1rem; line-height: 1.6; }
-  .footer-links ul li { margin-bottom: 10px; }
-  .footer-links a, .footer-contact a { color: #94a3b8; font-size: 0.9rem; }
-  .footer-links a:hover { color: #7a7b7e; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; font-size: 0.85rem; }
-
-   
-  body { overflow-x: hidden; margin: 0; }  
-  
-  .skills-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px; 
-  }
-  .skill-card { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 20px; 
-    text-align: center; 
-    transition: 0.3s; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    border: 1px solid #f1f5f9; 
-  }
-  .skill-icon-img { 
-    width: 60px; 
-    height: 60px; 
-    object-fit: contain; 
-    margin-bottom: 15px; 
-  }
-</style></body>
-
-</html>
+<!doctype html><html lang=en dir=auto data-theme=light><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack | NGUYEN THI THUY HIEN BLOG</title><meta name=keywords content="Java,Multithreading,Concurrency,Performance"><meta name=description content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng."><meta name=author content><link rel=canonical href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/><link crossorigin=anonymous href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as=style><link rel=icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png><link rel=apple-touch-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png><link rel=mask-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/><noscript><style>#theme-toggle,.top-link{display:none}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"&&(document.querySelector("html").dataset.theme="dark")</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"><meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG"><meta property="og:title" content="Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack"><meta property="og:description" content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng."><meta property="og:locale" content="vi"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-12-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-12-26T00:00:00+00:00"><meta property="article:tag" content="Java"><meta property="article:tag" content="Multithreading"><meta property="article:tag" content="Concurrency"><meta property="article:tag" content="Performance"><meta name=twitter:card content="summary"><meta name=twitter:title content="Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack"><meta name=twitter:description content="Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"},{"@type":"ListItem","position":2,"name":"Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack","name":"Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack","description":"Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.","keywords":["Java","Multithreading","Concurrency","Performance"],"articleBody":"Trong lập trình Java, Multithreading (Đa luồng) là một kỹ thuật cho phép CPU thực hiện nhiều tác vụ cùng một lúc. Nó giúp tận dụng tối đa sức mạnh của bộ vi xử lý và làm cho ứng dụng phản hồi nhanh hơn, đặc biệt là trong các game hay ứng dụng xử lý dữ liệu lớn.\nBài viết này sẽ tóm tắt các kiến thức cốt lõi về Đa luồng dựa trên tài liệu từ VietJack.\n1. Đa luồng là gì? Đa luồng trong Java là quá trình thực thi nhiều luồng (thread) đồng thời. Một Thread là một đơn vị xử lý nhỏ nhất trong chương trình.\nĐa nhiệm (Multitasking): Là chạy nhiều tiến trình (process) cùng lúc (ví dụ: vừa nghe nhạc vừa code). Đa luồng (Multithreading): Là chạy nhiều luồng trong cùng một tiến trình (ví dụ: trong trình nghe nhạc, một luồng phát nhạc, một luồng tải bài hát tiếp theo). 2. Vòng đời của một Thread (Thread Life Cycle) Một Thread trong Java sẽ trải qua 5 trạng thái chính trong vòng đời của nó:\nNew (Mới): Luồng vừa được khởi tạo nhưng chưa chạy (chưa gọi hàm start()). Runnable (Có thể chạy): Luồng đã sẵn sàng và đang đợi CPU cấp phát tài nguyên để chạy. Running (Đang chạy): CPU đang thực thi các mã lệnh trong luồng. Blocked/Waiting (Bị chặn/Đợi): Luồng tạm dừng để đợi tài nguyên (I/O) hoặc đợi một luồng khác. Terminated/Dead (Kết thúc): Luồng hoàn thành công việc hoặc bị tắt đột ngột. 3. Cách tạo Thread trong Java Có 2 cách chính để tạo một luồng trong Java.\nCách 1: Kế thừa lớp Thread\nBạn tạo một class kế thừa từ Thread và ghi đè phương thức run().\nclass MyThread extends Thread { public void run() { System.out.println(\"Luồng đang chạy...\"); } public static void main(String args[]) { MyThread t1 = new MyThread(); t1.start(); // Bắt đầu luồng } } Cách 2: Thực thi interface Runnable\nCách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiều interface) nhưng chỉ cho phép đơn kế thừa.Javaclass MyRunnable\nimplements Runnable { public void run() { System.out.println(\"Luồng Runnable đang chạy...\"); } public static void main(String args[]) { MyRunnable myRunnable = new MyRunnable(); Thread t1 = new Thread(myRunnable); t1.start(); } } 4. Các phương thức quan trọng Lớp Thread cung cấp nhiều phương thức để điều khiển luồng:\nPhương thức Mô tả start() Bắt đầu thực thi luồng (gọi hàm run() bên trong). run() Chứa code thực thi chính của luồng. sleep(long millis) Tạm dừng luồng trong một khoảng thời gian (tính bằng mili giây). join() Đợi luồng này kết thúc rồi mới tiếp tục chạy luồng khác. getPriority() Lấy mức độ ưu tiên của luồng. setPriority(int) Thiết lập độ ưu tiên của luồng (MIN_PRIORITY = 1, MAX_PRIORITY = 10). 5. Ví dụ: Sử dụng sleep()Dưới đây là ví dụ cho hai luồng chạy song song và tạm dừng xen kẽ nhau:\nJavaclass TestSleep extends Thread { public void run() { for (int i = 1; i \u003c= 3; i++) { try { Thread.sleep(500); // Ngủ 500ms } catch (InterruptedException e) { System.out.println(e); } System.out.println(i); } } public static void main(String args[]) { TestSleep t1 = new TestSleep(); TestSleep t2 = new TestSleep(); t1.start(); t2.start(); } } 6.Kết quả: Bạn sẽ thấy các số 1, 1, 2, 2, 3, 3 hiện ra lần lượt do hai luồng chạy đua với nhau.6. Kết luậnMultithreading là một vũ khí mạnh mẽ nhưng cũng dễ gây lỗi (như Deadlock, Race Condition) nếu không quản lý tốt. Hiểu rõ vòng đời và cách tạo Thread là bước đầu tiên để bạn chinh phục các ứng dụng Java hiệu năng cao.\nNguồn tham khảo VietJack – Java Multithreading\nhttps://vietjack.com/java/java_multithreading.jsp\nVietJack – Java Thread Class\nhttps://vietjack.com/java/java_thread_class.jsp\nOracle Java Documentation – Concurrency\nhttps://docs.oracle.com/javase/tutorial/essential/concurrency/\nOracle Java API – Thread Class\nhttps://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html\n","wordCount":"644","inLanguage":"en","datePublished":"2025-12-26T00:00:00Z","dateModified":"2025-12-26T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/"},"publisher":{"@type":"Organization","name":"NGUYEN THI THUY HIEN BLOG","logo":{"@type":"ImageObject","url":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/ accesskey=h title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://hiennguyen267.github.io/ title="Trang Chủ"><span>Trang Chủ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/ title="Bài Viết"><span>Bài Viết</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/ title="Giới Thiệu"><span>Giới Thiệu</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/ title="Liên Hệ"><span>Liên Hệ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/ title=CV><span>CV</span></a></li></ul></nav></header><main class=main><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel=stylesheet><article class=post-article><header class=post-header><div class=post-meta><span class=tag-badge>Java</span>
+<span class=date>26/12/2025</span></div><h1 class=post-title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack</h1><p class=post-lead>Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.</p><div class=header-divider></div></header><div class=markdown-body><p>Trong lập trình Java, <strong>Multithreading (Đa luồng)</strong> là một kỹ thuật cho phép CPU thực hiện nhiều tác vụ cùng một lúc. Nó giúp tận dụng tối đa sức mạnh của bộ vi xử lý và làm cho ứng dụng phản hồi nhanh hơn, đặc biệt là trong các game hay ứng dụng xử lý dữ liệu lớn.</p><p>Bài viết này sẽ tóm tắt các kiến thức cốt lõi về Đa luồng dựa trên tài liệu từ <strong>VietJack</strong>.</p><h2 id=1-đa-luồng-là-gì>1. Đa luồng là gì?</h2><p>Đa luồng trong Java là quá trình thực thi nhiều luồng (thread) đồng thời. Một <strong>Thread</strong> là một đơn vị xử lý nhỏ nhất trong chương trình.</p><ul><li><strong>Đa nhiệm (Multitasking):</strong> Là chạy nhiều tiến trình (process) cùng lúc (ví dụ: vừa nghe nhạc vừa code).</li><li><strong>Đa luồng (Multithreading):</strong> Là chạy nhiều luồng trong cùng một tiến trình (ví dụ: trong trình nghe nhạc, một luồng phát nhạc, một luồng tải bài hát tiếp theo).</li></ul><h2 id=2-vòng-đời-của-một-thread-thread-life-cycle>2. Vòng đời của một Thread (Thread Life Cycle)</h2><p>Một Thread trong Java sẽ trải qua 5 trạng thái chính trong vòng đời của nó:</p><ol><li><strong>New (Mới):</strong> Luồng vừa được khởi tạo nhưng chưa chạy (chưa gọi hàm <code>start()</code>).</li><li><strong>Runnable (Có thể chạy):</strong> Luồng đã sẵn sàng và đang đợi CPU cấp phát tài nguyên để chạy.</li><li><strong>Running (Đang chạy):</strong> CPU đang thực thi các mã lệnh trong luồng.</li><li><strong>Blocked/Waiting (Bị chặn/Đợi):</strong> Luồng tạm dừng để đợi tài nguyên (I/O) hoặc đợi một luồng khác.</li><li><strong>Terminated/Dead (Kết thúc):</strong> Luồng hoàn thành công việc hoặc bị tắt đột ngột.</li></ol><h2 id=3-cách-tạo-thread-trong-java>3. Cách tạo Thread trong Java</h2><p>Có 2 cách chính để tạo một luồng trong Java.</p><p><strong>Cách 1: Kế thừa lớp <code>Thread</code></strong><br>Bạn tạo một class kế thừa từ <code>Thread</code> và ghi đè phương thức <code>run()</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyThread</span> <span style=color:#66d9ef>extends</span> Thread {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Luồng đang chạy...&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String args<span style=color:#f92672>[]</span>) {
+</span></span><span style=display:flex><span>        MyThread t1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MyThread();
+</span></span><span style=display:flex><span>        t1.<span style=color:#a6e22e>start</span>(); <span style=color:#75715e>// Bắt đầu luồng</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>Cách 2: Thực thi interface Runnable</strong><br>Cách này linh hoạt hơn vì Java hỗ trợ đa thực thi (implement nhiều interface) nhưng chỉ cho phép đơn kế thừa.Javaclass MyRunnable</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#66d9ef>implements</span> Runnable {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Luồng Runnable đang chạy...&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String args<span style=color:#f92672>[]</span>) {
+</span></span><span style=display:flex><span>        MyRunnable myRunnable <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MyRunnable();
+</span></span><span style=display:flex><span>        Thread t1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Thread(myRunnable);
+</span></span><span style=display:flex><span>        t1.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=4-các-phương-thức-quan-trọng>4. Các phương thức quan trọng</h2><p>Lớp Thread cung cấp nhiều phương thức để điều khiển luồng:</p><table><thead><tr><th>Phương thức</th><th>Mô tả</th></tr></thead><tbody><tr><td><code>start()</code></td><td>Bắt đầu thực thi luồng (gọi hàm <code>run()</code> bên trong).</td></tr><tr><td><code>run()</code></td><td>Chứa code thực thi chính của luồng.</td></tr><tr><td><code>sleep(long millis)</code></td><td>Tạm dừng luồng trong một khoảng thời gian (tính bằng mili giây).</td></tr><tr><td><code>join()</code></td><td>Đợi luồng này kết thúc rồi mới tiếp tục chạy luồng khác.</td></tr><tr><td><code>getPriority()</code></td><td>Lấy mức độ ưu tiên của luồng.</td></tr><tr><td><code>setPriority(int)</code></td><td>Thiết lập độ ưu tiên của luồng (<code>MIN_PRIORITY = 1</code>, <code>MAX_PRIORITY = 10</code>).</td></tr></tbody></table><h2 id=5-ví-dụ>5. Ví dụ:</h2><p>Sử dụng sleep()Dưới đây là ví dụ cho hai luồng chạy song song và tạm dừng xen kẽ nhau:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Javaclass TestSleep <span style=color:#66d9ef>extends</span> Thread {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>run</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 1; i <span style=color:#f92672>&lt;=</span> 3; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>                Thread.<span style=color:#a6e22e>sleep</span>(500); <span style=color:#75715e>// Ngủ 500ms</span>
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>catch</span> (InterruptedException e) {
+</span></span><span style=display:flex><span>                System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(e);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(i);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String args<span style=color:#f92672>[]</span>) {
+</span></span><span style=display:flex><span>        TestSleep t1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TestSleep();
+</span></span><span style=display:flex><span>        TestSleep t2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TestSleep();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        t1.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>        t2.<span style=color:#a6e22e>start</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=6kết-quả>6.Kết quả:</h2><p>Bạn sẽ thấy các số 1, 1, 2, 2, 3, 3 hiện ra lần lượt do hai luồng chạy đua với nhau.6. Kết luậnMultithreading là một vũ khí mạnh mẽ nhưng cũng dễ gây lỗi (như Deadlock, Race Condition) nếu không quản lý tốt. Hiểu rõ vòng đời và cách tạo Thread là bước đầu tiên để bạn chinh phục các ứng dụng Java hiệu năng cao.</p><h2 id=nguồn-tham-khảo>Nguồn tham khảo</h2><ul><li><p><strong>VietJack – Java Multithreading</strong><br><a href=https://vietjack.com/java/java_multithreading.jsp>https://vietjack.com/java/java_multithreading.jsp</a></p></li><li><p><strong>VietJack – Java Thread Class</strong><br><a href=https://vietjack.com/java/java_thread_class.jsp>https://vietjack.com/java/java_thread_class.jsp</a></p></li><li><p><strong>Oracle Java Documentation – Concurrency</strong><br><a href=https://docs.oracle.com/javase/tutorial/essential/concurrency/>https://docs.oracle.com/javase/tutorial/essential/concurrency/</a></p></li><li><p><strong>Oracle Java API – Thread Class</strong><br><a href=https://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html>https://docs.oracle.com/en/java/javase/8/docs/api/java/lang/Thread.html</a></p></li></ul></div><footer class=post-footer><div class=tags-section><span class=tags-label>Tags:</span>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java class=tag-pill>#Java</a>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/multithreading class=tag-pill>#Multithreading</a>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/concurrency class=tag-pill>#Concurrency</a>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance class=tag-pill>#Performance</a></div></footer></article></div></div><style>:root{--primary:#2563eb;--text-main:#111827;--text-body:#374151;--bg-page:#f8fafc}body{background-color:var(--bg-page);font-family:plus jakarta sans,sans-serif;color:var(--text-body);line-height:1.8}.blog-reading-wrapper{padding:60px 0 100px}.container{max-width:800px;margin:0 auto;padding:0 20px}.post-article{background:#fff;padding:60px 50px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,3%)}.breadcrumb{font-size:.9rem;color:#64748b;margin-bottom:40px;text-align:center}.breadcrumb a{text-decoration:none;color:#64748b}.sep{margin:0 8px;opacity:.4}.post-header{text-align:center;margin-bottom:50px}.post-title{font-family:merriweather,serif;font-size:2.5rem;color:var(--text-main);font-weight:900;margin:0 0 20px}.post-lead{font-size:1.2rem;color:#4b5563;margin-bottom:30px;font-style:italic}.tag-badge{background:#eff6ff;color:var(--primary);font-weight:700;padding:4px 12px;border-radius:20px;font-size:.75rem;text-transform:uppercase}.header-divider{height:4px;width:60px;background:var(--primary);margin:0 auto;border-radius:2px}.markdown-body{font-size:1.15rem;text-align:justify}.markdown-body p{margin-bottom:1.8em}.markdown-body h2{font-family:merriweather,serif;font-size:1.8rem;margin:50px 0 20px;font-weight:800;border-bottom:2px solid #f1f5f9;padding-bottom:10px}.markdown-body img{max-width:100%;border-radius:12px;margin:30px 0;display:block}.markdown-body pre{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:12px;overflow-x:auto;margin:30px 0}.post-footer{margin-top:80px;padding-top:40px;border-top:1px solid #e2e8f0}.tag-pill{display:inline-block;background:#f1f5f9;color:#64748b;padding:6px 14px;border-radius:8px;font-size:.9rem;margin-right:8px;text-decoration:none;font-weight:600}@media(max-width:768px){.post-article{padding:40px 20px}.post-title{font-size:2rem}}</style></main><footer class=main-footer><div class=container><div class=footer-grid><div class=footer-brand><div class=brand-logo><div class=badge-tech>IT Student</div><h3>Nguyễn Thị Thúy Hiền</h3></div><p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p></div><div class=footer-links><h3>Liên kết nhanh</h3><ul><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/>Trang chủ</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about>Giới thiệu</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts>Blog</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact>Liên hệ</a></li></ul></div><div class=footer-contact><h3>Thông tin liên hệ</h3><ul><li><a href=mailto:nguyenthithuyhienbl@gmail.com>nguyenthithuyhienbl@gmail.com</a></li><li><a href=https://www.facebook.com/hien.nguyen.564852>Facebook</a></li><li><a href=https://github.com/hiennguyen267>GitHub</a></li></ul></div></div><div class=footer-bottom><p>&copy; 2025 Nguyễn Thị Thúy Hiền</p></div></div></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>document.getElementById("theme-toggle")?.addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><style>.main-footer{background-color:#0f172a;color:#cbd5e1;padding:80px 0 30px;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;box-sizing:border-box}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:50px;margin-bottom:50px}.footer-brand h3,.footer-links h3,.footer-contact h3{color:#fff;margin-bottom:20px;font-size:1.1rem}.footer-brand p{font-size:1rem;line-height:1.6}.footer-links ul li{margin-bottom:10px}.footer-links a,.footer-contact a{color:#94a3b8;font-size:.9rem}.footer-links a:hover{color:#7a7b7e}.footer-bottom{border-top:1px solid rgba(255,255,255,5%);padding-top:30px;text-align:center;font-size:.85rem}body{overflow-x:hidden;margin:0}.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.skill-card{background:#fff;padding:30px;border-radius:20px;text-align:center;transition:.3s;box-shadow:0 4px 6px rgba(0,0,0,2%);border:1px solid #f1f5f9}.skill-icon-img{width:60px;height:60px;object-fit:contain;margin-bottom:15px}</style></body></html>

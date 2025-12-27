@@ -1,463 +1,83 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto" data-theme="light">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì? | NGUYEN THI THUY HIEN BLOG</title>
-<meta name="keywords" content="Java, RMI, Distributed System, Networking">
-<meta name="description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.">
-<meta name="author" content="">
-<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/">
-<link crossorigin="anonymous" href="/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
-<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-</noscript>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.querySelector("html").dataset.theme = 'dark';
-    }
-
-</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/">
-  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
-  <meta property="og:title" content="Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?">
-  <meta property="og:description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.">
-  <meta property="og:locale" content="vi">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
-    <meta property="article:tag" content="Java">
-    <meta property="article:tag" content="RMI">
-    <meta property="article:tag" content="Distributed System">
-    <meta property="article:tag" content="Networking">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?">
-<meta name="twitter:description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?",
-      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?",
-  "name": "Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?",
-  "description": "Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.",
-  "keywords": [
-    "Java", "RMI", "Distributed System", "Networking"
-  ],
-  "articleBody": "Trong lập trình hệ thống phân tán (Distributed Systems), việc giao tiếp giữa các máy tính là cốt lõi. Chúng ta thường nghe đến REST API hay Socket. Tuy nhiên, trong thế giới thuần Java, có một công nghệ cực kỳ mạnh mẽ giúp việc giao tiếp giữa các server trở nên trong suốt như đang gọi hàm nội bộ: đó là Java RMI.\nHôm nay, mình sẽ giới thiệu về Java RMI và cách triển khai một ứng dụng Calculator đơn giản.\n1. Java RMI là gì? RMI (Remote Method Invocation) là cơ chế cho phép một đối tượng đang chạy trên máy ảo Java này (Client) có thể gọi các phương thức của một đối tượng đang chạy trên máy ảo Java khác (Server).\nHãy tưởng tượng: Bạn đang code ở máy A, bạn gọi hàm tinhTong(1, 2). Nhưng thực tế, phép tính 1 + 2 lại được thực hiện CPU của máy B, sau đó máy B trả kết quả về cho máy A. Đó chính là RMI.\n2. Các thành phần cốt lõi Để RMI hoạt động, nó dựa trên kiến trúc Stub/Skeleton:\nRemote Interface: Một Interface chung quy định các hàm mà Server sẽ cung cấp và Client có thể gọi. Remote Object (Server): Đối tượng thực sự cài đặt các xử lý logic (Implementation). Stub (Client-side): Một “đại diện” giả mạo của đối tượng Server nằm ở phía Client. Khi Client gọi hàm, nó gọi vào Stub. Stub sẽ đóng gói dữ liệu và gửi qua mạng. RMI Registry: Cuốn “danh bạ” điện thoại. Server đăng ký tên của object vào đây, Client tra cứu tên để tìm địa chỉ object. 3. Ví dụ thực tế: Ứng dụng Calculator Chúng ta sẽ xây dựng một ứng dụng tính toán đơn giản gồm 2 máy: Client gửi số, Server tính toán và trả về kết quả.\nBước 1: Tạo Remote Interface Interface này phải kế thừa từ java.rmi.Remote và các phương thức phải ném ra ngoại lệ RemoteException.\nimport java.rmi.Remote; import java.rmi.RemoteException; // Interface chung cho cả Client và Server public interface CalculatorService extends Remote { int add(int a, int b) throws RemoteException; int subtract(int a, int b) throws RemoteException; } Bước 2: Cài đặt logic trên Server (Implementation) Class này sẽ thực thi logic thực tế. Nó thường kế thừa UnicastRemoteObject để RMI có thể export object này ra mạng.\nJava import java.rmi.server.UnicastRemoteObject; import java.rmi.RemoteException; public class CalculatorServiceImpl extends UnicastRemoteObject implements CalculatorService { // Constructor bắt buộc phải throw RemoteException protected CalculatorServiceImpl() throws RemoteException { super(); } @Override public int add(int a, int b) throws RemoteException { System.out.println(\"Server đang tính tổng: \" + a + \" + \" + b); return a + b; } @Override public int subtract(int a, int b) throws RemoteException { return a - b; } } Bước 3: Tạo Server và Đăng ký lên Registry Server sẽ khởi tạo object và gắn nó vào một cái tên (ví dụ: “Calculator”) trên cổng mặc định 1099.\nJava import java.rmi.Naming; import java.rmi.registry.LocateRegistry; public class RmiServer { public static void main(String[] args) { try { // 1. Tạo thanh ghi RMI ở cổng 1099 LocateRegistry.createRegistry(1099); // 2. Khởi tạo đối tượng CalculatorService service = new CalculatorServiceImpl(); // 3. Đăng ký tên định danh cho đối tượng Naming.rebind(\"rmi://localhost:1099/Calculator\", service); System.out.println(\"Server đã sẵn sàng!\"); } catch (Exception e) { e.printStackTrace(); } } } Bước 4: Tạo Client để gọi hàm Client sẽ tìm kiếm object tên là “Calculator” và gọi hàm như thể object đó đang nằm ngay trên máy mình.\nJava import java.rmi.Naming; public class RmiClient { public static void main(String[] args) { try { // 1. Tìm kiếm đối tượng trên Server qua tên \"Calculator\" CalculatorService service = (CalculatorService) Naming.lookup(\"rmi://localhost:1099/Calculator\"); // 2. Gọi phương thức từ xa int result = service.add(10, 20); System.out.println(\"Kết quả trả về từ Server: \" + result); } catch (Exception e) { e.printStackTrace(); } } } 4. Ưu và nhược điểm Ưu điểm\nDễ sử dụng: Cú pháp giống hệt gọi hàm Java thông thường.\nType-safe: Đảm bảo an toàn kiểu dữ liệu vì dùng chung Interface Java.\nTích hợp sâu: Hỗ trợ truyền Object phức tạp (thông qua Serialization).\nNhược điểm\nChỉ dành cho Java: Cả Client và Server đều phải viết bằng Java. Nếu muốn đa ngôn ngữ, bạn nên dùng REST API hoặc gRPC.\nChậm hơn Socket: Do mất chi phí đóng gói (Marshalling) và giải nén (Unmarshalling) đối tượng.\nCấu hình mạng: Đôi khi gặp rắc rối với Firewall khi triển khai thực tế.\n5. Kết luận Java RMI là một công nghệ nền tảng tuyệt vời để hiểu về cách các hệ thống phân tán hoạt động. Mặc dù ngày nay Microservices và REST API phổ biến hơn, nhưng RMI vẫn được sử dụng trong nhiều hệ thống nội bộ doanh nghiệp nhờ sự chặt chẽ và an toàn của nó.\nNguồn tham khảo Oracle Java Documentation – Java RMI\nhttps://docs.oracle.com/javase/8/docs/technotes/guides/rmi/\nOracle Java SE – Remote Method Invocation (RMI)\nhttps://docs.oracle.com/javase/tutorial/rmi/\nGeeksforGeeks – Java RMI\nhttps://www.geeksforgeeks.org/java-rmi/\nTutorialsPoint – Java RMI\nhttps://www.tutorialspoint.com/java_rmi/index.htm\nIBM Documentation – Java RMI Concepts\nhttps://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi\n",
-  "wordCount" : "844",
-  "inLanguage": "en",
-  "datePublished": "2025-12-26T00:00:00Z",
-  "dateModified": "2025-12-26T00:00:00Z",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "NGUYEN THI THUY HIEN BLOG",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-<body id="top">
-    <header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" title="Trang Chủ">
-                    <span>Trang Chủ</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
-                    <span>Bài Viết</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-
-    <article class="post-article">
-      <header class="post-header">
-        <div class="post-meta">
-          
-          <span class="tag-badge">Java</span>
-          
-          <span class="date">26/12/2025</span>
-        </div>
-        <h1 class="post-title">Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?</h1>
-        <p class="post-lead">Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.</p>
-        <div class="header-divider"></div>
-      </header>
-
-      <div class="markdown-body">
-        <p>Trong lập trình hệ thống phân tán (Distributed Systems), việc giao tiếp giữa các máy tính là cốt lõi. Chúng ta thường nghe đến REST API hay Socket. Tuy nhiên, trong thế giới thuần Java, có một công nghệ cực kỳ mạnh mẽ giúp việc giao tiếp giữa các server trở nên trong suốt như đang gọi hàm nội bộ: đó là <strong>Java RMI</strong>.</p>
-<p>Hôm nay, mình sẽ giới thiệu về Java RMI và cách triển khai một ứng dụng Calculator đơn giản.</p>
-<h2 id="1-java-rmi-là-gì">1. Java RMI là gì?</h2>
-<p><strong>RMI (Remote Method Invocation)</strong> là cơ chế cho phép một đối tượng đang chạy trên máy ảo Java này (Client) có thể gọi các phương thức của một đối tượng đang chạy trên máy ảo Java khác (Server).</p>
-<p>Hãy tưởng tượng: Bạn đang code ở máy A, bạn gọi hàm <code>tinhTong(1, 2)</code>. Nhưng thực tế, phép tính <code>1 + 2</code> lại được thực hiện CPU của máy B, sau đó máy B trả kết quả về cho máy A. Đó chính là RMI.</p>
-<h2 id="2-các-thành-phần-cốt-lõi">2. Các thành phần cốt lõi</h2>
-<p>Để RMI hoạt động, nó dựa trên kiến trúc Stub/Skeleton:</p>
-<ol>
-<li><strong>Remote Interface:</strong> Một Interface chung quy định các hàm mà Server sẽ cung cấp và Client có thể gọi.</li>
-<li><strong>Remote Object (Server):</strong> Đối tượng thực sự cài đặt các xử lý logic (Implementation).</li>
-<li><strong>Stub (Client-side):</strong> Một &ldquo;đại diện&rdquo; giả mạo của đối tượng Server nằm ở phía Client. Khi Client gọi hàm, nó gọi vào Stub. Stub sẽ đóng gói dữ liệu và gửi qua mạng.</li>
-<li><strong>RMI Registry:</strong> Cuốn &ldquo;danh bạ&rdquo; điện thoại. Server đăng ký tên của object vào đây, Client tra cứu tên để tìm địa chỉ object.</li>
-</ol>
-<h2 id="3-ví-dụ-thực-tế-ứng-dụng-calculator">3. Ví dụ thực tế: Ứng dụng Calculator</h2>
-<p>Chúng ta sẽ xây dựng một ứng dụng tính toán đơn giản gồm 2 máy: Client gửi số, Server tính toán và trả về kết quả.</p>
-<h3 id="bước-1-tạo-remote-interface">Bước 1: Tạo Remote Interface</h3>
-<p>Interface này phải kế thừa từ <code>java.rmi.Remote</code> và các phương thức phải ném ra ngoại lệ <code>RemoteException</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.Remote;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.RemoteException;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Interface chung cho cả Client và Server</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CalculatorService</span> <span style="color:#66d9ef">extends</span> Remote {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) <span style="color:#66d9ef">throws</span> RemoteException;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">subtract</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) <span style="color:#66d9ef">throws</span> RemoteException;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="bước-2-cài-đặt-logic-trên-server-implementation">Bước 2: Cài đặt logic trên Server (Implementation)</h3>
-<p>Class này sẽ thực thi logic thực tế. Nó thường kế thừa UnicastRemoteObject để RMI có thể export object này ra mạng.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Java
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.server.UnicastRemoteObject;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.RemoteException;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CalculatorServiceImpl</span> <span style="color:#66d9ef">extends</span> UnicastRemoteObject <span style="color:#66d9ef">implements</span> CalculatorService {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Constructor bắt buộc phải throw RemoteException</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> <span style="color:#a6e22e">CalculatorServiceImpl</span>() <span style="color:#66d9ef">throws</span> RemoteException {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">super</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) <span style="color:#66d9ef">throws</span> RemoteException {
-</span></span><span style="display:flex;"><span>        System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Server đang tính tổng: &#34;</span> <span style="color:#f92672">+</span> a <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; + &#34;</span> <span style="color:#f92672">+</span> b);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@Override</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">subtract</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) <span style="color:#66d9ef">throws</span> RemoteException {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">-</span> b;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="bước-3-tạo-server-và-đăng-ký-lên-registry">Bước 3: Tạo Server và Đăng ký lên Registry</h3>
-<p>Server sẽ khởi tạo object và gắn nó vào một cái tên (ví dụ: &ldquo;Calculator&rdquo;) trên cổng mặc định 1099.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Java
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.Naming;
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.registry.LocateRegistry;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RmiServer</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. Tạo thanh ghi RMI ở cổng 1099</span>
-</span></span><span style="display:flex;"><span>            LocateRegistry.<span style="color:#a6e22e">createRegistry</span>(1099);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 2. Khởi tạo đối tượng</span>
-</span></span><span style="display:flex;"><span>            CalculatorService service <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> CalculatorServiceImpl();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 3. Đăng ký tên định danh cho đối tượng</span>
-</span></span><span style="display:flex;"><span>            Naming.<span style="color:#a6e22e">rebind</span>(<span style="color:#e6db74">&#34;rmi://localhost:1099/Calculator&#34;</span>, service);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Server đã sẵn sàng!&#34;</span>);
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="bước-4-tạo-client-để-gọi-hàm">Bước 4: Tạo Client để gọi hàm</h3>
-<p>Client sẽ tìm kiếm object tên là &ldquo;Calculator&rdquo; và gọi hàm như thể object đó đang nằm ngay trên máy mình.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Java
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> java.rmi.Naming;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RmiClient</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(String<span style="color:#f92672">[]</span> args) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. Tìm kiếm đối tượng trên Server qua tên &#34;Calculator&#34;</span>
-</span></span><span style="display:flex;"><span>            CalculatorService service <span style="color:#f92672">=</span> (CalculatorService) Naming.<span style="color:#a6e22e">lookup</span>(<span style="color:#e6db74">&#34;rmi://localhost:1099/Calculator&#34;</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 2. Gọi phương thức từ xa</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> service.<span style="color:#a6e22e">add</span>(10, 20);
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;Kết quả trả về từ Server: &#34;</span> <span style="color:#f92672">+</span> result);
-</span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (Exception e) {
-</span></span><span style="display:flex;"><span>            e.<span style="color:#a6e22e">printStackTrace</span>();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="4-ưu-và-nhược-điểm">4. Ưu và nhược điểm</h2>
-<p><strong>Ưu điểm</strong></p>
-<ul>
-<li>
-<p>Dễ sử dụng: Cú pháp giống hệt gọi hàm Java thông thường.</p>
-</li>
-<li>
-<p>Type-safe: Đảm bảo an toàn kiểu dữ liệu vì dùng chung Interface Java.</p>
-</li>
-<li>
-<p>Tích hợp sâu: Hỗ trợ truyền Object phức tạp (thông qua Serialization).</p>
-</li>
-</ul>
-<p><strong>Nhược điểm</strong></p>
-<ul>
-<li>
-<p>Chỉ dành cho Java: Cả Client và Server đều phải viết bằng Java. Nếu muốn đa ngôn ngữ, bạn nên dùng REST API hoặc gRPC.</p>
-</li>
-<li>
-<p>Chậm hơn Socket: Do mất chi phí đóng gói (Marshalling) và giải nén (Unmarshalling) đối tượng.</p>
-</li>
-<li>
-<p>Cấu hình mạng: Đôi khi gặp rắc rối với Firewall khi triển khai thực tế.</p>
-</li>
-</ul>
-<h2 id="5-kết-luận">5. Kết luận</h2>
-<p>Java RMI là một công nghệ nền tảng tuyệt vời để hiểu về cách các hệ thống phân tán hoạt động. Mặc dù ngày nay Microservices và REST API phổ biến hơn, nhưng RMI vẫn được sử dụng trong nhiều hệ thống nội bộ doanh nghiệp nhờ sự chặt chẽ và an toàn của nó.</p>
-<h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2>
-<ul>
-<li>
-<p><strong>Oracle Java Documentation – Java RMI</strong><br>
-<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/rmi/">https://docs.oracle.com/javase/8/docs/technotes/guides/rmi/</a></p>
-</li>
-<li>
-<p><strong>Oracle Java SE – Remote Method Invocation (RMI)</strong><br>
-<a href="https://docs.oracle.com/javase/tutorial/rmi/">https://docs.oracle.com/javase/tutorial/rmi/</a></p>
-</li>
-<li>
-<p><strong>GeeksforGeeks – Java RMI</strong><br>
-<a href="https://www.geeksforgeeks.org/java-rmi/">https://www.geeksforgeeks.org/java-rmi/</a></p>
-</li>
-<li>
-<p><strong>TutorialsPoint – Java RMI</strong><br>
-<a href="https://www.tutorialspoint.com/java_rmi/index.htm">https://www.tutorialspoint.com/java_rmi/index.htm</a></p>
-</li>
-<li>
-<p><strong>IBM Documentation – Java RMI Concepts</strong><br>
-<a href="https://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi">https://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi</a></p>
-</li>
-</ul>
-
-      </div>
-
-      <footer class="post-footer">
-        
-        <div class="tags-section">
-          <span class="tags-label">Tags:</span>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/rmi" class="tag-pill">#RMI</a>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/distributed-system" class="tag-pill">#Distributed System</a>
-          
-          <a href="/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
-          
-        </div>
-        
-      </footer>
-    </article>
-  </div>
-</div>
-
-<style>
-  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
-  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
-  .blog-reading-wrapper { padding: 60px 0 100px; }
-  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
-  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
-  .post-header { text-align: center; margin-bottom: 50px; }
-  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
-  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
-  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
-  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
-  .markdown-body { font-size: 1.15rem; text-align: justify; }
-  .markdown-body p { margin-bottom: 1.8em; }
-  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
-  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
-  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
-  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
-  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
-</style>
-
-    </main>
-    
-<footer class="footer">
-    <div class="container"> <div class="footer-grid">
-            <div class="footer-column">
-                <h3>IT Student</h3>
-                <strong>Nguyễn Thị Thúy Hiền</strong>
-                <p>Chia sẻ kiến thức về lập trình...</p>
-            </div>
-            <div class="footer-column">
-                <h3>Liên kết nhanh</h3>
-                </div>
-            <div class="footer-column">
-                <h3>Thông tin liên hệ</h3>
-                </div>
-        </div>
-        <div class="footer-bottom">
-            © 2025 NGUYEN THI THUY HIEN BLOG
-        </div>
-    </div>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    
-    document.getElementById("theme-toggle")?.addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-    
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-</script>
-
-<style>
-   
-  .main-footer {
-    background-color: #0f172a;
-    color: #cbd5e1;
-    padding: 80px 0 30px;
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    box-sizing: border-box;
-  }
-  .footer-grid { 
-    display: grid; 
-    grid-template-columns: 1.5fr 1fr 1.2fr;
-    gap: 50px; 
-    margin-bottom: 50px; 
-  }
-  .footer-brand h3, .footer-links h3, .footer-contact h3 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
-  .footer-brand p { font-size: 1rem; line-height: 1.6; }
-  .footer-links ul li { margin-bottom: 10px; }
-  .footer-links a, .footer-contact a { color: #94a3b8; font-size: 0.9rem; }
-  .footer-links a:hover { color: #7a7b7e; }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; font-size: 0.85rem; }
-
-   
-  body { overflow-x: hidden; margin: 0; }  
-  
-  .skills-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px; 
-  }
-  .skill-card { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 20px; 
-    text-align: center; 
-    transition: 0.3s; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
-    border: 1px solid #f1f5f9; 
-  }
-  .skill-icon-img { 
-    width: 60px; 
-    height: 60px; 
-    object-fit: contain; 
-    margin-bottom: 15px; 
-  }
-</style></body>
-
-</html>
+<!doctype html><html lang=en dir=auto data-theme=light><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì? | NGUYEN THI THUY HIEN BLOG</title><meta name=keywords content="Java,RMI,Distributed System,Networking"><meta name=description content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác."><meta name=author content><link rel=canonical href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/><link crossorigin=anonymous href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as=style><link rel=icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png><link rel=apple-touch-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png><link rel=mask-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/><noscript><style>#theme-toggle,.top-link{display:none}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"&&(document.querySelector("html").dataset.theme="dark")</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"><meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG"><meta property="og:title" content="Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?"><meta property="og:description" content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác."><meta property="og:locale" content="vi"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-12-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-12-26T00:00:00+00:00"><meta property="article:tag" content="Java"><meta property="article:tag" content="RMI"><meta property="article:tag" content="Distributed System"><meta property="article:tag" content="Networking"><meta name=twitter:card content="summary"><meta name=twitter:title content="Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?"><meta name=twitter:description content="Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"},{"@type":"ListItem","position":2,"name":"Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?","name":"Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?","description":"Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.","keywords":["Java","RMI","Distributed System","Networking"],"articleBody":"Trong lập trình hệ thống phân tán (Distributed Systems), việc giao tiếp giữa các máy tính là cốt lõi. Chúng ta thường nghe đến REST API hay Socket. Tuy nhiên, trong thế giới thuần Java, có một công nghệ cực kỳ mạnh mẽ giúp việc giao tiếp giữa các server trở nên trong suốt như đang gọi hàm nội bộ: đó là Java RMI.\nHôm nay, mình sẽ giới thiệu về Java RMI và cách triển khai một ứng dụng Calculator đơn giản.\n1. Java RMI là gì? RMI (Remote Method Invocation) là cơ chế cho phép một đối tượng đang chạy trên máy ảo Java này (Client) có thể gọi các phương thức của một đối tượng đang chạy trên máy ảo Java khác (Server).\nHãy tưởng tượng: Bạn đang code ở máy A, bạn gọi hàm tinhTong(1, 2). Nhưng thực tế, phép tính 1 + 2 lại được thực hiện CPU của máy B, sau đó máy B trả kết quả về cho máy A. Đó chính là RMI.\n2. Các thành phần cốt lõi Để RMI hoạt động, nó dựa trên kiến trúc Stub/Skeleton:\nRemote Interface: Một Interface chung quy định các hàm mà Server sẽ cung cấp và Client có thể gọi. Remote Object (Server): Đối tượng thực sự cài đặt các xử lý logic (Implementation). Stub (Client-side): Một “đại diện” giả mạo của đối tượng Server nằm ở phía Client. Khi Client gọi hàm, nó gọi vào Stub. Stub sẽ đóng gói dữ liệu và gửi qua mạng. RMI Registry: Cuốn “danh bạ” điện thoại. Server đăng ký tên của object vào đây, Client tra cứu tên để tìm địa chỉ object. 3. Ví dụ thực tế: Ứng dụng Calculator Chúng ta sẽ xây dựng một ứng dụng tính toán đơn giản gồm 2 máy: Client gửi số, Server tính toán và trả về kết quả.\nBước 1: Tạo Remote Interface Interface này phải kế thừa từ java.rmi.Remote và các phương thức phải ném ra ngoại lệ RemoteException.\nimport java.rmi.Remote; import java.rmi.RemoteException; // Interface chung cho cả Client và Server public interface CalculatorService extends Remote { int add(int a, int b) throws RemoteException; int subtract(int a, int b) throws RemoteException; } Bước 2: Cài đặt logic trên Server (Implementation) Class này sẽ thực thi logic thực tế. Nó thường kế thừa UnicastRemoteObject để RMI có thể export object này ra mạng.\nJava import java.rmi.server.UnicastRemoteObject; import java.rmi.RemoteException; public class CalculatorServiceImpl extends UnicastRemoteObject implements CalculatorService { // Constructor bắt buộc phải throw RemoteException protected CalculatorServiceImpl() throws RemoteException { super(); } @Override public int add(int a, int b) throws RemoteException { System.out.println(\"Server đang tính tổng: \" + a + \" + \" + b); return a + b; } @Override public int subtract(int a, int b) throws RemoteException { return a - b; } } Bước 3: Tạo Server và Đăng ký lên Registry Server sẽ khởi tạo object và gắn nó vào một cái tên (ví dụ: “Calculator”) trên cổng mặc định 1099.\nJava import java.rmi.Naming; import java.rmi.registry.LocateRegistry; public class RmiServer { public static void main(String[] args) { try { // 1. Tạo thanh ghi RMI ở cổng 1099 LocateRegistry.createRegistry(1099); // 2. Khởi tạo đối tượng CalculatorService service = new CalculatorServiceImpl(); // 3. Đăng ký tên định danh cho đối tượng Naming.rebind(\"rmi://localhost:1099/Calculator\", service); System.out.println(\"Server đã sẵn sàng!\"); } catch (Exception e) { e.printStackTrace(); } } } Bước 4: Tạo Client để gọi hàm Client sẽ tìm kiếm object tên là “Calculator” và gọi hàm như thể object đó đang nằm ngay trên máy mình.\nJava import java.rmi.Naming; public class RmiClient { public static void main(String[] args) { try { // 1. Tìm kiếm đối tượng trên Server qua tên \"Calculator\" CalculatorService service = (CalculatorService) Naming.lookup(\"rmi://localhost:1099/Calculator\"); // 2. Gọi phương thức từ xa int result = service.add(10, 20); System.out.println(\"Kết quả trả về từ Server: \" + result); } catch (Exception e) { e.printStackTrace(); } } } 4. Ưu và nhược điểm Ưu điểm\nDễ sử dụng: Cú pháp giống hệt gọi hàm Java thông thường.\nType-safe: Đảm bảo an toàn kiểu dữ liệu vì dùng chung Interface Java.\nTích hợp sâu: Hỗ trợ truyền Object phức tạp (thông qua Serialization).\nNhược điểm\nChỉ dành cho Java: Cả Client và Server đều phải viết bằng Java. Nếu muốn đa ngôn ngữ, bạn nên dùng REST API hoặc gRPC.\nChậm hơn Socket: Do mất chi phí đóng gói (Marshalling) và giải nén (Unmarshalling) đối tượng.\nCấu hình mạng: Đôi khi gặp rắc rối với Firewall khi triển khai thực tế.\n5. Kết luận Java RMI là một công nghệ nền tảng tuyệt vời để hiểu về cách các hệ thống phân tán hoạt động. Mặc dù ngày nay Microservices và REST API phổ biến hơn, nhưng RMI vẫn được sử dụng trong nhiều hệ thống nội bộ doanh nghiệp nhờ sự chặt chẽ và an toàn của nó.\nNguồn tham khảo Oracle Java Documentation – Java RMI\nhttps://docs.oracle.com/javase/8/docs/technotes/guides/rmi/\nOracle Java SE – Remote Method Invocation (RMI)\nhttps://docs.oracle.com/javase/tutorial/rmi/\nGeeksforGeeks – Java RMI\nhttps://www.geeksforgeeks.org/java-rmi/\nTutorialsPoint – Java RMI\nhttps://www.tutorialspoint.com/java_rmi/index.htm\nIBM Documentation – Java RMI Concepts\nhttps://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi\n","wordCount":"844","inLanguage":"en","datePublished":"2025-12-26T00:00:00Z","dateModified":"2025-12-26T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/"},"publisher":{"@type":"Organization","name":"NGUYEN THI THUY HIEN BLOG","logo":{"@type":"ImageObject","url":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/ accesskey=h title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://hiennguyen267.github.io/ title="Trang Chủ"><span>Trang Chủ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/ title="Bài Viết"><span>Bài Viết</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/ title="Giới Thiệu"><span>Giới Thiệu</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/ title="Liên Hệ"><span>Liên Hệ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/ title=CV><span>CV</span></a></li></ul></nav></header><main class=main><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel=stylesheet><article class=post-article><header class=post-header><div class=post-meta><span class=tag-badge>Java</span>
+<span class=date>26/12/2025</span></div><h1 class=post-title>Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?</h1><p class=post-lead>Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.</p><div class=header-divider></div></header><div class=markdown-body><p>Trong lập trình hệ thống phân tán (Distributed Systems), việc giao tiếp giữa các máy tính là cốt lõi. Chúng ta thường nghe đến REST API hay Socket. Tuy nhiên, trong thế giới thuần Java, có một công nghệ cực kỳ mạnh mẽ giúp việc giao tiếp giữa các server trở nên trong suốt như đang gọi hàm nội bộ: đó là <strong>Java RMI</strong>.</p><p>Hôm nay, mình sẽ giới thiệu về Java RMI và cách triển khai một ứng dụng Calculator đơn giản.</p><h2 id=1-java-rmi-là-gì>1. Java RMI là gì?</h2><p><strong>RMI (Remote Method Invocation)</strong> là cơ chế cho phép một đối tượng đang chạy trên máy ảo Java này (Client) có thể gọi các phương thức của một đối tượng đang chạy trên máy ảo Java khác (Server).</p><p>Hãy tưởng tượng: Bạn đang code ở máy A, bạn gọi hàm <code>tinhTong(1, 2)</code>. Nhưng thực tế, phép tính <code>1 + 2</code> lại được thực hiện CPU của máy B, sau đó máy B trả kết quả về cho máy A. Đó chính là RMI.</p><h2 id=2-các-thành-phần-cốt-lõi>2. Các thành phần cốt lõi</h2><p>Để RMI hoạt động, nó dựa trên kiến trúc Stub/Skeleton:</p><ol><li><strong>Remote Interface:</strong> Một Interface chung quy định các hàm mà Server sẽ cung cấp và Client có thể gọi.</li><li><strong>Remote Object (Server):</strong> Đối tượng thực sự cài đặt các xử lý logic (Implementation).</li><li><strong>Stub (Client-side):</strong> Một &ldquo;đại diện&rdquo; giả mạo của đối tượng Server nằm ở phía Client. Khi Client gọi hàm, nó gọi vào Stub. Stub sẽ đóng gói dữ liệu và gửi qua mạng.</li><li><strong>RMI Registry:</strong> Cuốn &ldquo;danh bạ&rdquo; điện thoại. Server đăng ký tên của object vào đây, Client tra cứu tên để tìm địa chỉ object.</li></ol><h2 id=3-ví-dụ-thực-tế-ứng-dụng-calculator>3. Ví dụ thực tế: Ứng dụng Calculator</h2><p>Chúng ta sẽ xây dựng một ứng dụng tính toán đơn giản gồm 2 máy: Client gửi số, Server tính toán và trả về kết quả.</p><h3 id=bước-1-tạo-remote-interface>Bước 1: Tạo Remote Interface</h3><p>Interface này phải kế thừa từ <code>java.rmi.Remote</code> và các phương thức phải ném ra ngoại lệ <code>RemoteException</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.Remote;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.RemoteException;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// Interface chung cho cả Client và Server</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>CalculatorService</span> <span style=color:#66d9ef>extends</span> Remote {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b) <span style=color:#66d9ef>throws</span> RemoteException;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>subtract</span>(<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b) <span style=color:#66d9ef>throws</span> RemoteException;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=bước-2-cài-đặt-logic-trên-server-implementation>Bước 2: Cài đặt logic trên Server (Implementation)</h3><p>Class này sẽ thực thi logic thực tế. Nó thường kế thừa UnicastRemoteObject để RMI có thể export object này ra mạng.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Java
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.server.UnicastRemoteObject;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.RemoteException;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CalculatorServiceImpl</span> <span style=color:#66d9ef>extends</span> UnicastRemoteObject <span style=color:#66d9ef>implements</span> CalculatorService {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Constructor bắt buộc phải throw RemoteException</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#a6e22e>CalculatorServiceImpl</span>() <span style=color:#66d9ef>throws</span> RemoteException {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b) <span style=color:#66d9ef>throws</span> RemoteException {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Server đang tính tổng: &#34;</span> <span style=color:#f92672>+</span> a <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; + &#34;</span> <span style=color:#f92672>+</span> b);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> a <span style=color:#f92672>+</span> b;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>subtract</span>(<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b) <span style=color:#66d9ef>throws</span> RemoteException {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> a <span style=color:#f92672>-</span> b;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=bước-3-tạo-server-và-đăng-ký-lên-registry>Bước 3: Tạo Server và Đăng ký lên Registry</h3><p>Server sẽ khởi tạo object và gắn nó vào một cái tên (ví dụ: &ldquo;Calculator&rdquo;) trên cổng mặc định 1099.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Java
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.Naming;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.registry.LocateRegistry;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RmiServer</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 1. Tạo thanh ghi RMI ở cổng 1099</span>
+</span></span><span style=display:flex><span>            LocateRegistry.<span style=color:#a6e22e>createRegistry</span>(1099);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 2. Khởi tạo đối tượng</span>
+</span></span><span style=display:flex><span>            CalculatorService service <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CalculatorServiceImpl();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 3. Đăng ký tên định danh cho đối tượng</span>
+</span></span><span style=display:flex><span>            Naming.<span style=color:#a6e22e>rebind</span>(<span style=color:#e6db74>&#34;rmi://localhost:1099/Calculator&#34;</span>, service);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Server đã sẵn sàng!&#34;</span>);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>            e.<span style=color:#a6e22e>printStackTrace</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=bước-4-tạo-client-để-gọi-hàm>Bước 4: Tạo Client để gọi hàm</h3><p>Client sẽ tìm kiếm object tên là &ldquo;Calculator&rdquo; và gọi hàm như thể object đó đang nằm ngay trên máy mình.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Java
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.rmi.Naming;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RmiClient</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 1. Tìm kiếm đối tượng trên Server qua tên &#34;Calculator&#34;</span>
+</span></span><span style=display:flex><span>            CalculatorService service <span style=color:#f92672>=</span> (CalculatorService) Naming.<span style=color:#a6e22e>lookup</span>(<span style=color:#e6db74>&#34;rmi://localhost:1099/Calculator&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// 2. Gọi phương thức từ xa</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> result <span style=color:#f92672>=</span> service.<span style=color:#a6e22e>add</span>(10, 20);
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>            System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Kết quả trả về từ Server: &#34;</span> <span style=color:#f92672>+</span> result);
+</span></span><span style=display:flex><span>            
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>            e.<span style=color:#a6e22e>printStackTrace</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=4-ưu-và-nhược-điểm>4. Ưu và nhược điểm</h2><p><strong>Ưu điểm</strong></p><ul><li><p>Dễ sử dụng: Cú pháp giống hệt gọi hàm Java thông thường.</p></li><li><p>Type-safe: Đảm bảo an toàn kiểu dữ liệu vì dùng chung Interface Java.</p></li><li><p>Tích hợp sâu: Hỗ trợ truyền Object phức tạp (thông qua Serialization).</p></li></ul><p><strong>Nhược điểm</strong></p><ul><li><p>Chỉ dành cho Java: Cả Client và Server đều phải viết bằng Java. Nếu muốn đa ngôn ngữ, bạn nên dùng REST API hoặc gRPC.</p></li><li><p>Chậm hơn Socket: Do mất chi phí đóng gói (Marshalling) và giải nén (Unmarshalling) đối tượng.</p></li><li><p>Cấu hình mạng: Đôi khi gặp rắc rối với Firewall khi triển khai thực tế.</p></li></ul><h2 id=5-kết-luận>5. Kết luận</h2><p>Java RMI là một công nghệ nền tảng tuyệt vời để hiểu về cách các hệ thống phân tán hoạt động. Mặc dù ngày nay Microservices và REST API phổ biến hơn, nhưng RMI vẫn được sử dụng trong nhiều hệ thống nội bộ doanh nghiệp nhờ sự chặt chẽ và an toàn của nó.</p><h2 id=nguồn-tham-khảo>Nguồn tham khảo</h2><ul><li><p><strong>Oracle Java Documentation – Java RMI</strong><br><a href=https://docs.oracle.com/javase/8/docs/technotes/guides/rmi/>https://docs.oracle.com/javase/8/docs/technotes/guides/rmi/</a></p></li><li><p><strong>Oracle Java SE – Remote Method Invocation (RMI)</strong><br><a href=https://docs.oracle.com/javase/tutorial/rmi/>https://docs.oracle.com/javase/tutorial/rmi/</a></p></li><li><p><strong>GeeksforGeeks – Java RMI</strong><br><a href=https://www.geeksforgeeks.org/java-rmi/>https://www.geeksforgeeks.org/java-rmi/</a></p></li><li><p><strong>TutorialsPoint – Java RMI</strong><br><a href=https://www.tutorialspoint.com/java_rmi/index.htm>https://www.tutorialspoint.com/java_rmi/index.htm</a></p></li><li><p><strong>IBM Documentation – Java RMI Concepts</strong><br><a href="https://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi">https://www.ibm.com/docs/en/sdk-java-technology/8?topic=concepts-java-rmi</a></p></li></ul></div><footer class=post-footer><div class=tags-section><span class=tags-label>Tags:</span>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java class=tag-pill>#Java</a>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rmi class=tag-pill>#RMI</a>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/distributed-system class=tag-pill>#Distributed System</a>
+<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking class=tag-pill>#Networking</a></div></footer></article></div></div><style>:root{--primary:#2563eb;--text-main:#111827;--text-body:#374151;--bg-page:#f8fafc}body{background-color:var(--bg-page);font-family:plus jakarta sans,sans-serif;color:var(--text-body);line-height:1.8}.blog-reading-wrapper{padding:60px 0 100px}.container{max-width:800px;margin:0 auto;padding:0 20px}.post-article{background:#fff;padding:60px 50px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,3%)}.breadcrumb{font-size:.9rem;color:#64748b;margin-bottom:40px;text-align:center}.breadcrumb a{text-decoration:none;color:#64748b}.sep{margin:0 8px;opacity:.4}.post-header{text-align:center;margin-bottom:50px}.post-title{font-family:merriweather,serif;font-size:2.5rem;color:var(--text-main);font-weight:900;margin:0 0 20px}.post-lead{font-size:1.2rem;color:#4b5563;margin-bottom:30px;font-style:italic}.tag-badge{background:#eff6ff;color:var(--primary);font-weight:700;padding:4px 12px;border-radius:20px;font-size:.75rem;text-transform:uppercase}.header-divider{height:4px;width:60px;background:var(--primary);margin:0 auto;border-radius:2px}.markdown-body{font-size:1.15rem;text-align:justify}.markdown-body p{margin-bottom:1.8em}.markdown-body h2{font-family:merriweather,serif;font-size:1.8rem;margin:50px 0 20px;font-weight:800;border-bottom:2px solid #f1f5f9;padding-bottom:10px}.markdown-body img{max-width:100%;border-radius:12px;margin:30px 0;display:block}.markdown-body pre{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:12px;overflow-x:auto;margin:30px 0}.post-footer{margin-top:80px;padding-top:40px;border-top:1px solid #e2e8f0}.tag-pill{display:inline-block;background:#f1f5f9;color:#64748b;padding:6px 14px;border-radius:8px;font-size:.9rem;margin-right:8px;text-decoration:none;font-weight:600}@media(max-width:768px){.post-article{padding:40px 20px}.post-title{font-size:2rem}}</style></main><footer class=main-footer><div class=container><div class=footer-grid><div class=footer-brand><div class=brand-logo><div class=badge-tech>IT Student</div><h3>Nguyễn Thị Thúy Hiền</h3></div><p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p></div><div class=footer-links><h3>Liên kết nhanh</h3><ul><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/>Trang chủ</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about>Giới thiệu</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts>Blog</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact>Liên hệ</a></li></ul></div><div class=footer-contact><h3>Thông tin liên hệ</h3><ul><li><a href=mailto:nguyenthithuyhienbl@gmail.com>nguyenthithuyhienbl@gmail.com</a></li><li><a href=https://www.facebook.com/hien.nguyen.564852>Facebook</a></li><li><a href=https://github.com/hiennguyen267>GitHub</a></li></ul></div></div><div class=footer-bottom><p>&copy; 2025 Nguyễn Thị Thúy Hiền</p></div></div></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>document.getElementById("theme-toggle")?.addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><style>.main-footer{background-color:#0f172a;color:#cbd5e1;padding:80px 0 30px;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;box-sizing:border-box}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:50px;margin-bottom:50px}.footer-brand h3,.footer-links h3,.footer-contact h3{color:#fff;margin-bottom:20px;font-size:1.1rem}.footer-brand p{font-size:1rem;line-height:1.6}.footer-links ul li{margin-bottom:10px}.footer-links a,.footer-contact a{color:#94a3b8;font-size:.9rem}.footer-links a:hover{color:#7a7b7e}.footer-bottom{border-top:1px solid rgba(255,255,255,5%);padding-top:30px;text-align:center;font-size:.85rem}body{overflow-x:hidden;margin:0}.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.skill-card{background:#fff;padding:30px;border-radius:20px;text-align:center;transition:.3s;box-shadow:0 4px 6px rgba(0,0,0,2%);border:1px solid #f1f5f9}.skill-icon-img{width:60px;height:60px;object-fit:contain;margin-bottom:15px}</style></body></html>
