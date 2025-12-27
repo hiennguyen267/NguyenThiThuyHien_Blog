@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Hướng dẫn RESTful Web Service trong Spring Boot | NGUYEN THI THUY HIEN BLOG</title>
+<meta name="keywords" content="Java, Spring Boot, REST API, Backend">
+<meta name="description" content="Bắt đầu hành trình xây dựng API chuẩn RESTful với Spring Boot. Tìm hiểu các Annotation cơ bản và cách trả về dữ liệu JSON.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/">
+<link crossorigin="anonymous" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    }
+
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="Hướng dẫn RESTful Web Service trong Spring Boot">
+  <meta property="og:description" content="Bắt đầu hành trình xây dựng API chuẩn RESTful với Spring Boot. Tìm hiểu các Annotation cơ bản và cách trả về dữ liệu JSON.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring Boot">
+    <meta property="article:tag" content="REST API">
+    <meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hướng dẫn RESTful Web Service trong Spring Boot">
+<meta name="twitter:description" content="Bắt đầu hành trình xây dựng API chuẩn RESTful với Spring Boot. Tìm hiểu các Annotation cơ bản và cách trả về dữ liệu JSON.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Hướng dẫn RESTful Web Service trong Spring Boot",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hướng dẫn RESTful Web Service trong Spring Boot",
+  "name": "Hướng dẫn RESTful Web Service trong Spring Boot",
+  "description": "Bắt đầu hành trình xây dựng API chuẩn RESTful với Spring Boot. Tìm hiểu các Annotation cơ bản và cách trả về dữ liệu JSON.",
+  "keywords": [
+    "Java", "Spring Boot", "REST API", "Backend"
+  ],
+  "articleBody": "Trong phát triển Web hiện đại, việc xây dựng các API (Application Programming Interface) để giao tiếp giữa Frontend (React, Vue, Angular) và Backend là điều bắt buộc. Spring Boot cung cấp khả năng tạo ra các RESTful Web Service cực kỳ nhanh chóng và mạnh mẽ.\nBài viết này được tổng hợp từ Laptrinhjavaweb, sẽ hướng dẫn bạn những bước đầu tiên.\n1. RESTful Web Service là gì? [Image of REST API Architecture]\nHiểu đơn giản, RESTful Web Service là một kiến trúc phần mềm giúp các ứng dụng giao tiếp với nhau qua giao thức HTTP.\nDữ liệu: Thường được trao đổi dưới dạng JSON (JavaScript Object Notation). Hoạt động: Client gửi Request (GET, POST, PUT, DELETE) -\u003e Server xử lý -\u003e Server trả về Response (JSON + HTTP Status Code). 2. Cài đặt Dependency Để làm việc với REST API trong Spring Boot, trong file pom.xml, chúng ta cần thêm dependency quan trọng nhất là spring-boot-starter-web.\norg.springframework.boot spring-boot-starter-web Thư viện này đã bao gồm sẵn Tomcat (Server để chạy web) và Jackson (Thư viện chuyển đổi Object Java sang JSON và ngược lại).\n3. Tạo API đầu tiên Chúng ta sẽ xây dựng một API quản lý bài viết (New).\nBước 1: Tạo DTO (Data Transfer Object) Đây là object dùng để hứng dữ liệu từ Client gửi lên hoặc trả dữ liệu về.\npackage com.laptrinhjavaweb.dto; public class NewDTO { private String title; private String content; // Bắt buộc phải có Getter và Setter public String getTitle() { return title; } public void setTitle(String title) { this.title = title; } public String getContent() { return content; } public void setContent(String content) { this.content = content; } } Bước 2: Tạo Controller (API) Đây là nơi đón nhận các request từ người dùng.\npackage com.laptrinhjavaweb.api; import org.springframework.web.bind.annotation.*; import com.laptrinhjavaweb.dto.NewDTO; @RestController // 1. Khai báo đây là RESTful Controller public class NewAPI { // 2. Định nghĩa API thêm bài viết (POST) @PostMapping(\"/new\") public NewDTO createNew(@RequestBody NewDTO model) { // @RequestBody: Map dữ liệu JSON từ Client vào object Java return model; // Trả về chính object đó (Spring tự convert sang JSON) } } 4. Giải thích các Annotation quan trọng Trong đoạn code trên, có 3 Annotation bạn cần “khắc cốt ghi tâm”:\n@RestController: Là sự kết hợp của @Controller và @ResponseBody.\nNó báo cho Spring biết Class này chuyên dùng để viết API.\nMọi giá trị return của hàm sẽ được trả về dưới dạng JSON (thay vì trả về tên file giao diện HTML/JSP như MVC truyền thống).\n@PostMapping(\"/new\"): Định nghĩa phương thức HTTP là POST.\nĐường dẫn truy cập là /new.\nThường dùng cho chức năng Thêm mới.\n@RequestBody: Dùng để lấy dữ liệu từ phần Body của Request (thường là JSON) và map (ánh xạ) vào Object Java (NewDTO).\nNếu thiếu cái này, dữ liệu gửi lên sẽ bị null.\n5. Kiểm thử với Postman Sau khi chạy ứng dụng Spring Boot, bạn mở Postman lên và test như sau:\nURL: http://localhost:8080/new\nMethod: POST\nBody (raw - JSON):\n{ \"title\": \"Bài viết số 1\", \"content\": \"Nội dung bài viết số 1\" } Kết quả mong đợi: Server sẽ trả về đúng cục JSON bạn vừa gửi lên.\n6. Kết luận Trong phần 1 này, chúng ta đã làm quen với cách tạo một API đơn giản sử dụng @RestController. Spring Boot đã làm ẩn đi rất nhiều cấu hình phức tạp (như chuyển đổi JSON), giúp chúng ta tập trung vào logic nghiệp vụ.\nỞ các phần tiếp theo, chúng ta sẽ tìm hiểu cách kết nối xuống Database và các phương thức PUT (Sửa), DELETE (Xóa).\nNguồn tham khảo Laptrinhjavaweb – Hướng dẫn RESTful Web Service trong Spring Boot\nhttps://laptrinhjavaweb.com/\nSpring Boot Documentation – Building a RESTful Web Service\nhttps://spring.io/guides/gs/rest-service/\n",
+  "wordCount" : "630",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hiennguyen267.github.io/" title="Trang Chủ">
+                    <span>Trang Chủ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/posts/" title="Bài Viết">
+                    <span>Bài Viết</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/about/" title="Giới Thiệu">
+                    <span>Giới Thiệu</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/contact/" title="Liên Hệ">
+                    <span>Liên Hệ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/cv/" title="CV">
+                    <span>CV</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <article class="post-article">
+      <header class="post-header">
+        <div class="post-meta">
+          
+          <span class="tag-badge">Java</span>
+          
+          <span class="date">26/12/2025</span>
+        </div>
+        <h1 class="post-title">Hướng dẫn RESTful Web Service trong Spring Boot</h1>
+        <p class="post-lead">Bắt đầu hành trình xây dựng API chuẩn RESTful với Spring Boot. Tìm hiểu các Annotation cơ bản và cách trả về dữ liệu JSON.</p>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="markdown-body">
+        <p>Trong phát triển Web hiện đại, việc xây dựng các API (Application Programming Interface) để giao tiếp giữa Frontend (React, Vue, Angular) và Backend là điều bắt buộc. <strong>Spring Boot</strong> cung cấp khả năng tạo ra các <strong>RESTful Web Service</strong> cực kỳ nhanh chóng và mạnh mẽ.</p>
+<p>Bài viết này được tổng hợp từ <strong>Laptrinhjavaweb</strong>, sẽ hướng dẫn bạn những bước đầu tiên.</p>
+<h2 id="1-restful-web-service-là-gì">1. RESTful Web Service là gì?</h2>
+<p>[Image of REST API Architecture]</p>
+<p>Hiểu đơn giản, <strong>RESTful Web Service</strong> là một kiến trúc phần mềm giúp các ứng dụng giao tiếp với nhau qua giao thức HTTP.</p>
+<ul>
+<li><strong>Dữ liệu:</strong> Thường được trao đổi dưới dạng <strong>JSON</strong> (JavaScript Object Notation).</li>
+<li><strong>Hoạt động:</strong> Client gửi Request (GET, POST, PUT, DELETE) -&gt; Server xử lý -&gt; Server trả về Response (JSON + HTTP Status Code).</li>
+</ul>
+<h2 id="2-cài-đặt-dependency">2. Cài đặt Dependency</h2>
+<p>Để làm việc với REST API trong Spring Boot, trong file <code>pom.xml</code>, chúng ta cần thêm dependency quan trọng nhất là <code>spring-boot-starter-web</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;groupId&gt;</span>org.springframework.boot<span style="color:#f92672">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;artifactId&gt;</span>spring-boot-starter-web<span style="color:#f92672">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/dependency&gt;</span>
+</span></span></code></pre></div><p>Thư viện này đã bao gồm sẵn Tomcat (Server để chạy web) và Jackson (Thư viện chuyển đổi Object Java sang JSON và ngược lại).</p>
+<h2 id="3-tạo-api-đầu-tiên">3. Tạo API đầu tiên</h2>
+<p>Chúng ta sẽ xây dựng một API quản lý bài viết (New).</p>
+<p><strong>Bước 1:</strong> Tạo DTO (Data Transfer Object)
+Đây là object dùng để hứng dữ liệu từ Client gửi lên hoặc trả dữ liệu về.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.laptrinhjavaweb.dto;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NewDTO</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String title;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> String content;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Bắt buộc phải có Getter và Setter</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getTitle</span>() { <span style="color:#66d9ef">return</span> title; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setTitle</span>(String title) { <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> title; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getContent</span>() { <span style="color:#66d9ef">return</span> content; }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setContent</span>(String content) { <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">content</span> <span style="color:#f92672">=</span> content; }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Bước 2:</strong> Tạo Controller (API)
+Đây là nơi đón nhận các request từ người dùng.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">package</span> com.laptrinhjavaweb.api;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.bind.annotation.*;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> com.laptrinhjavaweb.dto.NewDTO;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span> <span style="color:#75715e">// 1. Khai báo đây là RESTful Controller</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">NewAPI</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. Định nghĩa API thêm bài viết (POST)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@PostMapping</span>(<span style="color:#e6db74">&#34;/new&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> NewDTO <span style="color:#a6e22e">createNew</span>(<span style="color:#a6e22e">@RequestBody</span> NewDTO model) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// @RequestBody: Map dữ liệu JSON từ Client vào object Java</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> model; <span style="color:#75715e">// Trả về chính object đó (Spring tự convert sang JSON)</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="4-giải-thích-các-annotation-quan-trọng">4. Giải thích các Annotation quan trọng</h2>
+<p>Trong đoạn code trên, có 3 Annotation bạn cần &ldquo;khắc cốt ghi tâm&rdquo;:</p>
+<ol>
+<li><strong>@RestController:</strong></li>
+</ol>
+<ul>
+<li>
+<p>Là sự kết hợp của @Controller và @ResponseBody.</p>
+</li>
+<li>
+<p>Nó báo cho Spring biết Class này chuyên dùng để viết API.</p>
+</li>
+<li>
+<p>Mọi giá trị return của hàm sẽ được trả về dưới dạng JSON (thay vì trả về tên file giao diện HTML/JSP như MVC truyền thống).</p>
+</li>
+</ul>
+<ol start="2">
+<li><strong>@PostMapping(&quot;/new&quot;):</strong></li>
+</ol>
+<ul>
+<li>
+<p>Định nghĩa phương thức HTTP là POST.</p>
+</li>
+<li>
+<p>Đường dẫn truy cập là /new.</p>
+</li>
+<li>
+<p>Thường dùng cho chức năng Thêm mới.</p>
+</li>
+</ul>
+<ol start="3">
+<li><strong>@RequestBody:</strong></li>
+</ol>
+<ul>
+<li>
+<p>Dùng để lấy dữ liệu từ phần Body của Request (thường là JSON) và map (ánh xạ) vào Object Java (NewDTO).</p>
+</li>
+<li>
+<p>Nếu thiếu cái này, dữ liệu gửi lên sẽ bị null.</p>
+</li>
+</ul>
+<h2 id="5-kiểm-thử-với-postman">5. Kiểm thử với Postman</h2>
+<p>Sau khi chạy ứng dụng Spring Boot, bạn mở Postman lên và test như sau:</p>
+<p><strong>URL:</strong> http://localhost:8080/new</p>
+<p><strong>Method:</strong> POST</p>
+<p><strong>Body (raw - JSON):</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;title&#34;</span>: <span style="color:#e6db74">&#34;Bài viết số 1&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;content&#34;</span>: <span style="color:#e6db74">&#34;Nội dung bài viết số 1&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Kết quả mong đợi: Server sẽ trả về đúng cục JSON bạn vừa gửi lên.</p>
+<h2 id="6-kết-luận">6. Kết luận</h2>
+<p>Trong phần 1 này, chúng ta đã làm quen với cách tạo một API đơn giản sử dụng @RestController. Spring Boot đã làm ẩn đi rất nhiều cấu hình phức tạp (như chuyển đổi JSON), giúp chúng ta tập trung vào logic nghiệp vụ.</p>
+<p>Ở các phần tiếp theo, chúng ta sẽ tìm hiểu cách kết nối xuống Database và các phương thức PUT (Sửa), DELETE (Xóa).</p>
+<h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2>
+<ul>
+<li>
+<p><strong>Laptrinhjavaweb – Hướng dẫn RESTful Web Service trong Spring Boot</strong><br>
+<a href="https://laptrinhjavaweb.com/">https://laptrinhjavaweb.com/</a></p>
+</li>
+<li>
+<p><strong>Spring Boot Documentation – Building a RESTful Web Service</strong><br>
+<a href="https://spring.io/guides/gs/rest-service/">https://spring.io/guides/gs/rest-service/</a></p>
+</li>
+</ul>
+
+      </div>
+
+      <footer class="post-footer">
+        
+        <div class="tags-section">
+          <span class="tags-label">Tags:</span>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/spring-boot" class="tag-pill">#Spring Boot</a>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/rest-api" class="tag-pill">#REST API</a>
+          
+          <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/backend" class="tag-pill">#Backend</a>
+          
+        </div>
+        
+      </footer>
+    </article>
+  </div>
+</div>
+
+<style>
+  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
+  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
+  .blog-reading-wrapper { padding: 60px 0 100px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
+  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
+  .post-header { text-align: center; margin-bottom: 50px; }
+  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
+  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
+  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
+  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+  .markdown-body { font-size: 1.15rem; text-align: justify; }
+  .markdown-body p { margin-bottom: 1.8em; }
+  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
+  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
+  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
+  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
+  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
+</style>
+
+    </main>
+    
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-logo">
+                    <div class="badge-tech">IT Student</div>
+                    <h3>Nguyễn Thị Thúy Hiền</h3>
+                </div>
+                <p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/">Trang chủ</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Thông tin liên hệ</h3>
+                <ul>
+                    <li><a href="mailto:nguyenthithuyhienbl@gmail.com">nguyenthithuyhienbl@gmail.com</a></li>
+                    <li><a href="https://www.facebook.com/hien.nguyen.564852">Facebook</a></li>
+                    <li><a href="https://github.com/hiennguyen267">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Nguyễn Thị Thúy Hiền</p>
+        </div>
+    </div>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    
+    document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+    
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+</script>
+
+<style>
+   
+  .main-footer {
+    background-color: #0f172a;
+    color: #cbd5e1;
+    padding: 80px 0 30px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+  }
+  .footer-grid { 
+    display: grid; 
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 50px; 
+    margin-bottom: 50px; 
+  }
+  .footer-brand h3, .footer-links h3, .footer-contact h3 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+  .footer-brand p { font-size: 1rem; line-height: 1.6; }
+  .footer-links ul li { margin-bottom: 10px; }
+  .footer-links a, .footer-contact a { color: #94a3b8; font-size: 0.9rem; }
+  .footer-links a:hover { color: #7a7b7e; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; font-size: 0.85rem; }
+
+   
+  body { overflow-x: hidden; margin: 0; }  
+  
+  .skills-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px; 
+  }
+  .skill-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 20px; 
+    text-align: center; 
+    transition: 0.3s; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    border: 1px solid #f1f5f9; 
+  }
+  .skill-icon-img { 
+    width: 60px; 
+    height: 60px; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+  }
+</style></body>
+
+</html>

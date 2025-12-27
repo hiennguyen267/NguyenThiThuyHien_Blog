@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>JavaScript on NGUYEN THI THUY HIEN BLOG</title>
+    <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/javascript/</link>
+    <description>Recent content in JavaScript on NGUYEN THI THUY HIEN BLOG</description>
+    <generator>Hugo -- 0.153.2</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fetch API trong JavaScript: Hướng dẫn từ A-Z</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/javascript-fetch/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/javascript-fetch/</guid>
+      <description>Tìm hiểu Fetch API - chuẩn mới thay thế XMLHttpRequest. Hướng dẫn cách gửi request GET, POST, xử lý JSON và Async/Await chi tiết.</description>
+    </item>
+    <item>
+      <title>Phân biệt Java và JavaScript</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/</guid>
+      <description>Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.</description>
+    </item>
+  </channel>
+</rss>

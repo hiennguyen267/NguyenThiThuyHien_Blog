@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>NGUYEN THI THUY HIEN BLOG</title>
+    <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/</link>
+    <description>Recent content on NGUYEN THI THUY HIEN BLOG</description>
+    <generator>Hugo -- 0.153.2</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/</guid>
+      <description>Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.</description>
+    </item>
+    <item>
+      <title>Fetch API trong JavaScript: Hướng dẫn từ A-Z</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/javascript-fetch/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/javascript-fetch/</guid>
+      <description>Tìm hiểu Fetch API - chuẩn mới thay thế XMLHttpRequest. Hướng dẫn cách gửi request GET, POST, xử lý JSON và Async/Await chi tiết.</description>
+    </item>
+    <item>
+      <title>Giới thiệu</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/</guid>
+      <description>&lt;h2 id=&#34;-xin-chào-mình-là-nguyễn-thị-thúy-hiền&#34;&gt;👋 Xin chào! Mình là Nguyễn Thị Thúy Hiền&lt;/h2&gt;
+&lt;p&gt;Mình là &lt;strong&gt;Sinh viên Công nghệ Thông tin&lt;/strong&gt; — đam mê &lt;strong&gt;lập trình mạng&lt;/strong&gt;, &lt;strong&gt;Java&lt;/strong&gt; và &lt;strong&gt;JavaScript&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Từ khi học về lập trình mạng, mình đã tìm hiểu và thực hành nhiều kiến thức như:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Socket, TCP/UDP&lt;/li&gt;
+&lt;li&gt;Java RMI&lt;/li&gt;
+&lt;li&gt;REST API&lt;/li&gt;
+&lt;li&gt;WebSocket trong JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-kỹ-năng&#34;&gt;📌 Kỹ năng&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Java&lt;/strong&gt;: Socket, Multithreading, REST API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt;: DOM, Fetch API, WebSocket&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web Development&lt;/strong&gt;: HTML, CSS, REST&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tools&lt;/strong&gt;: Git, GitHub, VS Code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-học-tập--dự-án&#34;&gt;🎓 Học tập / Dự án&lt;/h2&gt;
+&lt;p&gt;🎓 Hiện tại mình đang là sinh viên CNTT,&lt;br&gt;
+từng tham gia các khóa:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HTTP Request và HTTP Response: Cặp đôi hoàn hảo của Web</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/http-request-response/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/http-request-response/</guid>
+      <description>Giải phẫu chi tiết cấu trúc của gói tin HTTP Request và Response. Kiến thức nền tảng quan trọng cho mọi Web Developer.</description>
+    </item>
+    <item>
+      <title>Hướng dẫn RESTful Web Service trong Spring Boot</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/rest-api-java/</guid>
+      <description>Bắt đầu hành trình xây dựng API chuẩn RESTful với Spring Boot. Tìm hiểu các Annotation cơ bản và cách trả về dữ liệu JSON.</description>
+    </item>
+    <item>
+      <title>Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-rmi/</guid>
+      <description>Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.</description>
+    </item>
+    <item>
+      <title>Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/multicast-java/</guid>
+      <description>Tìm hiểu về kỹ thuật Multicast - gửi dữ liệu từ một nguồn đến một nhóm người nhận cụ thể. Hướng dẫn sử dụng MulticastSocket trong Java.</description>
+    </item>
+    <item>
+      <title>Liên hệ</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/</guid>
+      <description>&lt;p&gt;Nếu bạn có câu hỏi, góp ý hoặc muốn trao đổi về &lt;strong&gt;lập trình mạng, Java, JavaScript&lt;/strong&gt;&lt;br&gt;
+hãy liên hệ với mình qua các kênh bên dưới 👇&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;📧 &lt;strong&gt;Email&lt;/strong&gt;: &lt;a href=&#34;mailto:nguyenthithuyhienbl@gmail.com&#34;&gt;nguyenthithuyhienbl@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;💻 &lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a href=&#34;https://github.com/hiennguyen267&#34;&gt;https://github.com/hiennguyen267&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;🌐 &lt;strong&gt;Website&lt;/strong&gt;: &lt;a href=&#34;https://hiennguyen267.github.io&#34;&gt;https://hiennguyen267.github.io&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📘 &lt;strong&gt;Facebook&lt;/strong&gt;: &lt;a href=&#34;https://facebook.com/&#34;&gt;https://facebook.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Phân biệt Java và JavaScript</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-vs-javascript-network/</guid>
+      <description>Nhiều người nhầm tưởng Java và JavaScript là họ hàng, nhưng thực tế chúng khác nhau hoàn toàn.</description>
+    </item>
+    <item>
+      <title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</guid>
+      <description>Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.</description>
+    </item>
+    <item>
+      <title>Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/</guid>
+      <description>Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.</description>
+    </item>
+    <item>
+      <title>Tổng quan về Lập trình mạng trong Java (Java Networking)</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/websocket/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/websocket/</guid>
+      <description>Khám phá sức mạnh của gói thư viện java.net. Hướng dẫn cơ bản về Socket, URL và cách xây dựng ứng dụng Client-Server đơn giản.</description>
+    </item>
+    <item>
+      <title>Curriculum Vitae</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/</guid>
+      <description>&lt;h2 id=&#34;-thông-tin-cá-nhân&#34;&gt;👤 Thông tin cá nhân&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Họ tên&lt;/strong&gt;: Nguyễn Thị Thúy Hiền&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ngành&lt;/strong&gt;: Công nghệ Thông tin&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Sở thích&lt;/strong&gt;: Lập trình mạng, Java, JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-học-vấn&#34;&gt;🎓 Học vấn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Sinh viên ngành Công nghệ Thông tin&lt;/li&gt;
+&lt;li&gt;Đã học các học phần:
+&lt;ul&gt;
+&lt;li&gt;Lập trình Java&lt;/li&gt;
+&lt;li&gt;Lập trình JavaScript&lt;/li&gt;
+&lt;li&gt;Mạng máy tính&lt;/li&gt;
+&lt;li&gt;Phân tích &amp;amp; thiết kế hệ thống&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-kỹ-năng&#34;&gt;💻 Kỹ năng&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Java&lt;/strong&gt;: Socket, RMI, Multithreading&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt;: Fetch API, WebSocket&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Web&lt;/strong&gt;: HTML, CSS, REST API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Công cụ&lt;/strong&gt;: Git, GitHub, VS Code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-dự-án-học-tập&#34;&gt;🚀 Dự án học tập&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Blog cá nhân sử dụng &lt;strong&gt;Hugo + GitHub Pages&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Ứng dụng Chat Client – Server bằng Java Socket&lt;/li&gt;
+&lt;li&gt;Demo WebSocket realtime với JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;-liên-hệ&#34;&gt;📬 Liên hệ&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Email: &lt;a href=&#34;mailto:hien@example.com&#34;&gt;hien@example.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GitHub: &lt;a href=&#34;https://github.com/hiennguyen267&#34;&gt;https://github.com/hiennguyen267&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
