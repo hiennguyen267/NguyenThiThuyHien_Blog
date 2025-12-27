@@ -1,29 +1,433 @@
-<!doctype html><html lang=en dir=auto data-theme=light><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z | NGUYEN THI THUY HIEN BLOG</title><meta name=keywords content="Java,Spring Boot,SSL,HTTPS,Security"><meta name=description content="Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties."><meta name=author content><link rel=canonical href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/><link crossorigin=anonymous href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as=style><link rel=icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png><link rel=apple-touch-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png><link rel=mask-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/><noscript><style>#theme-toggle,.top-link{display:none}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"&&(document.querySelector("html").dataset.theme="dark")</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/"><meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG"><meta property="og:title" content="Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z"><meta property="og:description" content="Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties."><meta property="og:locale" content="vi"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-12-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-12-26T00:00:00+00:00"><meta property="article:tag" content="Java"><meta property="article:tag" content="Spring Boot"><meta property="article:tag" content="SSL"><meta property="article:tag" content="HTTPS"><meta property="article:tag" content="Security"><meta name=twitter:card content="summary"><meta name=twitter:title content="Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z"><meta name=twitter:description content="Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"},{"@type":"ListItem","position":2,"name":"Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z","name":"Thiết lập SSL\/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z","description":"Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.","keywords":["Java","Spring Boot","SSL","HTTPS","Security"],"articleBody":"Trong môi trường Production, việc chạy ứng dụng Web trên giao thức HTTP là rất thiếu an toàn vì dữ liệu truyền đi không được mã hóa. SSL/TLS (HTTPS) là tiêu chuẩn bắt buộc để bảo vệ dữ liệu người dùng.\nBài viết này sẽ hướng dẫn bạn cách thiết lập SSL cho Spring Boot sử dụng chứng chỉ tự ký (Self-signed Certificate) để chạy test dưới local.\n1. Chuẩn bị: Tạo Keystore Để chạy HTTPS, chúng ta cần một “chứng minh thư” số gọi là Certificate. Trong Java, chứng chỉ này thường được lưu trong một file gọi là Keystore (.p12 hoặc .jks).\nChúng ta sẽ dùng công cụ keytool (có sẵn trong bộ JDK) để tạo một chứng chỉ tự ký.\nMở CMD (hoặc Terminal) và chạy lệnh sau:\nkeytool -genkeypair -alias stackjava -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore spring-ssl-test.p12 -validity 3650 Giải thích:\nalias stackjava: Tên định danh cho chứng chỉ.\nkeyalg RSA: Thuật toán mã hóa RSA.\nstoretype PKCS12: Định dạng file keystore (chuẩn mới là PKCS12, cũ là JKS).\nkeystore spring-ssl-test.p12: Tên file keystore sẽ được tạo ra.\nvalidity 3650: Thời hạn có hiệu lực (3650 ngày ~ 10 năm).\nSau khi chạy, bạn sẽ được yêu cầu nhập mật khẩu (ví dụ: 123456) và điền các thông tin (Tên, Tổ chức…). Bạn có thể điền đại khái hoặc Enter để bỏ qua, nhưng nhớ kỹ mật khẩu.\nSau bước này, bạn sẽ có file spring-ssl-test.p12. Hãy copy file này vào thư mục src/main/resources của project Spring Boot.\n2. Cấu hình Spring Boot Mở file application.properties và thêm các dòng cấu hình sau để kích hoạt SSL:\nCổng chạy ứng dụng (thường HTTPS chạy port 8443 hoặc 443)\nserver.port=8443 Kích hoạt SSL\nserver.ssl.enabled=true Đường dẫn tới file Keystore (nằm trong thư mục resources)\nserver.ssl.key-store=classpath:spring-ssl-test.p12 Mật khẩu bạn đã đặt ở bước 1\nserver.ssl.key-store-password=123456 Loại Keystore (PKCS12)\nserver.ssl.key-store-type=PKCS12 Alias đã đặt ở bước 1\nserver.ssl.key-alias=stackjava 3. Viết API kiểm thử Tạo một Controller đơn giản để test xem HTTPS có hoạt động không.\nimport org.springframework.web.bind.annotation.GetMapping; import org.springframework.web.bind.annotation.RestController; @RestController public class HelloSslController { @GetMapping(\"/hello\") public String hello() { return \"Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.\"; } } 4. Chạy và Kiểm tra Khởi động ứng dụng Spring Boot của bạn. Sau đó mở trình duyệt và truy cập:\nhttps://localhost:8443/hello Lưu ý: Vì đây là chứng chỉ tự ký (Self-signed) nên trình duyệt sẽ cảnh báo “Kết nối không riêng tư” (Not Secure). Điều này hoàn toàn bình thường ở local.\nTrên Chrome: Bấm Nâng cao (Advanced) -\u003e Tiếp tục truy cập localhost (Proceed to localhost).\nNếu bạn thấy dòng chữ “Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.” thì chúc mừng, bạn đã cấu hình thành công!\n5. Chuyển hướng HTTP sang HTTPS (Nâng cao) Thông thường, chúng ta muốn người dùng dù gõ http:// thì cũng tự động chuyển sang https://. Để làm điều này trong Spring Boot, bạn cần cấu hình thêm một TomcatServletWebServerFactory để mở thêm một cổng HTTP (ví dụ 8080) và redirect nó sang cổng HTTPS (8443).\n6. Kết luận Việc cài đặt HTTPS cho Spring Boot khá đơn giản nhờ sự hỗ trợ tận răng của file cấu hình.\nVới môi trường Local: Dùng keytool tạo chứng chỉ tự ký.\nVới môi trường Production: Bạn nên mua chứng chỉ từ các tổ chức uy tín (CA) hoặc dùng Let’s Encrypt, sau đó cấu hình tương tự vào file .p12.\nNguồn tham khảo StackJava – Cài đặt SSL/TLS cho Spring Boot\nhttps://stackjava.com/spring-boot/https-ssl\nSpring Boot Official Documentation – SSL Configuration\nhttps://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.server.ssl\n","wordCount":"599","inLanguage":"en","datePublished":"2025-12-26T00:00:00Z","dateModified":"2025-12-26T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/"},"publisher":{"@type":"Organization","name":"NGUYEN THI THUY HIEN BLOG","logo":{"@type":"ImageObject","url":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/ accesskey=h title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://hiennguyen267.github.io/ title="Trang Chủ"><span>Trang Chủ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/ title="Bài Viết"><span>Bài Viết</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/ title="Giới Thiệu"><span>Giới Thiệu</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/ title="Liên Hệ"><span>Liên Hệ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/ title=CV><span>CV</span></a></li></ul></nav></header><main class=main><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel=stylesheet><article class=post-article><header class=post-header><div class=post-meta><span class=tag-badge>Java</span>
-<span class=date>26/12/2025</span></div><h1 class=post-title>Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z</h1><p class=post-lead>Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.</p><div class=header-divider></div></header><div class=markdown-body><p>Trong môi trường Production, việc chạy ứng dụng Web trên giao thức HTTP là rất thiếu an toàn vì dữ liệu truyền đi không được mã hóa. <strong>SSL/TLS (HTTPS)</strong> là tiêu chuẩn bắt buộc để bảo vệ dữ liệu người dùng.</p><p>Bài viết này sẽ hướng dẫn bạn cách thiết lập SSL cho Spring Boot sử dụng chứng chỉ tự ký (Self-signed Certificate) để chạy test dưới local.</p><h2 id=1-chuẩn-bị-tạo-keystore>1. Chuẩn bị: Tạo Keystore</h2><p>Để chạy HTTPS, chúng ta cần một &ldquo;chứng minh thư&rdquo; số gọi là Certificate. Trong Java, chứng chỉ này thường được lưu trong một file gọi là <strong>Keystore</strong> (<code>.p12</code> hoặc <code>.jks</code>).</p><p>Chúng ta sẽ dùng công cụ <code>keytool</code> (có sẵn trong bộ JDK) để tạo một chứng chỉ tự ký.</p><p>Mở CMD (hoặc Terminal) và chạy lệnh sau:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>keytool -genkeypair -alias stackjava -keyalg RSA -keysize <span style=color:#ae81ff>2048</span> -storetype PKCS12 -keystore spring-ssl-test.p12 -validity <span style=color:#ae81ff>3650</span>
-</span></span></code></pre></div><p><strong>Giải thích:</strong></p><ul><li><p><strong>alias stackjava:</strong> Tên định danh cho chứng chỉ.</p></li><li><p><strong>keyalg RSA:</strong> Thuật toán mã hóa RSA.</p></li><li><p><strong>storetype PKCS12:</strong> Định dạng file keystore (chuẩn mới là PKCS12, cũ là JKS).</p></li><li><p><strong>keystore spring-ssl-test.p12:</strong> Tên file keystore sẽ được tạo ra.</p></li><li><p><strong>validity 3650:</strong> Thời hạn có hiệu lực (3650 ngày ~ 10 năm).</p></li></ul><p>Sau khi chạy, bạn sẽ được yêu cầu nhập mật khẩu (ví dụ: 123456) và điền các thông tin (Tên, Tổ chức&mldr;). Bạn có thể điền đại khái hoặc Enter để bỏ qua, nhưng nhớ kỹ mật khẩu.</p><p>Sau bước này, bạn sẽ có file spring-ssl-test.p12. Hãy copy file này vào thư mục src/main/resources của project Spring Boot.</p><h2 id=2-cấu-hình-spring-boot>2. Cấu hình Spring Boot</h2><p>Mở file application.properties và thêm các dòng cấu hình sau để kích hoạt SSL:</p><p><strong>Cổng chạy ứng dụng (thường HTTPS chạy port 8443 hoặc 443)</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>server.port<span style=color:#f92672>=</span><span style=color:#ae81ff>8443</span>
-</span></span></code></pre></div><p><strong>Kích hoạt SSL</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>server.ssl.enabled<span style=color:#f92672>=</span>true
-</span></span></code></pre></div><p><strong>Đường dẫn tới file Keystore (nằm trong thư mục resources)</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>server.ssl.key-store<span style=color:#f92672>=</span>classpath:spring-ssl-test.p12
-</span></span></code></pre></div><p><strong>Mật khẩu bạn đã đặt ở bước 1</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>server.ssl.key-store-password<span style=color:#f92672>=</span><span style=color:#ae81ff>123456</span>
-</span></span></code></pre></div><p><strong>Loại Keystore (PKCS12)</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>server.ssl.key-store-type<span style=color:#f92672>=</span>PKCS12
-</span></span></code></pre></div><p><strong>Alias đã đặt ở bước 1</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>server.ssl.key-alias<span style=color:#f92672>=</span>stackjava
-</span></span></code></pre></div><h2 id=3-viết-api-kiểm-thử>3. Viết API kiểm thử</h2><p>Tạo một Controller đơn giản để test xem HTTPS có hoạt động không.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Java data-lang=Java><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.web.bind.annotation.GetMapping;
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.web.bind.annotation.RestController;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>@RestController</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>HelloSslController</span> {
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@GetMapping</span>(<span style=color:#e6db74>&#34;/hello&#34;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>hello</span>() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.&#34;</span>;
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h2 id=4-chạy-và-kiểm-tra>4. Chạy và Kiểm tra</h2><p>Khởi động ứng dụng Spring Boot của bạn. Sau đó mở trình duyệt và truy cập:</p><pre tabindex=0><code>https://localhost:8443/hello
-</code></pre><p><strong>Lưu ý:</strong> Vì đây là chứng chỉ tự ký (Self-signed) nên trình duyệt sẽ cảnh báo &ldquo;Kết nối không riêng tư&rdquo; (Not Secure). Điều này hoàn toàn bình thường ở local.</p><p><strong>Trên Chrome:</strong> Bấm Nâng cao (Advanced) -> Tiếp tục truy cập localhost (Proceed to localhost).</p><p>Nếu bạn thấy dòng chữ &ldquo;Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.&rdquo; thì chúc mừng, bạn đã cấu hình thành công!</p><h2 id=5-chuyển-hướng-http-sang-https-nâng-cao>5. Chuyển hướng HTTP sang HTTPS (Nâng cao)</h2><p>Thông thường, chúng ta muốn người dùng dù gõ http:// thì cũng tự động chuyển sang https://. Để làm điều này trong Spring Boot, bạn cần cấu hình thêm một TomcatServletWebServerFactory để mở thêm một cổng HTTP (ví dụ 8080) và redirect nó sang cổng HTTPS (8443).</p><h2 id=6-kết-luận>6. Kết luận</h2><ul><li><p>Việc cài đặt HTTPS cho Spring Boot khá đơn giản nhờ sự hỗ trợ tận răng của file cấu hình.</p></li><li><p>Với môi trường Local: Dùng keytool tạo chứng chỉ tự ký.</p></li><li><p>Với môi trường Production: Bạn nên mua chứng chỉ từ các tổ chức uy tín (CA) hoặc dùng Let&rsquo;s Encrypt, sau đó cấu hình tương tự vào file .p12.</p></li></ul><h2 id=nguồn-tham-khảo>Nguồn tham khảo</h2><ul><li><p><strong>StackJava – Cài đặt SSL/TLS cho Spring Boot</strong><br><a href=https://stackjava.com/spring-boot/https-ssl>https://stackjava.com/spring-boot/https-ssl</a></p></li><li><p><strong>Spring Boot Official Documentation – SSL Configuration</strong><br><a href=https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.server.ssl>https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.server.ssl</a></p></li></ul></div><footer class=post-footer><div class=tags-section><span class=tags-label>Tags:</span>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/java class=tag-pill>#Java</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/spring-boot class=tag-pill>#Spring Boot</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/ssl class=tag-pill>#SSL</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/https class=tag-pill>#HTTPS</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/security class=tag-pill>#Security</a></div></footer></article></div></div><style>:root{--primary:#2563eb;--text-main:#111827;--text-body:#374151;--bg-page:#f8fafc}body{background-color:var(--bg-page);font-family:plus jakarta sans,sans-serif;color:var(--text-body);line-height:1.8}.blog-reading-wrapper{padding:60px 0 100px}.container{max-width:800px;margin:0 auto;padding:0 20px}.post-article{background:#fff;padding:60px 50px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,3%)}.breadcrumb{font-size:.9rem;color:#64748b;margin-bottom:40px;text-align:center}.breadcrumb a{text-decoration:none;color:#64748b}.sep{margin:0 8px;opacity:.4}.post-header{text-align:center;margin-bottom:50px}.post-title{font-family:merriweather,serif;font-size:2.5rem;color:var(--text-main);font-weight:900;margin:0 0 20px}.post-lead{font-size:1.2rem;color:#4b5563;margin-bottom:30px;font-style:italic}.tag-badge{background:#eff6ff;color:var(--primary);font-weight:700;padding:4px 12px;border-radius:20px;font-size:.75rem;text-transform:uppercase}.header-divider{height:4px;width:60px;background:var(--primary);margin:0 auto;border-radius:2px}.markdown-body{font-size:1.15rem;text-align:justify}.markdown-body p{margin-bottom:1.8em}.markdown-body h2{font-family:merriweather,serif;font-size:1.8rem;margin:50px 0 20px;font-weight:800;border-bottom:2px solid #f1f5f9;padding-bottom:10px}.markdown-body img{max-width:100%;border-radius:12px;margin:30px 0;display:block}.markdown-body pre{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:12px;overflow-x:auto;margin:30px 0}.post-footer{margin-top:80px;padding-top:40px;border-top:1px solid #e2e8f0}.tag-pill{display:inline-block;background:#f1f5f9;color:#64748b;padding:6px 14px;border-radius:8px;font-size:.9rem;margin-right:8px;text-decoration:none;font-weight:600}@media(max-width:768px){.post-article{padding:40px 20px}.post-title{font-size:2rem}}</style></main><footer class=main-footer><div class=container><div class=footer-grid><div class=footer-brand><div class=brand-logo><div class=badge-tech>IT Student</div><h3>Nguyễn Thị Thúy Hiền</h3></div><p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p></div><div class=footer-links><h3>Liên kết nhanh</h3><ul><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/>Trang chủ</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about>Giới thiệu</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts>Blog</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact>Liên hệ</a></li></ul></div><div class=footer-contact><h3>Thông tin liên hệ</h3><ul><li><a href=mailto:nguyenthithuyhienbl@gmail.com>nguyenthithuyhienbl@gmail.com</a></li><li><a href=https://www.facebook.com/hien.nguyen.564852>Facebook</a></li><li><a href=https://github.com/hiennguyen267>GitHub</a></li></ul></div></div><div class=footer-bottom><p>&copy; 2025 Nguyễn Thị Thúy Hiền</p></div></div></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
-</a><script>document.getElementById("theme-toggle")?.addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><style>.main-footer{background-color:#0f172a;color:#cbd5e1;padding:80px 0 30px;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;box-sizing:border-box}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:50px;margin-bottom:50px}.footer-brand h3,.footer-links h3,.footer-contact h3{color:#fff;margin-bottom:20px;font-size:1.1rem}.footer-brand p{font-size:1rem;line-height:1.6}.footer-links ul li{margin-bottom:10px}.footer-links a,.footer-contact a{color:#94a3b8;font-size:.9rem}.footer-links a:hover{color:#7a7b7e}.footer-bottom{border-top:1px solid rgba(255,255,255,5%);padding-top:30px;text-align:center;font-size:.85rem}body{overflow-x:hidden;margin:0}.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.skill-card{background:#fff;padding:30px;border-radius:20px;text-align:center;transition:.3s;box-shadow:0 4px 6px rgba(0,0,0,2%);border:1px solid #f1f5f9}.skill-icon-img{width:60px;height:60px;object-fit:contain;margin-bottom:15px}</style></body></html>
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z | NGUYEN THI THUY HIEN BLOG</title>
+<meta name="keywords" content="Java, Spring Boot, SSL, HTTPS, Security">
+<meta name="description" content="Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/">
+<link crossorigin="anonymous" href="/NguyenThiThuyHien_Blog/assets/css/stylesheet.css" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    }
+
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z">
+  <meta property="og:description" content="Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Java">
+    <meta property="article:tag" content="Spring Boot">
+    <meta property="article:tag" content="SSL">
+    <meta property="article:tag" content="HTTPS">
+    <meta property="article:tag" content="Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z">
+<meta name="twitter:description" content="Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z",
+  "name": "Thiết lập SSL\/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z",
+  "description": "Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.",
+  "keywords": [
+    "Java", "Spring Boot", "SSL", "HTTPS", "Security"
+  ],
+  "articleBody": "Trong môi trường Production, việc chạy ứng dụng Web trên giao thức HTTP là rất thiếu an toàn vì dữ liệu truyền đi không được mã hóa. SSL/TLS (HTTPS) là tiêu chuẩn bắt buộc để bảo vệ dữ liệu người dùng.\nBài viết này sẽ hướng dẫn bạn cách thiết lập SSL cho Spring Boot sử dụng chứng chỉ tự ký (Self-signed Certificate) để chạy test dưới local.\n1. Chuẩn bị: Tạo Keystore Để chạy HTTPS, chúng ta cần một “chứng minh thư” số gọi là Certificate. Trong Java, chứng chỉ này thường được lưu trong một file gọi là Keystore (.p12 hoặc .jks).\nChúng ta sẽ dùng công cụ keytool (có sẵn trong bộ JDK) để tạo một chứng chỉ tự ký.\nMở CMD (hoặc Terminal) và chạy lệnh sau:\nkeytool -genkeypair -alias stackjava -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore spring-ssl-test.p12 -validity 3650 Giải thích:\nalias stackjava: Tên định danh cho chứng chỉ.\nkeyalg RSA: Thuật toán mã hóa RSA.\nstoretype PKCS12: Định dạng file keystore (chuẩn mới là PKCS12, cũ là JKS).\nkeystore spring-ssl-test.p12: Tên file keystore sẽ được tạo ra.\nvalidity 3650: Thời hạn có hiệu lực (3650 ngày ~ 10 năm).\nSau khi chạy, bạn sẽ được yêu cầu nhập mật khẩu (ví dụ: 123456) và điền các thông tin (Tên, Tổ chức…). Bạn có thể điền đại khái hoặc Enter để bỏ qua, nhưng nhớ kỹ mật khẩu.\nSau bước này, bạn sẽ có file spring-ssl-test.p12. Hãy copy file này vào thư mục src/main/resources của project Spring Boot.\n2. Cấu hình Spring Boot Mở file application.properties và thêm các dòng cấu hình sau để kích hoạt SSL:\nCổng chạy ứng dụng (thường HTTPS chạy port 8443 hoặc 443)\nserver.port=8443 Kích hoạt SSL\nserver.ssl.enabled=true Đường dẫn tới file Keystore (nằm trong thư mục resources)\nserver.ssl.key-store=classpath:spring-ssl-test.p12 Mật khẩu bạn đã đặt ở bước 1\nserver.ssl.key-store-password=123456 Loại Keystore (PKCS12)\nserver.ssl.key-store-type=PKCS12 Alias đã đặt ở bước 1\nserver.ssl.key-alias=stackjava 3. Viết API kiểm thử Tạo một Controller đơn giản để test xem HTTPS có hoạt động không.\nimport org.springframework.web.bind.annotation.GetMapping; import org.springframework.web.bind.annotation.RestController; @RestController public class HelloSslController { @GetMapping(\"/hello\") public String hello() { return \"Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.\"; } } 4. Chạy và Kiểm tra Khởi động ứng dụng Spring Boot của bạn. Sau đó mở trình duyệt và truy cập:\nhttps://localhost:8443/hello Lưu ý: Vì đây là chứng chỉ tự ký (Self-signed) nên trình duyệt sẽ cảnh báo “Kết nối không riêng tư” (Not Secure). Điều này hoàn toàn bình thường ở local.\nTrên Chrome: Bấm Nâng cao (Advanced) -\u003e Tiếp tục truy cập localhost (Proceed to localhost).\nNếu bạn thấy dòng chữ “Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.” thì chúc mừng, bạn đã cấu hình thành công!\n5. Chuyển hướng HTTP sang HTTPS (Nâng cao) Thông thường, chúng ta muốn người dùng dù gõ http:// thì cũng tự động chuyển sang https://. Để làm điều này trong Spring Boot, bạn cần cấu hình thêm một TomcatServletWebServerFactory để mở thêm một cổng HTTP (ví dụ 8080) và redirect nó sang cổng HTTPS (8443).\n6. Kết luận Việc cài đặt HTTPS cho Spring Boot khá đơn giản nhờ sự hỗ trợ tận răng của file cấu hình.\nVới môi trường Local: Dùng keytool tạo chứng chỉ tự ký.\nVới môi trường Production: Bạn nên mua chứng chỉ từ các tổ chức uy tín (CA) hoặc dùng Let’s Encrypt, sau đó cấu hình tương tự vào file .p12.\nNguồn tham khảo StackJava – Cài đặt SSL/TLS cho Spring Boot\nhttps://stackjava.com/spring-boot/https-ssl\nSpring Boot Official Documentation – SSL Configuration\nhttps://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.server.ssl\n",
+  "wordCount" : "599",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/spring-boot-ssl-https/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" title="Trang Chủ">
+                    <span>Trang Chủ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
+                    <span>Bài Viết</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/" title="Giới Thiệu">
+                    <span>Giới Thiệu</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/" title="Liên Hệ">
+                    <span>Liên Hệ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/" title="CV">
+                    <span>CV</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <article class="post-article">
+      <header class="post-header">
+        <div class="post-meta">
+          
+          <span class="tag-badge">Java</span>
+          
+          <span class="date">26/12/2025</span>
+        </div>
+        <h1 class="post-title">Thiết lập SSL/TLS cho Spring Boot: Hướng dẫn cài đặt HTTPS từ A-Z</h1>
+        <p class="post-lead">Hướng dẫn kích hoạt giao thức HTTPS bảo mật cho ứng dụng Spring Boot. Cách tạo Keystore với Keytool và cấu hình application.properties.</p>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="markdown-body">
+        <p>Trong môi trường Production, việc chạy ứng dụng Web trên giao thức HTTP là rất thiếu an toàn vì dữ liệu truyền đi không được mã hóa. <strong>SSL/TLS (HTTPS)</strong> là tiêu chuẩn bắt buộc để bảo vệ dữ liệu người dùng.</p>
+<p>Bài viết này sẽ hướng dẫn bạn cách thiết lập SSL cho Spring Boot sử dụng chứng chỉ tự ký (Self-signed Certificate) để chạy test dưới local.</p>
+<h2 id="1-chuẩn-bị-tạo-keystore">1. Chuẩn bị: Tạo Keystore</h2>
+<p>Để chạy HTTPS, chúng ta cần một &ldquo;chứng minh thư&rdquo; số gọi là Certificate. Trong Java, chứng chỉ này thường được lưu trong một file gọi là <strong>Keystore</strong> (<code>.p12</code> hoặc <code>.jks</code>).</p>
+<p>Chúng ta sẽ dùng công cụ <code>keytool</code> (có sẵn trong bộ JDK) để tạo một chứng chỉ tự ký.</p>
+<p>Mở CMD (hoặc Terminal) và chạy lệnh sau:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>keytool -genkeypair -alias stackjava -keyalg RSA -keysize <span style="color:#ae81ff">2048</span> -storetype PKCS12 -keystore spring-ssl-test.p12 -validity <span style="color:#ae81ff">3650</span>
+</span></span></code></pre></div><p><strong>Giải thích:</strong></p>
+<ul>
+<li>
+<p><strong>alias stackjava:</strong> Tên định danh cho chứng chỉ.</p>
+</li>
+<li>
+<p><strong>keyalg RSA:</strong> Thuật toán mã hóa RSA.</p>
+</li>
+<li>
+<p><strong>storetype PKCS12:</strong> Định dạng file keystore (chuẩn mới là PKCS12, cũ là JKS).</p>
+</li>
+<li>
+<p><strong>keystore spring-ssl-test.p12:</strong> Tên file keystore sẽ được tạo ra.</p>
+</li>
+<li>
+<p><strong>validity 3650:</strong> Thời hạn có hiệu lực (3650 ngày ~ 10 năm).</p>
+</li>
+</ul>
+<p>Sau khi chạy, bạn sẽ được yêu cầu nhập mật khẩu (ví dụ: 123456) và điền các thông tin (Tên, Tổ chức&hellip;). Bạn có thể điền đại khái hoặc Enter để bỏ qua, nhưng nhớ kỹ mật khẩu.</p>
+<p>Sau bước này, bạn sẽ có file spring-ssl-test.p12. Hãy copy file này vào thư mục src/main/resources của project Spring Boot.</p>
+<h2 id="2-cấu-hình-spring-boot">2. Cấu hình Spring Boot</h2>
+<p>Mở file application.properties và thêm các dòng cấu hình sau để kích hoạt SSL:</p>
+<p><strong>Cổng chạy ứng dụng (thường HTTPS chạy port 8443 hoặc 443)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server.port<span style="color:#f92672">=</span><span style="color:#ae81ff">8443</span>
+</span></span></code></pre></div><p><strong>Kích hoạt SSL</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server.ssl.enabled<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><p><strong>Đường dẫn tới file Keystore (nằm trong thư mục resources)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server.ssl.key-store<span style="color:#f92672">=</span>classpath:spring-ssl-test.p12
+</span></span></code></pre></div><p><strong>Mật khẩu bạn đã đặt ở bước 1</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server.ssl.key-store-password<span style="color:#f92672">=</span><span style="color:#ae81ff">123456</span>
+</span></span></code></pre></div><p><strong>Loại Keystore (PKCS12)</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server.ssl.key-store-type<span style="color:#f92672">=</span>PKCS12
+</span></span></code></pre></div><p><strong>Alias đã đặt ở bước 1</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>server.ssl.key-alias<span style="color:#f92672">=</span>stackjava
+</span></span></code></pre></div><h2 id="3-viết-api-kiểm-thử">3. Viết API kiểm thử</h2>
+<p>Tạo một Controller đơn giản để test xem HTTPS có hoạt động không.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.bind.annotation.GetMapping;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> org.springframework.web.bind.annotation.RestController;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@RestController</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HelloSslController</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@GetMapping</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">hello</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="4-chạy-và-kiểm-tra">4. Chạy và Kiểm tra</h2>
+<p>Khởi động ứng dụng Spring Boot của bạn. Sau đó mở trình duyệt và truy cập:</p>
+<pre tabindex="0"><code>https://localhost:8443/hello
+</code></pre><p><strong>Lưu ý:</strong> Vì đây là chứng chỉ tự ký (Self-signed) nên trình duyệt sẽ cảnh báo &ldquo;Kết nối không riêng tư&rdquo; (Not Secure). Điều này hoàn toàn bình thường ở local.</p>
+<p><strong>Trên Chrome:</strong> Bấm Nâng cao (Advanced) -&gt; Tiếp tục truy cập localhost (Proceed to localhost).</p>
+<p>Nếu bạn thấy dòng chữ &ldquo;Xin chào! Bạn đang truy cập qua giao thức HTTPS an toàn.&rdquo; thì chúc mừng, bạn đã cấu hình thành công!</p>
+<h2 id="5-chuyển-hướng-http-sang-https-nâng-cao">5. Chuyển hướng HTTP sang HTTPS (Nâng cao)</h2>
+<p>Thông thường, chúng ta muốn người dùng dù gõ http:// thì cũng tự động chuyển sang https://. Để làm điều này trong Spring Boot, bạn cần cấu hình thêm một TomcatServletWebServerFactory để mở thêm một cổng HTTP (ví dụ 8080) và redirect nó sang cổng HTTPS (8443).</p>
+<h2 id="6-kết-luận">6. Kết luận</h2>
+<ul>
+<li>
+<p>Việc cài đặt HTTPS cho Spring Boot khá đơn giản nhờ sự hỗ trợ tận răng của file cấu hình.</p>
+</li>
+<li>
+<p>Với môi trường Local: Dùng keytool tạo chứng chỉ tự ký.</p>
+</li>
+<li>
+<p>Với môi trường Production: Bạn nên mua chứng chỉ từ các tổ chức uy tín (CA) hoặc dùng Let&rsquo;s Encrypt, sau đó cấu hình tương tự vào file .p12.</p>
+</li>
+</ul>
+<h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2>
+<ul>
+<li>
+<p><strong>StackJava – Cài đặt SSL/TLS cho Spring Boot</strong><br>
+<a href="https://stackjava.com/spring-boot/https-ssl">https://stackjava.com/spring-boot/https-ssl</a></p>
+</li>
+<li>
+<p><strong>Spring Boot Official Documentation – SSL Configuration</strong><br>
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.server.ssl">https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.server.ssl</a></p>
+</li>
+</ul>
+
+      </div>
+
+      <footer class="post-footer">
+        
+        <div class="tags-section">
+          <span class="tags-label">Tags:</span>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/java" class="tag-pill">#Java</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/spring-boot" class="tag-pill">#Spring Boot</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/ssl" class="tag-pill">#SSL</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/https" class="tag-pill">#HTTPS</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/security" class="tag-pill">#Security</a>
+          
+        </div>
+        
+      </footer>
+    </article>
+  </div>
+</div>
+
+<style>
+  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
+  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
+  .blog-reading-wrapper { padding: 60px 0 100px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
+  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
+  .post-header { text-align: center; margin-bottom: 50px; }
+  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
+  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
+  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
+  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+  .markdown-body { font-size: 1.15rem; text-align: justify; }
+  .markdown-body p { margin-bottom: 1.8em; }
+  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
+  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
+  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
+  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
+  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
+</style>
+
+    </main>
+    
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-logo">
+                    <div class="badge-tech">IT Student</div>
+                    <h3>Nguyễn Thị Thúy Hiền</h3>
+                </div>
+                <p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="/NguyenThiThuyHien_Blog/about">Giới thiệu</a></li>
+                    <li><a href="/NguyenThiThuyHien_Blog/posts">Blog</a></li>
+                    <li><a href="/NguyenThiThuyHien_Blog/contact">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Thông tin liên hệ</h3>
+                <ul>
+                    <li><a href="mailto:nguyenthithuyhienbl@gmail.com">nguyenthithuyhienbl@gmail.com</a></li>
+                    <li><a href="https://www.facebook.com/hien.nguyen.564852">Facebook</a></li>
+                    <li><a href="https://github.com/hiennguyen267">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Nguyễn Thị Thúy Hiền</p>
+        </div>
+    </div>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    
+    document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+    
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+</script>
+
+<style>
+   
+  .main-footer {
+    background-color: #0f172a;
+    color: #cbd5e1;
+    padding: 80px 0 30px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+  }
+  .footer-grid { 
+    display: grid; 
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 50px; 
+    margin-bottom: 50px; 
+  }
+  .footer-brand h3, .footer-links h3, .footer-contact h3 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+  .footer-brand p { font-size: 1rem; line-height: 1.6; }
+  .footer-links ul li { margin-bottom: 10px; }
+  .footer-links a, .footer-contact a { color: #94a3b8; font-size: 0.9rem; }
+  .footer-links a:hover { color: #7a7b7e; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; font-size: 0.85rem; }
+
+   
+  body { overflow-x: hidden; margin: 0; }  
+  
+  .skills-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px; 
+  }
+  .skill-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 20px; 
+    text-align: center; 
+    transition: 0.3s; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    border: 1px solid #f1f5f9; 
+  }
+  .skill-icon-img { 
+    width: 60px; 
+    height: 60px; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+  }
+</style></body>
+
+</html>

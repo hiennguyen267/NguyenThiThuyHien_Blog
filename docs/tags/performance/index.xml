@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Performance on NGUYEN THI THUY HIEN BLOG</title><link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance/</link><description>Recent content in Performance on NGUYEN THI THUY HIEN BLOG</description><generator>Hugo -- 0.153.2</generator><language>vi</language><lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack</title><link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/</link><pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate><guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/</guid><description>Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Performance on NGUYEN THI THUY HIEN BLOG</title>
+    <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance/</link>
+    <description>Recent content in Performance on NGUYEN THI THUY HIEN BLOG</description>
+    <generator>Hugo -- 0.153.2</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/performance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Đa luồng (Multithreading) trong Java: Hướng dẫn cơ bản từ VietJack</title>
+      <link>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/java-thread-network/</guid>
+      <description>Tìm hiểu về Multithreading trong Java: Khái niệm, Vòng đời của một Thread và cách tạo luồng xử lý song song để tối ưu hóa hiệu năng ứng dụng.</description>
+    </item>
+  </channel>
+</rss>

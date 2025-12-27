@@ -4,7 +4,7 @@ languageCode = "vi"
 title = "NGUYEN THI THUY HIEN BLOG"
 theme = "PaperMod"
 
-canonifyURLs = true
+canonifyURLs = false
 relativeURLs = false
 
 [pagination]
@@ -16,13 +16,13 @@ relativeURLs = false
   ShowShareButtons = true
 
   [params.assets]
-    disableFingerprinting = false
+    disableFingerprinting = true
 
 [menu]
   [[menu.main]]
     identifier = "home"
     name = "Trang Chủ"
-    url = "/"
+    url = "./"
     weight = 10
 
   [[menu.main]]
