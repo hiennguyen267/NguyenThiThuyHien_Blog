@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Fetch API on NGUYEN THI THUY HIEN BLOG</title>
+    <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/fetch-api/</link>
+    <description>Recent content in Fetch API on NGUYEN THI THUY HIEN BLOG</description>
+    <generator>Hugo -- 0.153.2</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/fetch-api/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fetch API trong JavaScript: Hướng dẫn từ A-Z</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/javascript-fetch/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/javascript-fetch/</guid>
+      <description>Tìm hiểu Fetch API – chuẩn hiện đại thay thế XMLHttpRequest. Hướng dẫn chi tiết cách gửi request GET, POST, xử lý JSON và Async/Await.</description>
+    </item>
+  </channel>
+</rss>

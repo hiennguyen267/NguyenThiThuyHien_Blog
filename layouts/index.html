@@ -1,0 +1,279 @@
+{{ define "main" }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content fade-in-up">
+      <div class="badge-tech">IT Student</div>
+      <h1 class="hero-title">
+        Xin chào, mình là <br>
+        <span class="gradient-text">Nguyễn Thị Thúy Hiền</span>
+      </h1>
+      <p class="hero-desc">
+        Sinh viên <strong>Công nghệ Thông tin</strong> tại HUTECH. <br>
+        Đam mê khám phá <span class="highlight">Java</span>, <span class="highlight">JavaScript</span> & <span class="highlight">Network</span>.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="{{ "posts" | relURL }}" class="btn btn-primary">Đọc Blog</a>
+        <a href="{{ "about" | relURL }}" class="btn btn-outline">Giới thiệu</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-light">
+  <div class="container">
+    <div class="about-grid">
+      
+      <div class="about-info fade-in-left">
+        <h2 class="section-title">Về bản thân</h2>
+        <div class="header-divider"></div>
+        <p class="text-desc">
+          Blog này là nơi mình ghi lại hành trình học tập và chia sẻ kiến thức về lập trình. 
+          Mình tin rằng <em>"Cách tốt nhất để học là chia sẻ lại cho người khác"</em>.
+        </p>
+        <ul class="about-list">
+          <li>🎓 Sinh viên CNTT - HUTECH</li>
+          <li>📍 TP. Hồ Chí Minh</li>
+          <li>💌 Chia sẻ kiến thức Lập trình & Mạng</li>
+        </ul>
+        <a href="{{ "contact" | relURL }}" class="link-arrow">Liên hệ với mình <span>&rarr;</span></a>
+      </div>
+
+      <div class="about-card-wrapper fade-in-right">
+        <div class="profile-card">
+          <div class="card-header-bg"></div>
+          <div class="avatar-wrapper">
+            <img src="{{ "images/avatar.png" | relURL }}" alt="Avatar">
+          </div>
+          <div class="card-body">
+            <h3>Nguyễn Thị Thúy Hiền</h3>
+            <p class="role">Full-stack Developer (Future)</p>
+            <div class="tags">
+              <span>Java</span>
+              <span>JS</span>
+              <span>Spring</span>
+              <span>Net</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section-padding bg-white">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="section-title">Kỹ năng chuyên môn</h2>
+      <div class="header-divider center"></div>
+      <p class="text-gray">Công nghệ mình đang nghiên cứu và sử dụng</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <img src="{{ "images/java.png" | relURL }}" class="skill-icon-img" alt="Java">
+        <h3>Java Core</h3>
+        <p>OOP, Collections, Multi-threading, RMI</p>
+      </div>
+      
+      <div class="skill-card">
+        <img src="{{ "images/js.png" | relURL }}" class="skill-icon-img" alt="JS">
+        <h3>JavaScript</h3>
+        <p>ES6+, DOM Manipulation, Fetch API</p>
+      </div>
+      
+      <div class="skill-card">
+        <img src="{{ "images/net.png" | relURL }}" class="skill-icon-img" alt="Net">
+        <h3>Networking</h3>
+        <p>TCP/IP, Socket Programming, HTTP</p>
+      </div>
+      
+      <div class="skill-card">
+        <img src="{{ "images/front.png" | relURL }}" class="skill-icon-img" alt="Front">
+        <h3>Frontend</h3>
+        <p>HTML5, CSS3, Responsive Design</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured-posts bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Bài viết mới</h2>
+      <a href="{{ "posts" | relURL }}" class="view-all">Xem tất cả →</a>
+    </div>
+    <div class="header-divider"></div>
+
+    <div class="post-grid">
+      {{ range first 6 (where .Site.RegularPages "Type" "posts") }}
+      <a href="{{ .RelPermalink }}" class="post-card-link">
+        <article class="post-card">
+          <div class="card-content">
+            <time>{{ .Date.Format "02/01/2006" }}</time>
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Summary | truncate 90 }}</p> 
+            <span class="read-more">Đọc bài viết →</span>
+          </div>
+        </article>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<style>
+  :root {
+    --col-navy: #1e293b;
+    --col-blue: #2563eb;
+    --col-text: #334155;
+    --col-light: #f8fafc;
+    --border: #e2e8f0;
+  }
+
+  body { font-family: 'Inter', sans-serif; color: var(--col-text); margin: 0; overflow-x: hidden; background: white; }
+
+  /* Breakout sections full width */
+  .hero-section, .section-padding, .featured-posts {
+    width: 100vw; position: relative; left: 50%; margin-left: -50vw; box-sizing: border-box;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  .section-padding { padding: 120px 0; }
+  .bg-light { background-color: var(--col-light); }
+  .bg-white { background-color: white; }
+
+  /* --- HERO SECTION --- */
+  .hero-section {
+    padding: 180px 0 140px;
+    /* Đã sửa tên file từ backgound thành background cho khớp với ảnh thực tế */
+    background-image: linear-gradient(to bottom, rgba(241, 245, 249, 0.8), rgba(255, 255, 255, 0.9)), 
+                      url('{{ "images/background.png" | relURL }}'); 
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    border-bottom: none; 
+}
+  .badge-tech {
+    background: var(--col-light); color: var(--col-navy); padding: 8px 18px;
+    border-radius: 4px; font-size: 0.8rem; font-weight: 800;
+    display: inline-block; margin-bottom: 25px; border: 1px solid var(--border);
+  }
+  .hero-title { font-size: 3.2rem; color: var(--col-navy); letter-spacing: -1.5px; margin-bottom: 25px; }
+  .gradient-text { color: var(--col-navy); font-weight: 800; }
+  .hero-desc { font-size: 1.15rem; color: var(--col-text); max-width: 650px; margin: 0 auto 40px; }
+  .highlight { color: var(--col-blue); font-weight: 700; }
+
+  .hero-actions .btn {
+    padding: 14px 35px; border-radius: 30px; font-weight: 700; font-size: 0.85rem;
+    display: inline-block; margin: 0 8px; transition: 0.3s;
+  }
+  .btn-primary { background: var(--col-blue); color: white; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); }
+  .btn-primary:hover { background: #1d4ed8; transform: translateY(-2px); }
+  .btn-outline { background: white; color: var(--col-navy); border: 2px solid var(--col-navy); }
+  .btn-outline:hover { background: var(--col-navy); color: white; transform: translateY(-2px); }
+
+  /* --- TITLES & DIVIDERS --- */
+  .section-title { font-size: 1.5rem; color: var(--col-navy); font-weight: 800; margin-bottom: 5px; }
+  .header-divider { width: 50px; height: 4px; background: var(--col-blue); margin: 15px 0 40px; border-radius: 2px; }
+  .header-divider.center { margin: 15px auto 30px; }
+  .text-center { text-align: center; }
+  .mb-5 { margin-bottom: 3rem; }
+
+  /* --- ABOUT SECTION --- */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+  .text-desc { font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; }
+  .about-list li { margin-bottom: 15px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+  .link-arrow { color: var(--col-blue); font-weight: 800; display: inline-flex; align-items: center; gap: 8px; margin-top: 15px; }
+
+  /* --- PROFILE CARD --- */
+  .profile-card {
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05); border: 1px solid var(--border);
+    width: 100%; max-width: 350px; text-align: center; margin: 0 auto;
+  }
+  .card-header-bg { height: 100px; background: var(--col-navy); }
+  .avatar-wrapper { margin-top: -60px; margin-bottom: 15px; display: flex; justify-content: center; }
+  .profile-card img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; object-fit: cover; }
+  .card-body { padding: 0 25px 35px; }
+  .card-body h3 { font-size: 1.3rem; color: var(--col-navy); }
+  .card-body .role { color: var(--col-blue); font-weight: 700; font-size: 0.85rem; margin-bottom: 20px; text-transform: uppercase; }
+  .tags { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .tags span { background: var(--col-light); color: var(--col-navy); padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+
+  /* --- SKILLS GRID --- */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px; margin-top: 20px; }
+  .skill-card {
+    background: white; padding: 45px 30px; border-radius: 12px;
+    border: 1px solid var(--border); text-align: center; transition: 0.3s;
+  }
+  .skill-card:hover { border-color: var(--col-blue); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+  .skill-icon-img { height: 60px; margin-bottom: 20px; }
+
+  /* --- POSTS SECTION --- */
+  .section-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .view-all { color: var(--col-blue); font-weight: 800; font-size: 0.9rem; }
+  .post-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+  .post-card {
+    background: white; border: 1px solid var(--border); border-radius: 8px;
+    padding: 35px; height: 100%; transition: 0.3s; box-sizing: border-box;
+  }
+  .post-card-link:hover .post-card { border-color: var(--col-blue); transform: translateY(-5px); }
+  .post-card h3 { font-size: 1.2rem; color: var(--col-navy); margin-bottom: 15px; line-height: 1.5; }
+  .read-more { color: var(--col-blue); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; display: block; margin-top: 15px; }
+  /* Căn giữa cụm tiêu đề chính */
+.text-center {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px; /* Khoảng cách với phần bên dưới */
+}
+
+/* Căn giữa tiêu đề danh sách bài viết */
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa tiêu đề và divider */
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* Căn giữa đường gạch chân (Divider) */
+.header-divider.center {
+    margin: 15px auto 25px auto; /* Chìa khóa là margin auto */
+}
+
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn icon và text vào giữa card */
+    text-align: center;
+    padding: 45px 30px;
+}
+
+.skill-icon-img {
+    margin: 0 auto 20px auto;
+}
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+    .header-divider { margin: 15px auto 30px; }
+    .about-list { display: inline-block; text-align: left; }
+    .hero-title { font-size: 2.5rem; }
+  }
+
+  .fade-in-up { animation: fadeInUp 0.8s ease backwards; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+
+{{ end }}

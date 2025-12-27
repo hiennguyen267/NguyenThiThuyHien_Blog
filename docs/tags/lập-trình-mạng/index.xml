@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lập Trình Mạng on NGUYEN THI THUY HIEN BLOG</title>
+    <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/l%E1%BA%ADp-tr%C3%ACnh-m%E1%BA%A1ng/</link>
+    <description>Recent content in Lập Trình Mạng on NGUYEN THI THUY HIEN BLOG</description>
+    <generator>Hugo -- 0.153.2</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/l%E1%BA%ADp-tr%C3%ACnh-m%E1%BA%A1ng/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Giới thiệu Java RMI</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-rmi/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-rmi/</guid>
+      <description>&lt;h2 id=&#34;java-rmi-là-gì&#34;&gt;Java RMI là gì?&lt;/h2&gt;
+&lt;p&gt;Java RMI (Remote Method Invocation) cho phép chương trình Java
+gọi phương thức của một đối tượng nằm trên máy khác thông qua mạng.&lt;/p&gt;
+&lt;h2 id=&#34;đặc-điểm&#34;&gt;Đặc điểm&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Mô hình Client – Server&lt;/li&gt;
+&lt;li&gt;Giao tiếp qua TCP/IP&lt;/li&gt;
+&lt;li&gt;Dùng trong hệ thống phân tán&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ví-dụ-ứng-dụng&#34;&gt;Ví dụ ứng dụng&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Hệ thống ATM&lt;/li&gt;
+&lt;li&gt;Quản lý tài khoản từ xa&lt;/li&gt;
+&lt;li&gt;Ứng dụng doanh nghiệp&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,45 @@
+baseURL = 'https://github.com/hiennguyen267/NguyenThiThuyHien_Blog'
+publishDir = 'docs'
+languageCode = 'vi'
+title = 'NGUYEN THI THUY HIEN BLOG'
+theme = "PaperMod"
+
+# --- CẤU HÌNH PHÂN TRANG (CHUẨN MỚI) ---
+[pagination]
+  pagerSize = 3
+
+[params]
+  defaultTheme = "light"
+  ShowReadingTime = true
+  ShowShareButtons = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Trang Chủ"
+    url = "/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "posts"
+    name = "Bài Viết"
+    url = "/posts/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "about"
+    name = "Giới Thiệu"
+    url = "/about/"
+    weight = 30
+
+  [[menu.main]]
+    identifier = "contact"
+    name = "Liên Hệ"
+    url = "/contact/"
+    weight = 40
+
+  [[menu.main]]
+    identifier = "cv"
+    name = "CV"
+    url = "/cv/"
+    weight = 50

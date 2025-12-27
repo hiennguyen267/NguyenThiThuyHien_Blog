@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Networking on NGUYEN THI THUY HIEN BLOG</title>
+    <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking/</link>
+    <description>Recent content in Networking on NGUYEN THI THUY HIEN BLOG</description>
+    <generator>Hugo -- 0.153.2</generator>
+    <language>vi</language>
+    <lastBuildDate>Fri, 26 Dec 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTTP Request và HTTP Response: Cặp đôi hoàn hảo của Web</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/http-request-response/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/http-request-response/</guid>
+      <description>Giải phẫu chi tiết cấu trúc của gói tin HTTP Request và Response. Kiến thức nền tảng quan trọng cho mọi Web Developer.</description>
+    </item>
+    <item>
+      <title>Java RMI: Gọi phương thức từ xa (Remote Method Invocation) là gì?</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-rmi/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/java-rmi/</guid>
+      <description>Tìm hiểu về Java RMI - công nghệ cho phép một máy ảo Java (JVM) gọi phương thức của một đối tượng đang chạy trên một máy ảo Java khác.</description>
+    </item>
+    <item>
+      <title>Lập trình mạng Java: Xây dựng ứng dụng Multicast (Truyền tin theo nhóm)</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/multicast-java/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/multicast-java/</guid>
+      <description>Tìm hiểu về kỹ thuật Multicast - gửi dữ liệu từ một nguồn đến một nhóm người nhận cụ thể. Hướng dẫn sử dụng MulticastSocket trong Java.</description>
+    </item>
+    <item>
+      <title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/</guid>
+      <description>Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.</description>
+    </item>
+    <item>
+      <title>Tổng quan về Lập trình mạng trong Java (Java Networking)</title>
+      <link>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/websocket/</link>
+      <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/hiennguyen267/NguyenThiThuyHien_Blog/posts/websocket/</guid>
+      <description>Khám phá sức mạnh của gói thư viện java.net. Hướng dẫn cơ bản về Socket, URL và cách xây dựng ứng dụng Client-Server đơn giản.</description>
+    </item>
+  </channel>
+</rss>

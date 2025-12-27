@@ -1,0 +1,61 @@
+{{ define "main" }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <article class="post-article">
+      <header class="post-header">
+        <div class="post-meta">
+          {{ if .Params.tags }}
+          <span class="tag-badge">{{ index .Params.tags 0 }}</span>
+          {{ end }}
+          <span class="date">{{ .Date.Format "02/01/2006" }}</span>
+        </div>
+        <h1 class="post-title">{{ .Title }}</h1>
+        {{ if .Summary }}<p class="post-lead">{{ .Summary }}</p>{{ end }}
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="markdown-body">
+        {{ .Content }}
+      </div>
+
+      <footer class="post-footer">
+        {{ if .Params.tags }}
+        <div class="tags-section">
+          <span class="tags-label">Tags:</span>
+          {{ range .Params.tags }}
+          <a href="{{ "tags" | relURL }}/{{ . | urlize }}" class="tag-pill">#{{ . }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </footer>
+    </article>
+  </div>
+</div>
+
+<style>
+  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
+  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
+  .blog-reading-wrapper { padding: 60px 0 100px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
+  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
+  .post-header { text-align: center; margin-bottom: 50px; }
+  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
+  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
+  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
+  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+  .markdown-body { font-size: 1.15rem; text-align: justify; }
+  .markdown-body p { margin-bottom: 1.8em; }
+  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
+  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
+  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
+  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
+  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
+</style>
+{{ end }}

@@ -1,0 +1,224 @@
+{{ define "main" }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<section class="contact-page">
+  <div class="container">
+    
+    <div class="page-header">
+      <h1 class="title">LIÊN HỆ</h1>
+      <div class="header-divider"></div>
+      <p class="desc">
+        Bạn đang tìm kiếm một <strong>Backend Developer</strong> nhiệt huyết hay muốn trao đổi về dự án? 
+        Hãy để lại lời nhắn cho mình nhé!
+      </p>
+    </div>
+
+    <div class="contact-wrapper">
+      
+      <aside class="contact-info-sidebar">
+        <div class="sidebar-section">
+          <h2 class="sidebar-heading">Thông tin cá nhân</h2>
+          <div class="info-list">
+            <div class="info-item">
+              <span class="icon">📧</span>
+              <div class="details">
+                <span class="label">Email</span>
+                <a href="mailto:nguyenthithuyhienbl@gmail.com" class="value">nguyenthithuyhienbl@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="icon">📞</span>
+              <div class="details">
+                <span class="label">Số điện thoại</span>
+                <span class="value">0829870941</span>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <span class="icon">📍</span>
+              <div class="details">
+                <span class="label">Địa điểm</span>
+                <span class="value">TP. Hồ Chí Minh, Vietnam</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <h2 class="sidebar-heading">Kết nối</h2>
+          <div class="social-tags">
+            <a href="https://github.com/hiennguyen267" target="_blank">GitHub</a>
+            <a href="https://www.facebook.com/hien.nguyen.564852" target="_blank">Facebook</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="contact-form-main">
+        <h2 class="section-heading">GỬI TIN NHẮN TRỰC TIẾP</h2>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="form-box">
+          <div class="form-grid">
+            <div class="input-group">
+              <label for="name">Họ và tên</label>
+              <input type="text" id="name" name="name" placeholder="Nguyễn Văn A" required>
+            </div>
+
+            <div class="input-group">
+              <label for="email">Email liên hệ</label>
+              <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="message">Nội dung trao đổi</label>
+            <textarea id="message" name="message" rows="6" placeholder="Chào Hiền, mình muốn trao đổi về..." required></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-submit">
+              GỬI YÊU CẦU <span>→</span>
+            </button>
+          </div>
+        </form>
+      </main>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Lấy nguyên hệ màu và font từ cv.html */
+  :root {
+    --col-sidebar: #1e293b;
+    --col-text-light: #f8fafc;
+    --accent: #2563eb;
+    --text-main: #334155;
+    --border-color: #e2e8f0;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f5f9; /* Màu nền nhẹ giống môi trường bao quanh CV */
+    color: var(--text-main);
+    margin: 0;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+
+  /* --- HEADER SYNC --- */
+  .page-header { text-align: center; margin-bottom: 50px; }
+  .title { 
+    font-size: 2.2rem; 
+    color: var(--col-sidebar); 
+    margin: 0; 
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+  .header-divider {
+    width: 60px; height: 4px; background: var(--accent);
+    margin: 15px auto;
+  }
+  .desc { color: var(--text-main); font-size: 1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+  /* --- LAYOUT SYNC --- */
+  .contact-wrapper {
+    display: grid;
+  grid-template-columns: 270px 1fr; /* sidebar to hơn */
+  background: white;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  }
+  
+  /* --- SIDEBAR SYNC (Trái) --- */
+  .contact-info-sidebar {
+    background-color: var(--col-sidebar);
+    color: var(--col-text-light);
+    padding: 40px 30px;
+  }
+  
+  .sidebar-section { margin-bottom: 40px; }
+  .sidebar-heading {
+    font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px; margin-bottom: 20px; color: #94a3b8;
+  }
+
+  .info-list { display: flex; flex-direction: column; gap: 25px; }
+  .info-item { display: flex; gap: 15px; align-items: flex-start; }
+  .info-item .icon { font-size: 1.2rem; margin-top: 2px; }
+  .label { display: block; font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; margin-bottom: 4px; }
+  .value { color: white; font-weight: 500; text-decoration: none; font-size: 0.95rem; }
+  .value:hover { color: var(--accent); }
+
+  .social-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .social-tags a {
+    background: rgba(255,255,255,0.1);
+    color: white; padding: 6px 12px; border-radius: 4px;
+    font-size: 0.8rem; text-decoration: none; transition: 0.3s;
+  }
+  .social-tags a:hover { background: var(--accent); }
+
+  /* --- MAIN CONTENT SYNC (Phải) --- */
+  .contact-form-main {
+    padding: 40px 50px;
+    background: white;
+  }
+
+  .section-heading {
+    font-size: 1.1rem; color: var(--col-sidebar);
+    border-bottom: 2px solid var(--col-sidebar);
+    padding-bottom: 8px; margin-bottom: 30px; font-weight: 700;
+  }
+
+  .form-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+
+  .input-group { margin-bottom: 20px; }
+  .input-group label {
+    display: block; font-weight: 700; font-size: 0.85rem;
+    margin-bottom: 8px; color: var(--col-sidebar);
+  }
+
+  .input-group input, .input-group textarea {
+    width: 100%; padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px; font-family: inherit; font-size: 0.9rem;
+    box-sizing: border-box; transition: 0.3s;
+  }
+
+  .input-group input:focus, .input-group textarea:focus {
+    border-color: var(--accent); outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .btn-submit {
+    background: var(--accent);
+    color: white; border: none;
+    padding: 12px 30px; border-radius: 30px;
+    font-weight: 700; cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit; letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  }
+
+  .btn-submit:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .contact-form-main { padding: 30px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .container { padding: 30px 15px; }
+  }
+</style>
+
+{{ end }}

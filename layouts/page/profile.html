@@ -1,0 +1,239 @@
+{{ define "main" }}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<div class="profile-wrapper">
+  
+  <div class="bg-decoration"></div>
+
+  <div class="container">
+    
+    <div class="split-card fade-in">
+      
+      <aside class="card-sidebar">
+        <div class="sidebar-content">
+          <div class="avatar-block">
+            <img src="{{ "images/avatar.png" | relURL }}" alt="Avatar" class="avatar-img">
+            <div class="status-badge"><span class="dot"></span> Available</div>
+          </div>
+
+          <h1 class="profile-name">Nguyễn Thị Thúy Hiền</h1>
+          <p class="profile-role">Fresher Backend Developer</p>
+          
+          <div class="separator"></div>
+
+          <ul class="info-list">
+            <li>
+              <span class="label">Họ tên</span>
+              <span class="value">Thúy Hiền</span>
+            </li>
+            <li>
+              <span class="label">Điện thoại</span>
+              <span class="value">0829870941</span>
+            </li>
+            <li>
+              <span class="label">Vị trí</span>
+              <span class="value">Hồ Chí Minh, VN</span>
+            </li>
+            <li>
+              <span class="label">Kỹ năng</span>
+              <div class="stack-tags">
+                <span>Java</span><span>Spring</span><span>SQL</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="sidebar-footer">
+            <div class="social-row">
+              <a href="https://github.com/hiennguyen267" target="_blank" title="Github"><svg fill="currentColor" viewBox="0 0 24 24" width="24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            </div>
+            <a href="{{ "contact" | relURL }}" class="btn-contact">Liên hệ tôi</a>
+          </div>
+        </div>
+      </aside>
+
+      <main class="card-main">
+        <div class="main-content-wrapper">
+          <span class="small-tag">Giới thiệu</span>
+          
+          <article class="markdown-body">
+            {{ .Content }}
+          </article>
+
+          <div class="cta-section">
+            <a href="{{ "cv" | relURL }}" class="link-cv">Xem CV chi tiết &rarr;</a>
+          </div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* --- 1. KỸ THUẬT BREAKOUT --- */
+  .profile-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 60px 0;
+    background-color: #f1f5f9; /* Nền xám nhạt đồng bộ */
+  }
+
+  body { overflow-x: hidden; margin: 0; font-family: 'Inter', sans-serif; }
+
+  /* --- 2. SETTINGS (Đã chỉnh màu Navy & Blue) --- */
+  :root {
+    --sidebar-bg: #1e293b;     /* Đổi sang Navy đậm của CV */
+    --content-bg: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #94a3b8; /* Chữ phụ nhạt hơn trên nền tối */
+    --accent: #2563eb;         /* Màu xanh Blue đặc trưng */
+    --radius: 12px;            /* Bo góc nhẹ nhàng hơn cho chuyên nghiệp */
+  }
+
+  .bg-decoration {
+    position: absolute; top: 0; left: 0; right: 0; height: 100%;
+    background: radial-gradient(circle at 10% 20%, #e2e8f0 0%, #f1f5f9 90%);
+    z-index: 0;
+  }
+
+  .container { width: 100%; max-width: 1100px; padding: 0 20px; position: relative; z-index: 1; }
+
+  /* --- 3. GRID LAYOUT --- */
+  .split-card {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    background: var(--content-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  /* --- SIDEBAR --- */
+  .card-sidebar {
+    background: var(--sidebar-bg);
+    color: white;
+    padding: 50px 40px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+  }
+  .avatar-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .avatar-img {
+    width: 200px; 
+    height: 200px; 
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 4px solid rgba(255,255,255,0.1);
+    margin-bottom: 15px;
+  }
+
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.1); padding: 4px 12px;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    color: #4ade80;
+  }
+  .dot { width: 8px; height: 8px; background: #4ade80; border-radius: 50%; }
+
+  .profile-name {
+    font-size: 1.6rem; font-weight: 800; margin: 20px 0 5px; 
+    color: white; letter-spacing: -0.5px;
+  }
+  .profile-role {
+    color: var(--accent); font-size: 0.9rem; font-weight: 700; margin-bottom: 25px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .info-list { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0 0 30px; 
+    width: 100%; /* Để các dòng căn đều */
+  }
+
+  .separator { height: 1px; background: rgba(255,255,255,0.1); margin: 0 30px 30px; }
+
+  /* --- INFO LIST --- */
+  .info-list { list-style: none; padding: 0; margin: 0 0 30px; text-align: left; }
+  .info-list li {
+    display: flex; justify-content: space-between;
+    margin-bottom: 15px; font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;
+  }
+  .info-list .label { color: var(--text-secondary); font-weight: 500; }
+  .info-list .value { font-weight: 600; color: white; }
+  
+  .stack-tags { display: flex; gap: 5px; }
+  .stack-tags span {
+    background: rgba(255,255,255,0.1); color: white;
+    padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600;
+  }
+
+  .btn-contact {
+    display: block; width: 100%; padding: 12px;
+    background: var(--accent); color: white;
+    text-decoration: none; border-radius: 30px; font-weight: 700;
+    transition: 0.3s; font-size: 0.85rem;
+  }
+  .btn-contact:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+  /* --- CONTENT --- */
+  .card-main { padding: 60px; background: white; }
+
+  .small-tag {
+    text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px;
+    color: var(--accent); font-weight: 800; display: block; margin-bottom: 15px;
+  }
+
+  .markdown-body { font-size: 1rem; color: #334155; line-height: 1.8; }
+  .markdown-body h2 {
+    font-size: 1.8rem; font-weight: 800;
+    color: var(--sidebar-bg); margin: 0 0 20px;
+  }
+  .markdown-body strong { color: var(--accent); font-weight: 700; }
+
+  .cta-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+  .link-cv {
+    color: var(--sidebar-bg); font-weight: 700; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 5px; transition: 0.2s;
+  }
+  .link-cv:hover { color: var(--accent); gap: 10px; }
+  .main-footer {
+  left: auto !important;
+  right: auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  }
+ .main-footer .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  }
+  /* --- RESPONSIVE --- */
+  @media (max-width: 900px) {
+    .split-card { grid-template-columns: 1fr; }
+    .card-sidebar { padding: 40px 20px; }
+    .card-main { padding: 40px 25px; }
+    .avatar-img { width: 150px; height: 150px; }
+  }
+
+  .fade-in { animation: fadeIn 0.6s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+{{ end }}
