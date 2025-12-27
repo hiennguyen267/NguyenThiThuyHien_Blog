@@ -1,11 +1,12 @@
-baseURL = 'https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/'
-publishDir = 'docs'
-languageCode = 'vi'
-title = 'NGUYEN THI THUY HIEN BLOG'
+baseURL = "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/"
+publishDir = "docs"
+languageCode = "vi"
+title = "NGUYEN THI THUY HIEN BLOG"
 theme = "PaperMod"
+
 canonifyURLs = true
 relativeURLs = false
-# --- CẤU HÌNH PHÂN TRANG (CHUẨN MỚI) ---
+
 [pagination]
   pagerSize = 3
 
@@ -13,6 +14,9 @@ relativeURLs = false
   defaultTheme = "light"
   ShowReadingTime = true
   ShowShareButtons = true
+
+  [params.assets]
+    disableFingerprinting = false
 
 [menu]
   [[menu.main]]
