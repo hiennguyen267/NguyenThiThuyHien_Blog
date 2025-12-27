@@ -3,8 +3,8 @@ publishDir = 'docs'
 languageCode = 'vi'
 title = 'NGUYEN THI THUY HIEN BLOG'
 theme = "PaperMod"
-relativeURLs = true
 canonifyURLs = false
+relativeURLs = true
 # --- CẤU HÌNH PHÂN TRANG (CHUẨN MỚI) ---
 [pagination]
   pagerSize = 3
@@ -24,23 +24,23 @@ canonifyURLs = false
   [[menu.main]]
     identifier = "posts"
     name = "Bài Viết"
-    url = "/posts/"
+    url = "posts/"
     weight = 20
 
   [[menu.main]]
     identifier = "about"
     name = "Giới Thiệu"
-    url = "/about/"
+    url = "about/"
     weight = 30
 
   [[menu.main]]
     identifier = "contact"
     name = "Liên Hệ"
-    url = "/contact/"
+    url = "contact/"
     weight = 40
 
   [[menu.main]]
     identifier = "cv"
     name = "CV"
-    url = "/cv/"
+    url = "cv/"
     weight = 50
