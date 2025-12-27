@@ -1,10 +1,419 @@
-<!doctype html><html lang=en dir=auto data-theme=light><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet | NGUYEN THI THUY HIEN BLOG</title><meta name=keywords content="Networking,TCP,UDP,Protocol,Network Layer"><meta name=description content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix."><meta name=author content><link rel=canonical href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/><link crossorigin=anonymous href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as=style><link rel=icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png><link rel=apple-touch-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png><link rel=mask-icon href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/><noscript><style>#theme-toggle,.top-link{display:none}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"&&(document.querySelector("html").dataset.theme="dark")</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"><meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG"><meta property="og:title" content="TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet"><meta property="og:description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix."><meta property="og:locale" content="vi"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-12-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-12-26T00:00:00+00:00"><meta property="article:tag" content="Networking"><meta property="article:tag" content="TCP"><meta property="article:tag" content="UDP"><meta property="article:tag" content="Protocol"><meta property="article:tag" content="Network Layer"><meta name=twitter:card content="summary"><meta name=twitter:title content="TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet"><meta name=twitter:description content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"},{"@type":"ListItem","position":2,"name":"TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet","item":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet","name":"TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet","description":"Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.","keywords":["Networking","TCP","UDP","Protocol","Network Layer"],"articleBody":"Trong thế giới mạng máy tính, mọi dữ liệu di chuyển từ máy này sang máy khác đều phải tuân theo các quy tắc gọi là Giao thức (Protocol). Ở tầng Giao vận (Transport Layer), hai “gã khổng lồ” phổ biến nhất chính là TCP và UDP.\nHiểu rõ sự khác biệt giữa chúng là kiến thức bắt buộc để thiết kế ứng dụng mạng hiệu quả. Bài viết này dựa trên thông tin từ Vietnix sẽ giúp bạn phân biệt chúng.\n1. TCP (Transmission Control Protocol) là gì? TCP (Giao thức điều khiển truyền vận) là giao thức hướng kết nối (connection-oriented). Điểm đặc trưng nhất của TCP là sự tin cậy.\nĐặc điểm nổi bật: Bắt tay 3 bước (Three-way Handshake): Trước khi gửi dữ liệu, TCP buộc hai máy phải thiết lập kết nối với nhau (SYN - SYN/ACK - ACK). Đảm bảo toàn vẹn: TCP đảm bảo dữ liệu gửi đi không bị mất, không bị lỗi và đến đúng thứ tự. Nếu gói tin bị mất, TCP sẽ yêu cầu gửi lại (Retransmission). Kiểm soát luồng (Flow Control): Điều chỉnh tốc độ gửi dữ liệu để tránh làm quá tải người nhận. Ứng dụng thực tế: Do tính chất “chậm mà chắc”, TCP được dùng cho:\nDuyệt Web (HTTP/HTTPS). Gửi nhận Email (SMTP, IMAP/POP). Truyền tải file (FTP). 2. UDP (User Datagram Protocol) là gì? UDP (Giao thức gói dữ liệu người dùng) là giao thức phi kết nối (connectionless). Điểm đặc trưng của UDP là tốc độ.\nĐặc điểm nổi bật: Không kết nối: Gửi là gửi thôi, không cần “bắt tay” hay chào hỏi gì cả. Gửi và quên (Fire and Forget): UDP không quan tâm gói tin có đến nơi hay không, cũng không quan tâm thứ tự. Gói tin đến trước có thể được xử lý trước hoặc sau gói tin đến muộn. Nhẹ và nhanh: Do bỏ qua các bước kiểm tra lỗi và thiết lập kết nối, UDP có header nhỏ hơn và tốc độ truyền tải nhanh hơn TCP rất nhiều. Ứng dụng thực tế: Do tính chất “nhanh nhưng ẩu”, UDP phù hợp với các ứng dụng chấp nhận mất một chút dữ liệu nhưng cần thời gian thực (Real-time):\nStreaming Video/Audio (YouTube, Netflix, Spotify). Game Online (FPS, MOBA). Voice over IP (VoIP - Gọi điện qua mạng như Zoom, Skype). Hệ thống phân giải tên miền (DNS). 3. Bảng so sánh TCP và UDP Dưới đây là bảng tổng hợp sự khác biệt chính dựa trên tài liệu từ Vietnix:\nTiêu chí TCP (Transmission Control Protocol) UDP (User Datagram Protocol) Loại kết nối Hướng kết nối (Connection-oriented). Phi kết nối (Connectionless). Độ tin cậy Cao. Đảm bảo dữ liệu đến nơi đầy đủ. Thấp. Không đảm bảo dữ liệu đến nơi. Thứ tự Sắp xếp lại đúng thứ tự gửi. Không quan tâm thứ tự. Tốc độ Chậm hơn (do phải kiểm tra lỗi, bắt tay). Nhanh hơn. Header Size Lớn (20 bytes). Nhỏ (8 bytes). Cơ chế gửi lại Có (nếu mất gói tin). Không. 4. Khi nào nên dùng loại nào? Câu trả lời phụ thuộc vào yêu cầu của ứng dụng bạn đang viết:\nChọn TCP khi: Bạn cần độ chính xác tuyệt đối. Ví dụ: Khi tải một file .exe hay gửi một tin nhắn văn bản, bạn không muốn mất dù chỉ 1 byte dữ liệu. Chọn UDP khi: Bạn cần tốc độ và độ trễ thấp (Low latency). Ví dụ: Khi xem Livestream, nếu mạng lag, bạn thà bị nhòe hình (mất gói tin) trong 1 giây rồi xem tiếp, còn hơn là video dừng hẳn lại để chờ tải lại gói tin bị mất đó. 5. Kết luận TCP và UDP không có cái nào “tốt hơn” cái nào, chúng sinh ra để giải quyết các bài toán khác nhau của Internet.\nTCP là người vận chuyển cẩn thận, tỉ mỉ. UDP là người vận chuyển siêu tốc, phóng khoáng. Là một lập trình viên Backend/Network, việc lựa chọn đúng giao thức sẽ quyết định hiệu năng ứng dụng của bạn.\nNguồn tham khảo Vietnix – TCP vs UDP: Phân biệt các giao thức truyền tải Internet\nhttps://vietnix.vn/tcp-vs-udp\nOracle Java Documentation – TCP/IP Protocols\nhttps://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html\n","wordCount":"706","inLanguage":"en","datePublished":"2025-12-26T00:00:00Z","dateModified":"2025-12-26T00:00:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"},"publisher":{"@type":"Organization","name":"NGUYEN THI THUY HIEN BLOG","logo":{"@type":"ImageObject","url":"https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=nav><div class=logo><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/ accesskey=h title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
-<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://hiennguyen267.github.io/ title="Trang Chủ"><span>Trang Chủ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/ title="Bài Viết"><span>Bài Viết</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about/ title="Giới Thiệu"><span>Giới Thiệu</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact/ title="Liên Hệ"><span>Liên Hệ</span></a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/cv/ title=CV><span>CV</span></a></li></ul></nav></header><main class=main><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel=stylesheet><article class=post-article><header class=post-header><div class=post-meta><span class=tag-badge>Networking</span>
-<span class=date>26/12/2025</span></div><h1 class=post-title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet</h1><p class=post-lead>Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.</p><div class=header-divider></div></header><div class=markdown-body><p>Trong thế giới mạng máy tính, mọi dữ liệu di chuyển từ máy này sang máy khác đều phải tuân theo các quy tắc gọi là <strong>Giao thức (Protocol)</strong>. Ở tầng Giao vận (Transport Layer), hai &ldquo;gã khổng lồ&rdquo; phổ biến nhất chính là <strong>TCP</strong> và <strong>UDP</strong>.</p><p>Hiểu rõ sự khác biệt giữa chúng là kiến thức bắt buộc để thiết kế ứng dụng mạng hiệu quả. Bài viết này dựa trên thông tin từ <strong>Vietnix</strong> sẽ giúp bạn phân biệt chúng.</p><h2 id=1-tcp-transmission-control-protocol-là-gì>1. TCP (Transmission Control Protocol) là gì?</h2><p><strong>TCP</strong> (Giao thức điều khiển truyền vận) là giao thức hướng kết nối (connection-oriented). Điểm đặc trưng nhất của TCP là sự <strong>tin cậy</strong>.</p><h3 id=đặc-điểm-nổi-bật>Đặc điểm nổi bật:</h3><ul><li><strong>Bắt tay 3 bước (Three-way Handshake):</strong> Trước khi gửi dữ liệu, TCP buộc hai máy phải thiết lập kết nối với nhau (SYN - SYN/ACK - ACK).</li><li><strong>Đảm bảo toàn vẹn:</strong> TCP đảm bảo dữ liệu gửi đi không bị mất, không bị lỗi và đến đúng thứ tự. Nếu gói tin bị mất, TCP sẽ yêu cầu gửi lại (Retransmission).</li><li><strong>Kiểm soát luồng (Flow Control):</strong> Điều chỉnh tốc độ gửi dữ liệu để tránh làm quá tải người nhận.</li></ul><h3 id=ứng-dụng-thực-tế>Ứng dụng thực tế:</h3><p>Do tính chất &ldquo;chậm mà chắc&rdquo;, TCP được dùng cho:</p><ul><li>Duyệt Web (HTTP/HTTPS).</li><li>Gửi nhận Email (SMTP, IMAP/POP).</li><li>Truyền tải file (FTP).</li></ul><h2 id=2-udp-user-datagram-protocol-là-gì>2. UDP (User Datagram Protocol) là gì?</h2><p><strong>UDP</strong> (Giao thức gói dữ liệu người dùng) là giao thức phi kết nối (connectionless). Điểm đặc trưng của UDP là <strong>tốc độ</strong>.</p><h3 id=đặc-điểm-nổi-bật-1>Đặc điểm nổi bật:</h3><ul><li><strong>Không kết nối:</strong> Gửi là gửi thôi, không cần &ldquo;bắt tay&rdquo; hay chào hỏi gì cả.</li><li><strong>Gửi và quên (Fire and Forget):</strong> UDP không quan tâm gói tin có đến nơi hay không, cũng không quan tâm thứ tự. Gói tin đến trước có thể được xử lý trước hoặc sau gói tin đến muộn.</li><li><strong>Nhẹ và nhanh:</strong> Do bỏ qua các bước kiểm tra lỗi và thiết lập kết nối, UDP có header nhỏ hơn và tốc độ truyền tải nhanh hơn TCP rất nhiều.</li></ul><h3 id=ứng-dụng-thực-tế-1>Ứng dụng thực tế:</h3><p>Do tính chất &ldquo;nhanh nhưng ẩu&rdquo;, UDP phù hợp với các ứng dụng chấp nhận mất một chút dữ liệu nhưng cần thời gian thực (Real-time):</p><ul><li>Streaming Video/Audio (YouTube, Netflix, Spotify).</li><li>Game Online (FPS, MOBA).</li><li>Voice over IP (VoIP - Gọi điện qua mạng như Zoom, Skype).</li><li>Hệ thống phân giải tên miền (DNS).</li></ul><h2 id=3-bảng-so-sánh-tcp-và-udp>3. Bảng so sánh TCP và UDP</h2><p>Dưới đây là bảng tổng hợp sự khác biệt chính dựa trên tài liệu từ Vietnix:</p><table><thead><tr><th style=text-align:left>Tiêu chí</th><th style=text-align:left>TCP (Transmission Control Protocol)</th><th style=text-align:left>UDP (User Datagram Protocol)</th></tr></thead><tbody><tr><td style=text-align:left><strong>Loại kết nối</strong></td><td style=text-align:left>Hướng kết nối (Connection-oriented).</td><td style=text-align:left>Phi kết nối (Connectionless).</td></tr><tr><td style=text-align:left><strong>Độ tin cậy</strong></td><td style=text-align:left>Cao. Đảm bảo dữ liệu đến nơi đầy đủ.</td><td style=text-align:left>Thấp. Không đảm bảo dữ liệu đến nơi.</td></tr><tr><td style=text-align:left><strong>Thứ tự</strong></td><td style=text-align:left>Sắp xếp lại đúng thứ tự gửi.</td><td style=text-align:left>Không quan tâm thứ tự.</td></tr><tr><td style=text-align:left><strong>Tốc độ</strong></td><td style=text-align:left>Chậm hơn (do phải kiểm tra lỗi, bắt tay).</td><td style=text-align:left>Nhanh hơn.</td></tr><tr><td style=text-align:left><strong>Header Size</strong></td><td style=text-align:left>Lớn (20 bytes).</td><td style=text-align:left>Nhỏ (8 bytes).</td></tr><tr><td style=text-align:left><strong>Cơ chế gửi lại</strong></td><td style=text-align:left>Có (nếu mất gói tin).</td><td style=text-align:left>Không.</td></tr></tbody></table><h2 id=4-khi-nào-nên-dùng-loại-nào>4. Khi nào nên dùng loại nào?</h2><p>Câu trả lời phụ thuộc vào yêu cầu của ứng dụng bạn đang viết:</p><ul><li><strong>Chọn TCP khi:</strong> Bạn cần độ chính xác tuyệt đối. Ví dụ: Khi tải một file <code>.exe</code> hay gửi một tin nhắn văn bản, bạn không muốn mất dù chỉ 1 byte dữ liệu.</li><li><strong>Chọn UDP khi:</strong> Bạn cần tốc độ và độ trễ thấp (Low latency). Ví dụ: Khi xem Livestream, nếu mạng lag, bạn thà bị nhòe hình (mất gói tin) trong 1 giây rồi xem tiếp, còn hơn là video dừng hẳn lại để chờ tải lại gói tin bị mất đó.</li></ul><h2 id=5-kết-luận>5. Kết luận</h2><p>TCP và UDP không có cái nào &ldquo;tốt hơn&rdquo; cái nào, chúng sinh ra để giải quyết các bài toán khác nhau của Internet.</p><ul><li><strong>TCP</strong> là người vận chuyển cẩn thận, tỉ mỉ.</li><li><strong>UDP</strong> là người vận chuyển siêu tốc, phóng khoáng.</li></ul><p>Là một lập trình viên Backend/Network, việc lựa chọn đúng giao thức sẽ quyết định hiệu năng ứng dụng của bạn.</p><h2 id=nguồn-tham-khảo>Nguồn tham khảo</h2><ul><li><p><strong>Vietnix – TCP vs UDP: Phân biệt các giao thức truyền tải Internet</strong><br><a href=https://vietnix.vn/tcp-vs-udp>https://vietnix.vn/tcp-vs-udp</a></p></li><li><p><strong>Oracle Java Documentation – TCP/IP Protocols</strong><br><a href=https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html>https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html</a></p></li></ul></div><footer class=post-footer><div class=tags-section><span class=tags-label>Tags:</span>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/networking class=tag-pill>#Networking</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/tcp class=tag-pill>#TCP</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/udp class=tag-pill>#UDP</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/protocol class=tag-pill>#Protocol</a>
-<a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/tags/network-layer class=tag-pill>#Network Layer</a></div></footer></article></div></div><style>:root{--primary:#2563eb;--text-main:#111827;--text-body:#374151;--bg-page:#f8fafc}body{background-color:var(--bg-page);font-family:plus jakarta sans,sans-serif;color:var(--text-body);line-height:1.8}.blog-reading-wrapper{padding:60px 0 100px}.container{max-width:800px;margin:0 auto;padding:0 20px}.post-article{background:#fff;padding:60px 50px;border-radius:20px;box-shadow:0 4px 20px rgba(0,0,0,3%)}.breadcrumb{font-size:.9rem;color:#64748b;margin-bottom:40px;text-align:center}.breadcrumb a{text-decoration:none;color:#64748b}.sep{margin:0 8px;opacity:.4}.post-header{text-align:center;margin-bottom:50px}.post-title{font-family:merriweather,serif;font-size:2.5rem;color:var(--text-main);font-weight:900;margin:0 0 20px}.post-lead{font-size:1.2rem;color:#4b5563;margin-bottom:30px;font-style:italic}.tag-badge{background:#eff6ff;color:var(--primary);font-weight:700;padding:4px 12px;border-radius:20px;font-size:.75rem;text-transform:uppercase}.header-divider{height:4px;width:60px;background:var(--primary);margin:0 auto;border-radius:2px}.markdown-body{font-size:1.15rem;text-align:justify}.markdown-body p{margin-bottom:1.8em}.markdown-body h2{font-family:merriweather,serif;font-size:1.8rem;margin:50px 0 20px;font-weight:800;border-bottom:2px solid #f1f5f9;padding-bottom:10px}.markdown-body img{max-width:100%;border-radius:12px;margin:30px 0;display:block}.markdown-body pre{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:12px;overflow-x:auto;margin:30px 0}.post-footer{margin-top:80px;padding-top:40px;border-top:1px solid #e2e8f0}.tag-pill{display:inline-block;background:#f1f5f9;color:#64748b;padding:6px 14px;border-radius:8px;font-size:.9rem;margin-right:8px;text-decoration:none;font-weight:600}@media(max-width:768px){.post-article{padding:40px 20px}.post-title{font-size:2rem}}</style></main><footer class=main-footer><div class=container><div class=footer-grid><div class=footer-brand><div class=brand-logo><div class=badge-tech>IT Student</div><h3>Nguyễn Thị Thúy Hiền</h3></div><p>Chia sẻ kiến thức về lập trình Java và JavaScript. Nơi học hỏi và phát triển kỹ năng lập trình mạng.</p></div><div class=footer-links><h3>Liên kết nhanh</h3><ul><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/>Trang chủ</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/about>Giới thiệu</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts>Blog</a></li><li><a href=https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/contact>Liên hệ</a></li></ul></div><div class=footer-contact><h3>Thông tin liên hệ</h3><ul><li><a href=mailto:nguyenthithuyhienbl@gmail.com>nguyenthithuyhienbl@gmail.com</a></li><li><a href=https://www.facebook.com/hien.nguyen.564852>Facebook</a></li><li><a href=https://github.com/hiennguyen267>GitHub</a></li></ul></div></div><div class=footer-bottom><p>&copy; 2025 Nguyễn Thị Thúy Hiền</p></div></div></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
-</a><script>document.getElementById("theme-toggle")?.addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))});var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><style>.main-footer{background-color:#0f172a;color:#cbd5e1;padding:80px 0 30px;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;box-sizing:border-box}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr;gap:50px;margin-bottom:50px}.footer-brand h3,.footer-links h3,.footer-contact h3{color:#fff;margin-bottom:20px;font-size:1.1rem}.footer-brand p{font-size:1rem;line-height:1.6}.footer-links ul li{margin-bottom:10px}.footer-links a,.footer-contact a{color:#94a3b8;font-size:.9rem}.footer-links a:hover{color:#7a7b7e}.footer-bottom{border-top:1px solid rgba(255,255,255,5%);padding-top:30px;text-align:center;font-size:.85rem}body{overflow-x:hidden;margin:0}.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px}.skill-card{background:#fff;padding:30px;border-radius:20px;text-align:center;transition:.3s;box-shadow:0 4px 6px rgba(0,0,0,2%);border:1px solid #f1f5f9}.skill-icon-img{width:60px;height:60px;object-fit:contain;margin-bottom:15px}</style></body></html>
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="light">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet | NGUYEN THI THUY HIEN BLOG</title>
+<meta name="keywords" content="Networking, TCP, UDP, Protocol, Network Layer">
+<meta name="description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.">
+<meta name="author" content="">
+<link rel="canonical" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
+<link crossorigin="anonymous" href="/NguyenThiThuyHien_Blog/assets/css/stylesheet.fd5566c526ae48aadabd950798a2dc3568536401560eae5caac3765a42a9e7b5.css" integrity="sha256-/VVmxSauSKravZUHmKLcNWhTZAFWDq5cqsN2WkKp57U=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    }
+
+</script><meta property="og:url" content="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/">
+  <meta property="og:site_name" content="NGUYEN THI THUY HIEN BLOG">
+  <meta property="og:title" content="TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet">
+  <meta property="og:description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.">
+  <meta property="og:locale" content="vi">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-26T00:00:00+00:00">
+    <meta property="article:tag" content="Networking">
+    <meta property="article:tag" content="TCP">
+    <meta property="article:tag" content="UDP">
+    <meta property="article:tag" content="Protocol">
+    <meta property="article:tag" content="Network Layer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet">
+<meta name="twitter:description" content="Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet",
+      "item": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet",
+  "name": "TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet",
+  "description": "Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.",
+  "keywords": [
+    "Networking", "TCP", "UDP", "Protocol", "Network Layer"
+  ],
+  "articleBody": "Trong thế giới mạng máy tính, mọi dữ liệu di chuyển từ máy này sang máy khác đều phải tuân theo các quy tắc gọi là Giao thức (Protocol). Ở tầng Giao vận (Transport Layer), hai “gã khổng lồ” phổ biến nhất chính là TCP và UDP.\nHiểu rõ sự khác biệt giữa chúng là kiến thức bắt buộc để thiết kế ứng dụng mạng hiệu quả. Bài viết này dựa trên thông tin từ Vietnix sẽ giúp bạn phân biệt chúng.\n1. TCP (Transmission Control Protocol) là gì? TCP (Giao thức điều khiển truyền vận) là giao thức hướng kết nối (connection-oriented). Điểm đặc trưng nhất của TCP là sự tin cậy.\nĐặc điểm nổi bật: Bắt tay 3 bước (Three-way Handshake): Trước khi gửi dữ liệu, TCP buộc hai máy phải thiết lập kết nối với nhau (SYN - SYN/ACK - ACK). Đảm bảo toàn vẹn: TCP đảm bảo dữ liệu gửi đi không bị mất, không bị lỗi và đến đúng thứ tự. Nếu gói tin bị mất, TCP sẽ yêu cầu gửi lại (Retransmission). Kiểm soát luồng (Flow Control): Điều chỉnh tốc độ gửi dữ liệu để tránh làm quá tải người nhận. Ứng dụng thực tế: Do tính chất “chậm mà chắc”, TCP được dùng cho:\nDuyệt Web (HTTP/HTTPS). Gửi nhận Email (SMTP, IMAP/POP). Truyền tải file (FTP). 2. UDP (User Datagram Protocol) là gì? UDP (Giao thức gói dữ liệu người dùng) là giao thức phi kết nối (connectionless). Điểm đặc trưng của UDP là tốc độ.\nĐặc điểm nổi bật: Không kết nối: Gửi là gửi thôi, không cần “bắt tay” hay chào hỏi gì cả. Gửi và quên (Fire and Forget): UDP không quan tâm gói tin có đến nơi hay không, cũng không quan tâm thứ tự. Gói tin đến trước có thể được xử lý trước hoặc sau gói tin đến muộn. Nhẹ và nhanh: Do bỏ qua các bước kiểm tra lỗi và thiết lập kết nối, UDP có header nhỏ hơn và tốc độ truyền tải nhanh hơn TCP rất nhiều. Ứng dụng thực tế: Do tính chất “nhanh nhưng ẩu”, UDP phù hợp với các ứng dụng chấp nhận mất một chút dữ liệu nhưng cần thời gian thực (Real-time):\nStreaming Video/Audio (YouTube, Netflix, Spotify). Game Online (FPS, MOBA). Voice over IP (VoIP - Gọi điện qua mạng như Zoom, Skype). Hệ thống phân giải tên miền (DNS). 3. Bảng so sánh TCP và UDP Dưới đây là bảng tổng hợp sự khác biệt chính dựa trên tài liệu từ Vietnix:\nTiêu chí TCP (Transmission Control Protocol) UDP (User Datagram Protocol) Loại kết nối Hướng kết nối (Connection-oriented). Phi kết nối (Connectionless). Độ tin cậy Cao. Đảm bảo dữ liệu đến nơi đầy đủ. Thấp. Không đảm bảo dữ liệu đến nơi. Thứ tự Sắp xếp lại đúng thứ tự gửi. Không quan tâm thứ tự. Tốc độ Chậm hơn (do phải kiểm tra lỗi, bắt tay). Nhanh hơn. Header Size Lớn (20 bytes). Nhỏ (8 bytes). Cơ chế gửi lại Có (nếu mất gói tin). Không. 4. Khi nào nên dùng loại nào? Câu trả lời phụ thuộc vào yêu cầu của ứng dụng bạn đang viết:\nChọn TCP khi: Bạn cần độ chính xác tuyệt đối. Ví dụ: Khi tải một file .exe hay gửi một tin nhắn văn bản, bạn không muốn mất dù chỉ 1 byte dữ liệu. Chọn UDP khi: Bạn cần tốc độ và độ trễ thấp (Low latency). Ví dụ: Khi xem Livestream, nếu mạng lag, bạn thà bị nhòe hình (mất gói tin) trong 1 giây rồi xem tiếp, còn hơn là video dừng hẳn lại để chờ tải lại gói tin bị mất đó. 5. Kết luận TCP và UDP không có cái nào “tốt hơn” cái nào, chúng sinh ra để giải quyết các bài toán khác nhau của Internet.\nTCP là người vận chuyển cẩn thận, tỉ mỉ. UDP là người vận chuyển siêu tốc, phóng khoáng. Là một lập trình viên Backend/Network, việc lựa chọn đúng giao thức sẽ quyết định hiệu năng ứng dụng của bạn.\nNguồn tham khảo Vietnix – TCP vs UDP: Phân biệt các giao thức truyền tải Internet\nhttps://vietnix.vn/tcp-vs-udp\nOracle Java Documentation – TCP/IP Protocols\nhttps://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html\n",
+  "wordCount" : "706",
+  "inLanguage": "en",
+  "datePublished": "2025-12-26T00:00:00Z",
+  "dateModified": "2025-12-26T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/tcp-vs-udp/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NGUYEN THI THUY HIEN BLOG",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" accesskey="h" title="NGUYEN THI THUY HIEN BLOG (Alt + H)">NGUYEN THI THUY HIEN BLOG</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/" title="Trang Chủ">
+                    <span>Trang Chủ</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://hiennguyen267.github.io/NguyenThiThuyHien_Blog/posts/" title="Bài Viết">
+                    <span>Bài Viết</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <article class="post-article">
+      <header class="post-header">
+        <div class="post-meta">
+          
+          <span class="tag-badge">Networking</span>
+          
+          <span class="date">26/12/2025</span>
+        </div>
+        <h1 class="post-title">TCP vs UDP: So sánh hai giao thức truyền tải cốt lõi của Internet</h1>
+        <p class="post-lead">Phân biệt chi tiết giữa TCP và UDP. Khi nào nên ưu tiên tốc độ (UDP) và khi nào cần sự tin cậy tuyệt đối (TCP)? Tổng hợp từ Vietnix.</p>
+        <div class="header-divider"></div>
+      </header>
+
+      <div class="markdown-body">
+        <p>Trong thế giới mạng máy tính, mọi dữ liệu di chuyển từ máy này sang máy khác đều phải tuân theo các quy tắc gọi là <strong>Giao thức (Protocol)</strong>. Ở tầng Giao vận (Transport Layer), hai &ldquo;gã khổng lồ&rdquo; phổ biến nhất chính là <strong>TCP</strong> và <strong>UDP</strong>.</p>
+<p>Hiểu rõ sự khác biệt giữa chúng là kiến thức bắt buộc để thiết kế ứng dụng mạng hiệu quả. Bài viết này dựa trên thông tin từ <strong>Vietnix</strong> sẽ giúp bạn phân biệt chúng.</p>
+<h2 id="1-tcp-transmission-control-protocol-là-gì">1. TCP (Transmission Control Protocol) là gì?</h2>
+<p><strong>TCP</strong> (Giao thức điều khiển truyền vận) là giao thức hướng kết nối (connection-oriented). Điểm đặc trưng nhất của TCP là sự <strong>tin cậy</strong>.</p>
+<h3 id="đặc-điểm-nổi-bật">Đặc điểm nổi bật:</h3>
+<ul>
+<li><strong>Bắt tay 3 bước (Three-way Handshake):</strong> Trước khi gửi dữ liệu, TCP buộc hai máy phải thiết lập kết nối với nhau (SYN - SYN/ACK - ACK).</li>
+<li><strong>Đảm bảo toàn vẹn:</strong> TCP đảm bảo dữ liệu gửi đi không bị mất, không bị lỗi và đến đúng thứ tự. Nếu gói tin bị mất, TCP sẽ yêu cầu gửi lại (Retransmission).</li>
+<li><strong>Kiểm soát luồng (Flow Control):</strong> Điều chỉnh tốc độ gửi dữ liệu để tránh làm quá tải người nhận.</li>
+</ul>
+<h3 id="ứng-dụng-thực-tế">Ứng dụng thực tế:</h3>
+<p>Do tính chất &ldquo;chậm mà chắc&rdquo;, TCP được dùng cho:</p>
+<ul>
+<li>Duyệt Web (HTTP/HTTPS).</li>
+<li>Gửi nhận Email (SMTP, IMAP/POP).</li>
+<li>Truyền tải file (FTP).</li>
+</ul>
+<h2 id="2-udp-user-datagram-protocol-là-gì">2. UDP (User Datagram Protocol) là gì?</h2>
+<p><strong>UDP</strong> (Giao thức gói dữ liệu người dùng) là giao thức phi kết nối (connectionless). Điểm đặc trưng của UDP là <strong>tốc độ</strong>.</p>
+<h3 id="đặc-điểm-nổi-bật-1">Đặc điểm nổi bật:</h3>
+<ul>
+<li><strong>Không kết nối:</strong> Gửi là gửi thôi, không cần &ldquo;bắt tay&rdquo; hay chào hỏi gì cả.</li>
+<li><strong>Gửi và quên (Fire and Forget):</strong> UDP không quan tâm gói tin có đến nơi hay không, cũng không quan tâm thứ tự. Gói tin đến trước có thể được xử lý trước hoặc sau gói tin đến muộn.</li>
+<li><strong>Nhẹ và nhanh:</strong> Do bỏ qua các bước kiểm tra lỗi và thiết lập kết nối, UDP có header nhỏ hơn và tốc độ truyền tải nhanh hơn TCP rất nhiều.</li>
+</ul>
+<h3 id="ứng-dụng-thực-tế-1">Ứng dụng thực tế:</h3>
+<p>Do tính chất &ldquo;nhanh nhưng ẩu&rdquo;, UDP phù hợp với các ứng dụng chấp nhận mất một chút dữ liệu nhưng cần thời gian thực (Real-time):</p>
+<ul>
+<li>Streaming Video/Audio (YouTube, Netflix, Spotify).</li>
+<li>Game Online (FPS, MOBA).</li>
+<li>Voice over IP (VoIP - Gọi điện qua mạng như Zoom, Skype).</li>
+<li>Hệ thống phân giải tên miền (DNS).</li>
+</ul>
+<h2 id="3-bảng-so-sánh-tcp-và-udp">3. Bảng so sánh TCP và UDP</h2>
+<p>Dưới đây là bảng tổng hợp sự khác biệt chính dựa trên tài liệu từ Vietnix:</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Tiêu chí</th>
+          <th style="text-align: left">TCP (Transmission Control Protocol)</th>
+          <th style="text-align: left">UDP (User Datagram Protocol)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>Loại kết nối</strong></td>
+          <td style="text-align: left">Hướng kết nối (Connection-oriented).</td>
+          <td style="text-align: left">Phi kết nối (Connectionless).</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Độ tin cậy</strong></td>
+          <td style="text-align: left">Cao. Đảm bảo dữ liệu đến nơi đầy đủ.</td>
+          <td style="text-align: left">Thấp. Không đảm bảo dữ liệu đến nơi.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Thứ tự</strong></td>
+          <td style="text-align: left">Sắp xếp lại đúng thứ tự gửi.</td>
+          <td style="text-align: left">Không quan tâm thứ tự.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Tốc độ</strong></td>
+          <td style="text-align: left">Chậm hơn (do phải kiểm tra lỗi, bắt tay).</td>
+          <td style="text-align: left">Nhanh hơn.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Header Size</strong></td>
+          <td style="text-align: left">Lớn (20 bytes).</td>
+          <td style="text-align: left">Nhỏ (8 bytes).</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>Cơ chế gửi lại</strong></td>
+          <td style="text-align: left">Có (nếu mất gói tin).</td>
+          <td style="text-align: left">Không.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-khi-nào-nên-dùng-loại-nào">4. Khi nào nên dùng loại nào?</h2>
+<p>Câu trả lời phụ thuộc vào yêu cầu của ứng dụng bạn đang viết:</p>
+<ul>
+<li><strong>Chọn TCP khi:</strong> Bạn cần độ chính xác tuyệt đối. Ví dụ: Khi tải một file <code>.exe</code> hay gửi một tin nhắn văn bản, bạn không muốn mất dù chỉ 1 byte dữ liệu.</li>
+<li><strong>Chọn UDP khi:</strong> Bạn cần tốc độ và độ trễ thấp (Low latency). Ví dụ: Khi xem Livestream, nếu mạng lag, bạn thà bị nhòe hình (mất gói tin) trong 1 giây rồi xem tiếp, còn hơn là video dừng hẳn lại để chờ tải lại gói tin bị mất đó.</li>
+</ul>
+<h2 id="5-kết-luận">5. Kết luận</h2>
+<p>TCP và UDP không có cái nào &ldquo;tốt hơn&rdquo; cái nào, chúng sinh ra để giải quyết các bài toán khác nhau của Internet.</p>
+<ul>
+<li><strong>TCP</strong> là người vận chuyển cẩn thận, tỉ mỉ.</li>
+<li><strong>UDP</strong> là người vận chuyển siêu tốc, phóng khoáng.</li>
+</ul>
+<p>Là một lập trình viên Backend/Network, việc lựa chọn đúng giao thức sẽ quyết định hiệu năng ứng dụng của bạn.</p>
+<h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2>
+<ul>
+<li>
+<p><strong>Vietnix – TCP vs UDP: Phân biệt các giao thức truyền tải Internet</strong><br>
+<a href="https://vietnix.vn/tcp-vs-udp">https://vietnix.vn/tcp-vs-udp</a></p>
+</li>
+<li>
+<p><strong>Oracle Java Documentation – TCP/IP Protocols</strong><br>
+<a href="https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html">https://docs.oracle.com/javase/8/docs/api/java/net/package-summary.html</a></p>
+</li>
+</ul>
+
+      </div>
+
+      <footer class="post-footer">
+        
+        <div class="tags-section">
+          <span class="tags-label">Tags:</span>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/networking" class="tag-pill">#Networking</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/tcp" class="tag-pill">#TCP</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/udp" class="tag-pill">#UDP</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/protocol" class="tag-pill">#Protocol</a>
+          
+          <a href="/NguyenThiThuyHien_Blog/tags/network-layer" class="tag-pill">#Network Layer</a>
+          
+        </div>
+        
+      </footer>
+    </article>
+  </div>
+</div>
+
+<style>
+  :root { --primary: #2563eb; --text-main: #111827; --text-body: #374151; --bg-page: #f8fafc; }
+  body { background-color: var(--bg-page); font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text-body); line-height: 1.8; }
+  .blog-reading-wrapper { padding: 60px 0 100px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .post-article { background: white; padding: 60px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+  .breadcrumb { font-size: 0.9rem; color: #64748b; margin-bottom: 40px; text-align: center; }
+  .breadcrumb a { text-decoration: none; color: #64748b; } .sep { margin: 0 8px; opacity: 0.4; }
+  .post-header { text-align: center; margin-bottom: 50px; }
+  .post-title { font-family: 'Merriweather', serif; font-size: 2.5rem; color: var(--text-main); font-weight: 900; margin: 0 0 20px; }
+  .post-lead { font-size: 1.2rem; color: #4b5563; margin-bottom: 30px; font-style: italic; }
+  .tag-badge { background: #eff6ff; color: var(--primary); font-weight: 700; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; text-transform: uppercase; }
+  .header-divider { height: 4px; width: 60px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+  .markdown-body { font-size: 1.15rem; text-align: justify; }
+  .markdown-body p { margin-bottom: 1.8em; }
+  .markdown-body h2 { font-family: 'Merriweather', serif; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 800; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
+  .markdown-body img { max-width: 100%; border-radius: 12px; margin: 30px 0; display: block; }
+  .markdown-body pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 30px 0; }
+  .post-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid #e2e8f0; }
+  .tag-pill { display: inline-block; background: #f1f5f9; color: #64748b; padding: 6px 14px; border-radius: 8px; font-size: 0.9rem; margin-right: 8px; text-decoration: none; font-weight: 600; }
+  @media (max-width: 768px) { .post-article { padding: 40px 20px; } .post-title { font-size: 2rem; } }
+</style>
+
+    </main>
+    
+<footer class="footer">
+    <div class="container"> <div class="footer-grid">
+            <div class="footer-column">
+                <h3>IT Student</h3>
+                <strong>Nguyễn Thị Thúy Hiền</strong>
+                <p>Chia sẻ kiến thức về lập trình...</p>
+            </div>
+            <div class="footer-column">
+                <h3>Liên kết nhanh</h3>
+                </div>
+            <div class="footer-column">
+                <h3>Thông tin liên hệ</h3>
+                </div>
+        </div>
+        <div class="footer-bottom">
+            © 2025 NGUYEN THI THUY HIEN BLOG
+        </div>
+    </div>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    
+    document.getElementById("theme-toggle")?.addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+    
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+</script>
+
+<style>
+   
+  .main-footer {
+    background-color: #0f172a;
+    color: #cbd5e1;
+    padding: 80px 0 30px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    box-sizing: border-box;
+  }
+  .footer-grid { 
+    display: grid; 
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 50px; 
+    margin-bottom: 50px; 
+  }
+  .footer-brand h3, .footer-links h3, .footer-contact h3 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+  .footer-brand p { font-size: 1rem; line-height: 1.6; }
+  .footer-links ul li { margin-bottom: 10px; }
+  .footer-links a, .footer-contact a { color: #94a3b8; font-size: 0.9rem; }
+  .footer-links a:hover { color: #7a7b7e; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; text-align: center; font-size: 0.85rem; }
+
+   
+  body { overflow-x: hidden; margin: 0; }  
+  
+  .skills-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px; 
+  }
+  .skill-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 20px; 
+    text-align: center; 
+    transition: 0.3s; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02); 
+    border: 1px solid #f1f5f9; 
+  }
+  .skill-icon-img { 
+    width: 60px; 
+    height: 60px; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+  }
+</style></body>
+
+</html>
